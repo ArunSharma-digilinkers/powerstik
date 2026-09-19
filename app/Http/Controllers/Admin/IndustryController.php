@@ -24,6 +24,7 @@ class IndustryController extends ResourceController
             Field::text('name', 'Name')->required(),
             Field::slug(),
             Field::textarea('excerpt', 'Short intro')->rules('max:500')->help('Shown on the industry card and as the page intro.'),
+            Field::text('note', 'Card note')->rules('max:120')->help('The technical constraint shown on the home page card, e.g. "Acid & heat resistant".'),
             Field::image('card_image', 'Card photo', 'industries'),
             Field::image('hero_image', 'Page hero photo', 'industries'),
             Field::richtext('challenges', 'Sector challenges'),

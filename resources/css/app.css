@@ -5,3 +5,132 @@
 @source '../views/**/*.blade.php';
 @source '../js/**/*.js';
 
+/* Public site. Square corners and no shadows everywhere, except the WhatsApp button and the round dots. */
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 96px;
+    }
+
+    body {
+        @apply bg-paper font-sans text-ink antialiased;
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--color-brand-500);
+        outline-offset: 2px;
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
+
+    .on-red :focus-visible {
+        outline-color: #fff;
+    }
+}
+
+@layer components {
+    /* 1360px content column, 44px gutter on desktop and 16px on phones */
+    .site-container {
+        @apply mx-auto w-full max-w-[1360px] px-4 sm:px-8 lg:px-11;
+    }
+
+    .site-container-wide {
+        @apply mx-auto w-full max-w-[1448px] px-4 sm:px-8 lg:px-11;
+    }
+
+    /* IBM Plex Mono small caps: kickers, spec lines, technical notes */
+    .mono {
+        @apply font-mono text-[11px] tracking-[.1em] uppercase;
+    }
+
+    .kicker {
+        @apply font-mono text-[11.5px] tracking-[.14em] text-brand-500 uppercase;
+    }
+
+    .h-section {
+        @apply font-extrabold tracking-[-.035em];
+        font-size: clamp(2rem, 1.1rem + 3.4vw, 3.625rem);
+        line-height: 1;
+        text-wrap: balance;
+    }
+
+    .link-underline {
+        @apply inline-block border-b-2 border-brand-500 pb-1 font-bold text-ink transition-colors hover:text-brand-500;
+    }
+
+    .btn {
+        @apply inline-flex items-center justify-center whitespace-nowrap transition-colors duration-150;
+    }
+
+    .btn-red {
+        @apply bg-brand-500 font-bold text-white;
+    }
+
+    .btn-ghost-dark {
+        @apply border border-white/40 font-semibold text-white hover:border-white hover:bg-white/8;
+    }
+
+    .img-well {
+        @apply bg-well object-cover;
+    }
+}
+
+/* Motion. Everything decorative stops under prefers-reduced-motion. */
+@keyframes ps-marquee {
+    to { transform: translateX(-50%); }
+}
+
+@keyframes ps-drop {
+    0% { transform: scale(.2); opacity: 0; }
+    30% { opacity: .9; }
+    100% { transform: scale(2.6); opacity: 0; }
+}
+
+@keyframes ps-dash {
+    to { stroke-dashoffset: 0; }
+}
+
+.ps-marquee {
+    animation: ps-marquee 46s linear infinite;
+}
+
+.ps-marquee-viewport:hover .ps-marquee {
+    animation-play-state: paused;
+}
+
+.ps-drop {
+    animation: ps-drop 3.4s ease-out infinite;
+}
+
+.ps-arc {
+    stroke-dasharray: 700;
+    stroke-dashoffset: 700;
+}
+
+.is-inview .ps-arc {
+    animation: ps-dash 2.2s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .ps-marquee,
+    .ps-drop {
+        animation: none;
+    }
+
+    .ps-drop {
+        opacity: 0;
+    }
+
+    .ps-arc,
+    .is-inview .ps-arc {
+        animation: none;
+        stroke-dashoffset: 0;
+    }
+}

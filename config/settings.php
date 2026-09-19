@@ -27,6 +27,12 @@ return [
             'moq' => ['label' => 'Minimum order', 'default' => '50 units'],
         ],
     ],
+    'home' => [
+        'label' => 'Home page',
+        'fields' => [
+            'founders_quote' => ['label' => "Founders' note", 'type' => 'textarea', 'help' => 'Shown beside the founders photo. Leave empty to show names only.', 'default' => ''],
+        ],
+    ],
     'social' => [
         'label' => 'Social links',
         'fields' => [

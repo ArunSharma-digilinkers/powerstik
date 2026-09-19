@@ -25,7 +25,8 @@ class ExportCountryController extends ResourceController
             Field::text('iso2', 'ISO code')->required()->rules('size:2', 'alpha')->help('Two letters, e.g. NP'),
             Field::text('lat', 'Latitude')->rules('numeric', 'between:-90,90')->help('Map pin position'),
             Field::text('lng', 'Longitude')->rules('numeric', 'between:-180,180'),
-            Field::textarea('blurb', 'Short note')->rules('max:500'),
+            Field::text('note', 'Card note')->rules('max:120')->help('What we ship there, e.g. "Battery labels". Shown on the home page.'),
+            Field::textarea('blurb', 'Longer description')->rules('max:500')->help('For the Global page.'),
             Field::number('sort', 'Sort order')->default(0),
             Field::toggle('is_published', 'Show on site')->default(true),
         ];

@@ -25,9 +25,12 @@ Nothing can be run by hand on the server, so every release has to work as it is 
 
 ## Brand
 
-- Red `#EC2028`, ink `#231F20`, tagline "better ideas".
-- Assets are in `public/images/brand/`. Raw media inbox: `resources/media-inbox/` (git-ignored). Optimise media before it goes into the app.
-- Fonts: Montserrat (display) and Inter (text), self-hosted via @fontsource.
+- Red `#E31E24`, ink `#121212`, paper `#F4F2EE`, tagline "better ideas". These values come from the home page design and supersede the logo samples (`#EC2028`/`#231F20`). All tokens are in `resources/css/tokens.css`.
+- Fonts: Archivo (everything) and IBM Plex Mono (small-caps labels, kickers, spec lines), self-hosted via @fontsource.
+- Square corners and no shadows. The only circles are the WhatsApp button, the dots and the avatars.
+- Assets are in `public/images/brand/`: `logo.png` and `logo-white.png`, the knockout version for dark grounds. Ask the client for SVGs.
+- Raw media inbox: `resources/media-inbox/` (git-ignored). Optimise media before it goes into the app.
+- Design specs: `docs/design/` (the home handoff README is the reference for tokens and patterns).
 
 ## Decisions
 
@@ -35,6 +38,17 @@ Nothing can be run by hand on the server, so every release has to work as it is 
 - The site shows 8 export countries (the value lives in Settings).
 - CRM integration is undecided. Until then, leads are stored in the DB and emailed.
 - Git: commit messages have **no trailer** (no Co-Authored-By or attribution lines). Default branch `main`.
+
+## Public site architecture
+
+- Layout: `<x-layouts.site>` holds the CMYK bar, utility bar, sticky header, footer and WhatsApp button (`components/site/*`).
+- Nav, footer links and conversion URLs are in `config/site.php`. Pages that aren't built yet 404.
+- `App\Support\Site` provides settings, the `wa.me` link, the `tel:` link and export countries.
+- Section header pattern (numbered kicker, H2, intro over a 2px rule): `<x-site.section-header>`.
+- Home: `HomeController` plus `home.blade.php`. The fixed marketing copy (tiles, process steps, machine teaser) lives in the view. Industries, countries, clients, featured projects, testimonials, leadership, counters (Settings → Proof strip) and the founders' note (Settings → Home page) come from the DB.
+- Fixed home media: drop files at `public/media/home/{hero.mp4, hero.webp, battery.webp, founders.webp}`. Tinted wells show until they exist.
+- Motion lives in `resources/js/site.js`: counters and arcs fire on scroll, and everything respects `prefers-reduced-motion`. Any element with `data-track="…"` sends a GA4 click event.
+- **`DemoContentSeeder`** loads the design's illustrative case studies, testimonials and founders' quote for local work only. It refuses to run in production. Never present that copy as real.
 
 ## Admin panel architecture
 

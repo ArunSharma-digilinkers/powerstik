@@ -23,9 +23,16 @@ class ContentSeeder extends Seeder
 {
     public function run(): void
     {
-        $industries = ['Battery', 'RO & water purifiers', 'Pharma', 'Cosmetics', 'Toys', 'Food', 'Pizza & QSR', 'Surgical', 'Electrical'];
-        foreach ($industries as $i => $name) {
+        // name => card note (the constraint each sector brings, from the home page design)
+        $industries = [
+            'Battery' => 'Acid & heat resistant', 'RO & water purifiers' => 'Wet-surface adhesion',
+            'Pharma' => 'Legibility compliance', 'Cosmetics' => 'Foil & spot UV', 'Toys' => 'Child-safe inks',
+            'Food' => 'Food-safe inks', 'Pizza & QSR' => 'Grease resistance', 'Surgical' => 'Sterile-pack ready',
+            'Electrical' => 'Warning & rating labels',
+        ];
+        foreach (array_keys($industries) as $i => $name) {
             Industry::firstOrCreate(['name' => $name], ['sort' => $i + 1]);
+            Industry::where('name', $name)->whereNull('note')->update(['note' => $industries[$name]]);
         }
 
         foreach (['Offset', 'Digital', 'Flexo'] as $i => $name) {
@@ -50,14 +57,16 @@ class ContentSeeder extends Seeder
             ]);
         }
 
-        // name, ISO, lat, lng (approximate centroid, used for the export map)
+        // name, ISO, lat, lng (approximate centroid, used for the export map), card note
         $countries = [
-            ['Nepal', 'NP', 28.39, 84.12], ['Bangladesh', 'BD', 23.68, 90.36], ['Afghanistan', 'AF', 33.94, 67.71],
-            ['Uganda', 'UG', 1.37, 32.29], ['USA', 'US', 37.09, -95.71], ['Fiji', 'FJ', -17.71, 178.07],
-            ['Russia', 'RU', 61.52, 105.32], ['Algeria', 'DZ', 28.03, 1.66],
+            ['Nepal', 'NP', 28.39, 84.12, 'Battery labels'], ['Bangladesh', 'BD', 23.68, 90.36, 'Labels & cartons'],
+            ['Afghanistan', 'AF', 33.94, 67.71, 'Battery labels'], ['Uganda', 'UG', 1.37, 32.29, 'Battery labels'],
+            ['USA', 'US', 37.09, -95.71, 'Speciality print'], ['Fiji', 'FJ', -17.71, 178.07, 'Labels'],
+            ['Russia', 'RU', 61.52, 105.32, 'Battery labels'], ['Algeria', 'DZ', 28.03, 1.66, 'Battery labels'],
         ];
-        foreach ($countries as $i => [$name, $iso, $lat, $lng]) {
+        foreach ($countries as $i => [$name, $iso, $lat, $lng, $note]) {
             ExportCountry::firstOrCreate(['iso2' => $iso], ['name' => $name, 'lat' => $lat, 'lng' => $lng, 'sort' => $i + 1]);
+            ExportCountry::where('iso2', $iso)->whereNull('note')->update(['note' => $note]);
         }
 
         // show_logo stays off until each client's permission is confirmed (brief §11).
