@@ -21,6 +21,7 @@ class HomePageTest extends TestCase
             ->assertOk()
             ->assertSee('Delivered like a factory.')
             ->assertSee('Acid & heat resistant')        // industry card note
+            ->assertSee('industries/', false)            // seeded card image
             ->assertSee('Eight countries, one standard.')
             ->assertSee('Livguard')                     // client wall
             ->assertSee('Amit Sharma')

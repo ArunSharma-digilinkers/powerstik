@@ -48,6 +48,7 @@ Nothing can be run by hand on the server, so every release has to work as it is 
 - Home: `HomeController` plus `home.blade.php`. The fixed marketing copy (tiles, process steps, machine teaser) lives in the view. Industries, countries, clients, featured projects, testimonials, leadership, counters (Settings → Proof strip) and the founders' note (Settings → Home page) come from the DB.
 - Fixed home media: drop files at `public/media/home/{hero.mp4, hero.webp, battery.webp, founders.webp}`. Tinted wells show until they exist.
 - Motion lives in `resources/js/site.js`: counters and arcs fire on scroll, and everything respects `prefers-reduced-motion`. Any element with `data-track="…"` sends a GA4 click event.
+- Starter images that must reach production (e.g. industry cards) live in `database/seeders/media/` and are attached by `ContentSeeder` only where the field is empty. On the server, run it with the **Seed** action in Admin → System. `public/uploads` itself is git-ignored.
 - **`DemoContentSeeder`** loads the design's illustrative case studies, testimonials and founders' quote for local work only. It refuses to run in production. Never present that copy as real.
 
 ## Admin panel architecture

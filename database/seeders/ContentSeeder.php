@@ -12,7 +12,9 @@ use App\Models\ProductType;
 use App\Models\TeamMember;
 use App\Models\Technology;
 use App\Models\TimelineEvent;
+use App\Support\ImageStore;
 use Illuminate\Database\Seeder;
+use Illuminate\Http\UploadedFile;
 
 /**
  * Starter content taken from Powerstik_Website_Architecture.docx. Only facts
@@ -34,6 +36,7 @@ class ContentSeeder extends Seeder
             Industry::firstOrCreate(['name' => $name], ['sort' => $i + 1]);
             Industry::where('name', $name)->whereNull('note')->update(['note' => $industries[$name]]);
         }
+        $this->attachIndustryCards();
 
         foreach (['Offset', 'Digital', 'Flexo'] as $i => $name) {
             Technology::firstOrCreate(['name' => $name], ['sort' => $i + 1]);
@@ -104,6 +107,21 @@ class ContentSeeder extends Seeder
         ];
         foreach ($glossary as [$term, $def]) {
             GlossaryTerm::firstOrCreate(['term' => $term], ['definition' => "<div>{$def}</div>"]);
+        }
+    }
+
+    /**
+     * Card images prepared from the client's media (4:3, in seeders/media/industries/{slug}.jpg).
+     * Only fills industries that have no card image yet, so uploads made in the admin win.
+     */
+    private function attachIndustryCards(): void
+    {
+        foreach (glob(database_path('seeders/media/industries/*.jpg')) as $file) {
+            $industry = Industry::where('slug', pathinfo($file, PATHINFO_FILENAME))->whereNull('card_image')->first();
+
+            if ($industry) {
+                $industry->update(['card_image' => ImageStore::store(new UploadedFile($file, basename($file), 'image/jpeg', null, true), 'industries')]);
+            }
         }
     }
 }

@@ -15,6 +15,7 @@ class Ops
         'migrate' => ['migrate --force'],
         'clear-cache' => ['optimize:clear'],
         'cache' => ['optimize'],
+        'seed' => ['db:seed --force'], // idempotent: adds missing starter content, never overwrites
     ];
 
     /** @return array<string, string> command => output */
