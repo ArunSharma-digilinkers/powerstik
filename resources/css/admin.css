@@ -1,0 +1,28 @@
+@import 'tailwindcss';
+@import './tokens.css';
+
+@source '../views/admin/**/*.blade.php';
+@source '../views/components/admin/**/*.blade.php';
+@source '../js/admin.js';
+
+@layer components {
+    .adm-input {
+        @apply block w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm text-ink shadow-xs
+            focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none;
+    }
+    .adm-label {
+        @apply mb-1 block text-sm font-medium text-zinc-700;
+    }
+    .adm-btn {
+        @apply inline-flex items-center gap-2 rounded-md bg-brand-500 px-4 py-2 text-sm font-semibold text-white
+            hover:bg-brand-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500
+            disabled:opacity-50;
+    }
+    .adm-btn-secondary {
+        @apply inline-flex items-center gap-2 rounded-md border border-zinc-300 bg-white px-4 py-2 text-sm font-semibold
+            text-zinc-700 hover:bg-zinc-50;
+    }
+    .adm-card {
+        @apply rounded-lg border border-zinc-200 bg-white shadow-xs;
+    }
+}

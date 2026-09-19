@@ -1,0 +1,29 @@
+/* Brand tokens shared by the public site and the admin panel. */
+@import '@fontsource-variable/montserrat';
+@import '@fontsource-variable/inter';
+
+@theme {
+    --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Montserrat Variable', 'Inter Variable', ui-sans-serif, sans-serif;
+
+    /* Brand red, sampled from the logo (#EC2028) */
+    --color-brand-50: #fef2f2;
+    --color-brand-100: #fde3e4;
+    --color-brand-200: #fbcbcd;
+    --color-brand-300: #f7a3a6;
+    --color-brand-400: #f16b70;
+    --color-brand-500: #ec2028;
+    --color-brand-600: #d3141c;
+    --color-brand-700: #b11017;
+    --color-brand-800: #921318;
+    --color-brand-900: #79161a;
+
+    /* Ink, from the logo's black (#231F20) */
+    --color-ink: #231f20;
+
+    /* Print-motif accents: use only for registration marks and colour bars */
+    --color-cmyk-c: #00aeef;
+    --color-cmyk-m: #ec008c;
+    --color-cmyk-y: #fff200;
+    --color-cmyk-k: #231f20;
+}
