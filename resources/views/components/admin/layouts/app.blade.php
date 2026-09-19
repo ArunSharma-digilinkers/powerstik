@@ -1,12 +1,16 @@
 @php
     use App\Models\User;
 
-    // Sidebar entries: [route, label, roles allowed (empty = all staff)].
-    $nav = [
+    // Sidebar: [route, label, roles allowed (admins always pass)], grouped.
+    $nav = ['' => [
         ['admin.dashboard', 'Dashboard', []],
-        ['admin.settings.edit', 'Settings', [User::ROLE_ADMIN]],
-        ['admin.system.index', 'System', [User::ROLE_ADMIN]],
-    ];
+        ['admin.leads.index', 'Leads', [User::ROLE_SALES]],
+    ]];
+    foreach (config('admin.resources') as $slug => [, $group, $label, $roles]) {
+        $nav[$group][] = ["admin.$slug.index", $label, $roles];
+    }
+    $nav['Administration'][] = ['admin.settings.edit', 'Settings', [User::ROLE_ADMIN]];
+    $nav['Administration'][] = ['admin.system.index', 'System', [User::ROLE_ADMIN]];
     $user = auth()->user();
 @endphp
 <!DOCTYPE html>
@@ -27,16 +31,24 @@
             <div class="flex h-16 items-center border-b border-zinc-200 px-5">
                 <a href="{{ route('admin.dashboard') }}"><img src="/images/brand/logo.png" alt="Powerstik" class="h-8 w-auto"></a>
             </div>
-            <nav class="space-y-1 p-3">
-                @foreach ($nav as [$route, $label, $roles])
-                    @continue($roles && ! $user->hasRole(...$roles))
-                    @php $active = request()->routeIs(\Illuminate\Support\Str::beforeLast($route, '.').'*'); @endphp
-                    <a href="{{ route($route) }}"
-                       @class([
-                           'block rounded-md px-3 py-2 text-sm font-medium',
-                           'bg-brand-50 text-brand-700' => $active,
-                           'text-zinc-700 hover:bg-zinc-100' => ! $active,
-                       ])>{{ $label }}</a>
+            <nav class="h-[calc(100%-4rem)] space-y-5 overflow-y-auto p-3">
+                @foreach ($nav as $group => $items)
+                    @php $items = array_filter($items, fn ($i) => ! $i[2] || $user->hasRole(...$i[2])); @endphp
+                    @continue(! $items)
+                    <div class="space-y-0.5">
+                        @if ($group)
+                            <p class="px-3 pb-1 text-xs font-semibold tracking-wide text-zinc-400 uppercase">{{ $group }}</p>
+                        @endif
+                        @foreach ($items as [$route, $label])
+                            @php $active = request()->routeIs(\Illuminate\Support\Str::beforeLast($route, '.').'.*') || request()->routeIs($route); @endphp
+                            <a href="{{ route($route) }}"
+                               @class([
+                                   'block rounded-md px-3 py-1.5 text-sm font-medium',
+                                   'bg-brand-50 text-brand-700' => $active,
+                                   'text-zinc-700 hover:bg-zinc-100' => ! $active,
+                               ])>{{ $label }}</a>
+                        @endforeach
+                    </div>
                 @endforeach
             </nav>
         </aside>

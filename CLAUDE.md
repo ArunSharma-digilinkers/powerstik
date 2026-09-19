@@ -34,3 +34,13 @@ Nothing can be run by hand on the server, so every release has to work as it is 
 - WhatsApp: click-to-chat (`wa.me`) only.
 - The site shows 8 export countries (the value lives in Settings).
 - CRM integration is undecided. Until then, leads are stored in the DB and emailed.
+- Git: commit messages have **no trailer** (no Co-Authored-By or attribution lines). Default branch `main`.
+
+## Admin panel architecture
+
+- Every content type is a subclass of `App\Http\Controllers\Admin\ResourceController`. The subclass declares `fields()` (built with `App\Support\Admin\Field`) and `columns()`, and the base class handles list, form, validation, uploads and relation syncing.
+- **Adding a screen:** write the migration, the model, and a controller extending `ResourceController`, then add one line to `config/admin.php`. That entry registers the routes and the sidebar link.
+- Images go through `App\Support\ImageStore`: WebP plus 480/960/1600px variants on the `public_uploads` disk. Use `ImageStore::srcset()` on the public site.
+- Rich text uses the Trix editor and is sanitised by `stevebauman/purify` (allowed tags are in `config/purify.php`).
+- Leads have their own screens (`LeadController`) and are never generic CRUD. Private attachments are stored on the `local` disk.
+- Tests: `php artisan test` (SQLite in memory).

@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(ContentSeeder::class);
+
         $email = config('powerstik.admin_email');
         $password = config('powerstik.admin_password');
 

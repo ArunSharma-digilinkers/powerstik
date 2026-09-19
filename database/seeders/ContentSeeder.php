@@ -1,0 +1,100 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Client;
+use App\Models\ExportCountry;
+use App\Models\Faq;
+use App\Models\GlossaryTerm;
+use App\Models\Industry;
+use App\Models\Machine;
+use App\Models\ProductType;
+use App\Models\TeamMember;
+use App\Models\Technology;
+use App\Models\TimelineEvent;
+use Illuminate\Database\Seeder;
+
+/**
+ * Starter content taken from Powerstik_Website_Architecture.docx. Only facts
+ * stated in the brief; everything else is left for the team to fill in.
+ * Idempotent: existing rows (matched by name) are never overwritten.
+ */
+class ContentSeeder extends Seeder
+{
+    public function run(): void
+    {
+        $industries = ['Battery', 'RO & water purifiers', 'Pharma', 'Cosmetics', 'Toys', 'Food', 'Pizza & QSR', 'Surgical', 'Electrical'];
+        foreach ($industries as $i => $name) {
+            Industry::firstOrCreate(['name' => $name], ['sort' => $i + 1]);
+        }
+
+        foreach (['Offset', 'Digital', 'Flexo'] as $i => $name) {
+            Technology::firstOrCreate(['name' => $name], ['sort' => $i + 1]);
+        }
+
+        $productTypes = ['Sheet labels', 'Roll labels', 'Battery labels', 'Mono cartons', 'Corrugated boxes', 'Branding & design'];
+        foreach ($productTypes as $i => $name) {
+            ProductType::firstOrCreate(['name' => $name], ['sort' => $i + 1]);
+        }
+
+        $machines = [
+            ['Heidelberg Speedmaster SM-74', 'offset', 'Heidelberg', 'SM-74'],
+            ['Heidelberg Speedmaster CD-102', 'offset', 'Heidelberg', 'CD-102'],
+            ['Canon digital press', 'digital', 'Canon', null],
+            ['Mark Andy E5', 'flexo', 'Mark Andy', 'E5'],
+            ['Corrugation line', 'corrugation', null, null, 'Full line from mono cartons to 9-ply boxes.'],
+        ];
+        foreach ($machines as $i => $m) {
+            Machine::firstOrCreate(['name' => $m[0]], [
+                'category' => $m[1], 'make' => $m[2], 'model' => $m[3], 'description' => $m[4] ?? null, 'sort' => $i + 1,
+            ]);
+        }
+
+        // name, ISO, lat, lng (approximate centroid, used for the export map)
+        $countries = [
+            ['Nepal', 'NP', 28.39, 84.12], ['Bangladesh', 'BD', 23.68, 90.36], ['Afghanistan', 'AF', 33.94, 67.71],
+            ['Uganda', 'UG', 1.37, 32.29], ['USA', 'US', 37.09, -95.71], ['Fiji', 'FJ', -17.71, 178.07],
+            ['Russia', 'RU', 61.52, 105.32], ['Algeria', 'DZ', 28.03, 1.66],
+        ];
+        foreach ($countries as $i => [$name, $iso, $lat, $lng]) {
+            ExportCountry::firstOrCreate(['iso2' => $iso], ['name' => $name, 'lat' => $lat, 'lng' => $lng, 'sort' => $i + 1]);
+        }
+
+        // show_logo stays off until each client's permission is confirmed (brief §11).
+        foreach (['Livguard', 'Eastman', 'Unique Energos', 'Tata Green', 'Amaron'] as $i => $name) {
+            Client::firstOrCreate(['name' => $name], ['sort' => $i + 1, 'show_logo' => false]);
+        }
+
+        TimelineEvent::firstOrCreate(['year' => 2002, 'title' => 'Founded as a design setup'], [
+            'body' => 'Powerstik began as a small design studio.',
+        ]);
+
+        TeamMember::firstOrCreate(['name' => 'Amit Sharma'], [
+            'role' => 'Operations & backend', 'department' => 'leadership', 'is_leadership' => true, 'sort' => 1,
+        ]);
+        TeamMember::firstOrCreate(['name' => 'Sumit Sharma'], [
+            'role' => 'Marketing & clients', 'department' => 'leadership', 'is_leadership' => true, 'sort' => 2,
+        ]);
+
+        $faqs = [
+            ['What is the minimum order quantity?', '<div>From 50 units, up to any volume, in sheet or roll form.</div>', 'Orders'],
+            ['How quickly do you dispatch?', '<div>Within 2–5 days of artwork approval, including bulk orders.</div>', 'Orders'],
+            ['Do you export?', '<div>Yes. We currently export to Nepal, Bangladesh, Afghanistan, Uganda, the USA, Fiji, Russia and Algeria.</div>', 'Export'],
+        ];
+        foreach ($faqs as $i => [$q, $a, $cat]) {
+            Faq::firstOrCreate(['question' => $q], ['answer' => $a, 'category' => $cat, 'sort' => $i + 1]);
+        }
+
+        $glossary = [
+            ['Ply', 'The number of layers in a corrugated board. 3-ply has one fluted layer between two liners; 5, 7 and 9-ply add more flute and liner layers for strength.'],
+            ['GSM', 'Grams per square metre: the weight, and roughly the thickness, of paper or board.'],
+            ['BOPP', 'Biaxially oriented polypropylene: a strong, moisture-resistant plastic film used for labels and lamination.'],
+            ['Lamination', 'A thin film bonded over a printed surface to protect it and give a gloss or matt finish.'],
+            ['Flute', 'The wavy middle layer of corrugated board that gives it rigidity and cushioning.'],
+            ['Mono carton', 'A single-layer folding carton made from paperboard, used for retail product packaging.'],
+        ];
+        foreach ($glossary as [$term, $def]) {
+            GlossaryTerm::firstOrCreate(['term' => $term], ['definition' => "<div>{$def}</div>"]);
+        }
+    }
+}

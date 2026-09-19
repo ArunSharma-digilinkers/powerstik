@@ -26,3 +26,12 @@
         @apply rounded-lg border border-zinc-200 bg-white shadow-xs;
     }
 }
+
+[x-cloak] { display: none !important; }
+
+/* Trix: hide the attach-file button (uploads aren't supported in rich text). */
+trix-toolbar [data-trix-button-group='file-tools'] { display: none; }
+.trix-content h1 { @apply text-lg font-semibold; }
+.trix-content ul { @apply list-disc pl-5; }
+.trix-content ol { @apply list-decimal pl-5; }
+.trix-content a { @apply text-brand-600 underline; }
