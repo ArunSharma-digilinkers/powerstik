@@ -49,7 +49,9 @@ Nothing can be run by hand on the server, so every release has to work as it is 
 - Fixed home media: drop files at `public/media/home/{hero.mp4, hero.webp, battery.webp, founders.webp}`. Tinted wells show until they exist.
 - Motion lives in `resources/js/site.js`: counters and arcs fire on scroll, and everything respects `prefers-reduced-motion`. Any element with `data-track="…"` sends a GA4 click event.
 - Starter images that must reach production (e.g. industry cards) live in `database/seeders/media/` and are attached by `ContentSeeder` only where the field is empty. On the server, run it with the **Seed** action in Admin → System. `public/uploads` itself is git-ignored.
-- **`DemoContentSeeder`** loads the design's illustrative case studies, testimonials and founders' quote for local work only. It refuses to run in production. Never present that copy as real.
+- About (`/about`, `/about-us` 301s to it): `AboutController` plus `about.blade.php`, spec in `docs/design/about-handoff.md`. It is one scrolling page with anchors (`#story`, `#leadership`, `#quality`, `#careers`…), not the sub-pages in the brief's sitemap. The story timeline is `timeline_events` (an Alpine tablist with arrow keys and `?year=`), leaders are `team_members` with `is_leadership` (plus `quote`), and roles are open `job_openings`. Teams, QC stages, the test list and plant facts are fixed copy in the view. Certifications, sustainability and the 360° walkthrough link come from Settings → About page, and each block stays hidden while its setting is empty, so no unverified claim ships. Photography goes in `public/media/about/*.webp` (the list is in `AboutController::MEDIA`). Section numbers count only the sections shown.
+- Inner pages: dark hero with `<x-site.breadcrumb>`. The red CTA band is `<x-site.cta-band>` with `<x-site.cta-link>` rows.
+- **`DemoContentSeeder`** loads the designs' illustrative case studies, testimonials, founders' quote, the story milestones after 2002, leadership bios and quotes, open roles and sustainability claims for local work only. It refuses to run in production. Never present that copy as real.
 
 ## Admin panel architecture
 

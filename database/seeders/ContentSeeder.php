@@ -15,6 +15,7 @@ use App\Models\TimelineEvent;
 use App\Support\ImageStore;
 use Illuminate\Database\Seeder;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Str;
 
 /**
  * Starter content taken from Powerstik_Website_Architecture.docx. Only facts
@@ -78,7 +79,7 @@ class ContentSeeder extends Seeder
         }
 
         TimelineEvent::firstOrCreate(['year' => 2002, 'title' => 'Founded as a design setup'], [
-            'body' => 'Powerstik began as a small design studio.',
+            'kicker' => 'The beginning', 'body' => 'Powerstik began as a small design studio.', 'meta' => 'Design India founded · Haryana',
         ]);
 
         TeamMember::firstOrCreate(['name' => 'Amit Sharma'], [
@@ -87,6 +88,7 @@ class ContentSeeder extends Seeder
         TeamMember::firstOrCreate(['name' => 'Sumit Sharma'], [
             'role' => 'Marketing & clients', 'department' => 'leadership', 'is_leadership' => true, 'sort' => 2,
         ]);
+        $this->attachPortraits();
 
         $faqs = [
             ['What is the minimum order quantity?', '<div>From 50 units, up to any volume, in sheet or roll form.</div>', 'Orders'],
@@ -107,6 +109,17 @@ class ContentSeeder extends Seeder
         ];
         foreach ($glossary as [$term, $def]) {
             GlossaryTerm::firstOrCreate(['term' => $term], ['definition' => "<div>{$def}</div>"]);
+        }
+    }
+
+    /** Leadership portraits (seeders/media/team/{name-slug}.jpg), only where no photo is set yet. */
+    private function attachPortraits(): void
+    {
+        foreach (glob(database_path('seeders/media/team/*.jpg')) as $file) {
+            $member = TeamMember::whereNull('photo')->get()
+                ->first(fn (TeamMember $m) => Str::slug($m->name) === pathinfo($file, PATHINFO_FILENAME));
+
+            $member?->update(['photo' => ImageStore::store(new UploadedFile($file, basename($file), 'image/jpeg', null, true), 'team')]);
         }
     }
 

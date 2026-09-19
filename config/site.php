@@ -28,11 +28,11 @@ return [
             ['Battery labels', '/battery-labels'],
         ],
         'Company' => [
-            ['Our story', '/about/our-story'],
-            ['Leadership', '/about/leadership'],
-            ['Quality & PDI', '/about/quality'],
+            ['Our story', '/about#story'],
+            ['Leadership', '/about#leadership'],
+            ['Quality & PDI', '/about#quality'],
             ['Global', '/global'],
-            ['Careers', '/careers'],
+            ['Careers', '/about#careers'],
         ],
         'Resources' => [
             ['Company profile (PDF)', '/resources/downloads'],

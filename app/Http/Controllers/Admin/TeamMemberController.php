@@ -25,6 +25,7 @@ class TeamMemberController extends ResourceController
             Field::text('role', 'Role / title'),
             Field::select('department', 'Department', TeamMember::DEPARTMENTS),
             Field::richtext('bio', 'Bio'),
+            Field::text('quote', 'Quote')->help('Leadership cards only. Their own words, without quotation marks.'),
             Field::image('photo', 'Photo', 'team'),
             Field::toggle('is_leadership', 'Show on Leadership page'),
             Field::toggle('is_published', 'Published')->default(true),

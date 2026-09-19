@@ -205,7 +205,7 @@
     @endif
 
     {{-- 10. Machine park teaser --}}
-    <section class="mt-20 border-y border-rule bg-paper-mid lg:mt-[108px]" aria-labelledby="machines-title">
+    <section id="machines" class="mt-20 border-y border-rule bg-paper-mid lg:mt-[108px]" aria-labelledby="machines-title">
         <div class="site-container grid items-center gap-12 py-20 lg:grid-cols-[.82fr_1.18fr] lg:gap-[72px] lg:py-24">
             <div>
                 <p class="kicker mb-[18px]">04 / Machine park</p>
@@ -361,26 +361,12 @@
         </section>
     @endif
 
-    {{-- 15. Final CTA band: the one place brand red runs as a field --}}
-    <section id="quote" @class(['on-red bg-brand-500 text-white', 'mt-20 lg:mt-[108px]' => $founders->isEmpty() && $testimonials->isEmpty()]) aria-labelledby="cta-title">
-        <div class="site-container grid items-center gap-12 py-20 lg:grid-cols-[1.1fr_.9fr] lg:gap-[72px] lg:py-[104px]">
-            <div>
-                <h2 id="cta-title" class="text-[clamp(2.25rem,1rem+4vw,4.5rem)] leading-[.96] font-extrabold tracking-[-.04em] text-balance">Have a job?<br> Get a quote in 24 hours.</h2>
-                <p class="mt-7 max-w-[50ch] text-[17px] leading-[1.5] text-white/92 sm:text-[19px]">Send size, quantity, sheet or roll and your artwork. A coordinator — a person, named, reachable — replies within one working day.</p>
-            </div>
-            <div class="flex flex-col gap-3">
-                <a href="{{ $quote }}" data-track="quote_cta" class="flex items-center justify-between gap-4 bg-white px-7 py-[22px] text-[17px] font-bold text-ink transition-colors hover:bg-ink hover:text-white">
-                    Start the smart RFQ <span class="font-mono text-[13px]" aria-hidden="true">→</span>
-                </a>
-                <a href="{{ $whatsapp ?? url('/contact') }}" @if ($whatsapp) target="_blank" rel="noopener" @endif data-track="whatsapp_cta"
-                   class="flex items-center justify-between gap-4 border border-white/50 px-7 py-[21px] text-[17px] font-semibold transition-colors hover:border-white hover:bg-white/12">
-                    WhatsApp us <span class="font-mono text-[13px]" aria-hidden="true">→</span>
-                </a>
-                <a href="{{ url(config('site.callback_url')) }}" data-track="callback"
-                   class="flex items-center justify-between gap-4 border border-white/50 px-7 py-[21px] text-[17px] font-semibold transition-colors hover:border-white hover:bg-white/12">
-                    Request a callback <span class="font-mono text-[13px]" aria-hidden="true">→</span>
-                </a>
-            </div>
-        </div>
-    </section>
+    {{-- 15. Final CTA band --}}
+    <x-site.cta-band id="cta-title" body="Send size, quantity, sheet or roll and your artwork. A coordinator — a person, named, reachable — replies within one working day."
+                     :class="$founders->isEmpty() && $testimonials->isEmpty() ? 'mt-20 lg:mt-[108px]' : ''">
+        <x-slot:title>Have a job?<br> Get a quote in 24 hours.</x-slot:title>
+        <x-site.cta-link :href="$quote" :solid="true" data-track="quote_cta">Start the smart RFQ</x-site.cta-link>
+        <x-site.cta-link :href="$whatsapp ?? url('/contact')" :external="(bool) $whatsapp" data-track="whatsapp_cta">WhatsApp us</x-site.cta-link>
+        <x-site.cta-link :href="url(config('site.callback_url'))" data-track="callback">Request a callback</x-site.cta-link>
+    </x-site.cta-band>
 </x-layouts.site>

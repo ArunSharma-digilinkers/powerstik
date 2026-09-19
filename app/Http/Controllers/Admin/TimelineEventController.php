@@ -22,9 +22,11 @@ class TimelineEventController extends ResourceController
     {
         return [
             Field::number('year', 'Year')->required()->rules('between:1990,2100'),
+            Field::text('kicker', 'Kicker')->help('Short red label above the title, e.g. "First press".'),
             Field::text('title', 'Title')->required(),
             Field::textarea('body', 'Text'),
-            Field::image('image', 'Photo', 'timeline'),
+            Field::text('meta', 'Footnote')->help('One line under the text, e.g. "Heidelberg SM-74 installed".'),
+            Field::image('image', 'Photo', 'timeline')->help('4:3. An archive photo of that year works best.'),
             Field::number('sort', 'Order within the year')->default(0),
         ];
     }

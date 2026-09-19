@@ -13,6 +13,7 @@ return [
             'whatsapp_message' => ['label' => 'WhatsApp pre-filled message', 'default' => 'Hello Powerstik, I would like a quote.'],
             'address' => ['label' => 'Plant address', 'type' => 'textarea', 'default' => ''],
             'map_embed_url' => ['label' => 'Google Maps embed URL', 'type' => 'url', 'default' => ''],
+            'careers_email' => ['label' => 'Careers email', 'type' => 'email', 'help' => 'Where job applications and portfolios go.', 'default' => ''],
             'lead_recipients' => ['label' => 'Lead notification emails', 'help' => 'Comma-separated', 'default' => ''],
         ],
     ],
@@ -31,6 +32,14 @@ return [
         'label' => 'Home page',
         'fields' => [
             'founders_quote' => ['label' => "Founders' note", 'type' => 'textarea', 'help' => 'Shown beside the founders photo. Leave empty to show names only.', 'default' => ''],
+        ],
+    ],
+    'about' => [
+        'label' => 'About page',
+        'fields' => [
+            'certifications' => ['label' => 'Certifications held', 'type' => 'textarea', 'help' => 'One per line, e.g. "ISO 9001:2015". Leave empty to hide the box.', 'default' => ''],
+            'sustainability' => ['label' => 'Sustainability practices', 'type' => 'textarea', 'help' => 'One per line as "Name: description". Only verified claims. Leave empty to hide the section.', 'default' => ''],
+            'walkthrough_url' => ['label' => '360° plant walkthrough link', 'type' => 'url', 'help' => 'Matterport, YouTube 360 or similar. Leave empty to hide the badge.', 'default' => ''],
         ],
     ],
     'social' => [

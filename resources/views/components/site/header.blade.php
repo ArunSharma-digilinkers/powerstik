@@ -40,7 +40,7 @@
                 @foreach (config('site.nav') as $item)
                     <li>
                         <a href="{{ url($item[1]) }}" @if (str_starts_with($current, $item[1])) aria-current="page" @endif
-                           class="flex items-center gap-2 transition-colors hover:text-brand-500 aria-[current=page]:text-brand-500">
+                           class="flex items-center gap-2 border-b-2 border-transparent pt-[5px] pb-[3px] transition-colors hover:text-brand-500 aria-[current=page]:border-brand-500 aria-[current=page]:hover:text-ink">
                             @if ($item['flagship'] ?? false)
                                 <span class="size-1.5 rounded-full bg-brand-500" aria-hidden="true"></span>
                             @endif
