@@ -61,6 +61,17 @@ class HomePageTest extends TestCase
             ->assertSee('+91 130 310 0105');                       // brochure landline
     }
 
+    public function test_the_flagship_section_carries_the_test_bench_photograph(): void
+    {
+        // The proof band only renders while the client's photo is in public/media/home.
+        $this->assertFileExists(public_path('media/home/acid-test.webp'));
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('From the test bench')
+            ->assertSee('media/home/acid-test.webp');
+    }
+
     public function test_whatsapp_button_uses_the_configured_number(): void
     {
         // The brochure's mobile is the default, and Settings overrides it.

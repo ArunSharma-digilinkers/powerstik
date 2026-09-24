@@ -153,6 +153,22 @@
                     <span class="relative text-center font-mono text-[10.5px] leading-[1.6] tracking-[.1em] uppercase">Acid<br>test<br>passed</span>
                 </div>
             </div>
+
+            {{-- Proof band. The client's own photograph of a sheet under test, so the three
+                 words above are evidenced rather than asserted. Hidden until the file exists. --}}
+            @if ($media['acid_test'])
+                <div class="order-3 mt-2 border-t border-[#2b2b2b] pt-11 lg:col-span-2 lg:mt-5 lg:pt-12">
+                    <div class="flex flex-col gap-8 sm:flex-row sm:items-center sm:gap-10 lg:gap-14">
+                        <img src="{{ $media['acid_test'] }}" width="1400" height="933" loading="lazy"
+                             alt="A sheet of Powerstik battery label paper lying in a test tray labelled “Heat Test” in pencil and dated, wet with acid, a pink stain spreading up from the lower edge"
+                             class="h-auto w-full max-w-[420px] shrink-0 sm:w-[46%]">
+                        <div>
+                            <p class="label-mark">From the test bench</p>
+                            <p class="mt-4 max-w-[52ch] text-[16px] leading-[1.55] text-on-dark">A sheet of the paper in the tray — dated, marked up by hand and left under acid and heat. Not a render and not a sample printed for a website: this is the test the three words above come from.</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </section>
 

@@ -69,6 +69,11 @@
         @apply block h-[3px] w-[14px] shrink-0 bg-brand-500;
     }
 
+    /* Ink type vanishes on a dark ground; the lime tick still reads. */
+    .on-dark .label-mark {
+        @apply text-white;
+    }
+
     .h-section {
         @apply font-extrabold tracking-[-.035em];
         font-size: clamp(2rem, 1.1rem + 3.4vw, 3.625rem);

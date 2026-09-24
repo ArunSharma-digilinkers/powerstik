@@ -106,7 +106,7 @@ The WhatsApp number is the brochure's mobile. Confirm it is actually on WhatsApp
 
 ## Client artwork in `public/media/`
 
-Two more sets arrived with the brochure and are used as-is, beyond recolouring:
+Three sets came from the client and are used as-is, beyond a crop and a mild level:
 
 - **`home/export-map.webp`** — Design India's own export map, the dotted world with lime flag
   pills. The original is drawn for white, so it is recoloured for the ink ground of the Global
@@ -116,6 +116,14 @@ Two more sets arrived with the brochure and are used as-is, beyond recolouring:
   `media-inbox/map.png`.
 - **`machines/*.webp`** — the makers' press cutouts, trimmed and capped at 1200px with their
   transparency intact, one per card in the machine park teaser.
+- **`home/acid-test.webp`** — the client's own photograph of a sheet of the battery paper in the
+  test tray, marked "Heat Test" in pencil and dated, with the acid stain climbing from the lower
+  edge. It runs as a proof band under the flagship section, so "Acid / Heat / Grip" is evidenced
+  rather than asserted. Processing was a tray-lip crop to 3:2 and a 1.14 contrast bump so the
+  pencil and the stain read at all — nothing that changes what the test shows. Source is
+  `media-inbox/acid-paper.jpeg`. **Ask the client for the protocol behind it** (which acid, what
+  temperature, how long, and the date in the corner), so the caption can state the test instead
+  of describing the photograph.
 
 **Two things to settle with the client.**
 
