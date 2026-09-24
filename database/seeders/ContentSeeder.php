@@ -147,16 +147,18 @@ class ContentSeeder extends Seeder
     }
 
     /**
-     * Card images prepared from the client's media (4:3, in seeders/media/industries/{slug}.jpg).
-     * Only fills industries that have no card image yet, so uploads made in the admin win.
+     * Industry images prepared from the client's media, named by slug:
+     *   seeders/media/industries/{slug}.jpg       → card_image (4:3, the home grid)
+     *   seeders/media/industries/hero/{slug}.jpg  → hero_image (16:9, the detail page)
+     * Only fills fields that are still empty, so uploads made in the admin win.
      */
     private function attachIndustryCards(): void
     {
-        foreach (glob(database_path('seeders/media/industries/*.jpg')) as $file) {
-            $industry = Industry::where('slug', pathinfo($file, PATHINFO_FILENAME))->whereNull('card_image')->first();
+        foreach (['' => 'card_image', 'hero/' => 'hero_image'] as $dir => $field) {
+            foreach (glob(database_path("seeders/media/industries/{$dir}*.jpg")) as $file) {
+                $industry = Industry::where('slug', pathinfo($file, PATHINFO_FILENAME))->whereNull($field)->first();
 
-            if ($industry) {
-                $industry->update(['card_image' => ImageStore::store(new UploadedFile($file, basename($file), 'image/jpeg', null, true), 'industries')]);
+                $industry?->update([$field => ImageStore::store(new UploadedFile($file, basename($file), 'image/jpeg', null, true), 'industries')]);
             }
         }
     }
