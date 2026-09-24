@@ -20,6 +20,7 @@ class HomeController extends Controller
         'hero_video' => 'media/home/hero.mp4',
         'hero_poster' => 'media/home/hero.webp',
         'battery' => 'media/home/battery.webp',
+        'export_map' => 'media/home/export-map.webp',
         'founders' => 'media/home/founders.webp',
     ];
 

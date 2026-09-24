@@ -23,11 +23,13 @@
         ['Dispatch', 'Packed, documented and out — bulk orders included.'],
     ];
 
+    // kind, name, spec, and the maker's cutout at public/media/machines/{file}.webp.
+    // One card per press, so each carries its own picture; the tinted well shows if a file is missing.
     $machines = [
-        ['Offset', 'Heidelberg SM-74', 'Five-colour sheetfed, the workhorse for cartons and sheet labels.'],
-        ['Offset', 'Heidelberg CD-102', 'Large-format sheetfed for long runs and heavy stock.'],
-        ['Flexo', 'Mark Andy E5', 'Roll label press — applicator-ready reels, defined winding.'],
-        ['Digital + corrugation', 'Canon & full flute line', 'Short runs and samples; mono carton to 9-ply in-house.'],
+        ['Offset · Germany', 'Two Heidelberg Speedmasters', 'The five-colour SM-74 for cartons and sheet labels, and the large-format CD-102 for long runs and heavy stock.', 'heidelberg'],
+        ['Flexo · USA', 'Mark Andy E5', 'Roll label press — applicator-ready reels, core size and winding direction to spec.', 'mark-andy'],
+        ['Digital', 'Digital press', 'Short runs, samples and variable data, without a plate or a minimum.', 'digital'],
+        ['Corrugation', 'Semi-automatic carton printer', 'Print, slot and die-cut in line: mono cartons through 3, 5, 7 and 9-ply, in-house.', 'corrugation'],
     ];
 @endphp
 
@@ -214,10 +216,16 @@
                 <a href="{{ url('/about/infrastructure') }}" class="link-underline mt-[30px] text-[15.5px]">Take the plant tour</a>
             </div>
             <ul class="grid gap-px bg-rule-mid sm:grid-cols-2">
-                @foreach ($machines as [$kind, $name, $spec])
-                    <li class="bg-paper px-7 py-[30px]">
+                @foreach ($machines as [$kind, $name, $spec, $file])
+                    @php($cutout = is_file(public_path("media/machines/{$file}.webp")) ? asset("media/machines/{$file}.webp") : null)
+                    <li class="flex flex-col bg-paper px-7 py-[26px]">
+                        <div class="mb-[22px] grid h-[92px] place-items-center @unless ($cutout) bg-well @endunless">
+                            @if ($cutout)
+                                <img src="{{ $cutout }}" alt="{{ $name }}" width="1200" height="420" loading="lazy" class="max-h-full w-auto max-w-full object-contain">
+                            @endif
+                        </div>
                         <p class="label-mark">{{ $kind }}</p>
-                        <h3 class="mt-3.5 text-[24px] leading-[1.15] font-bold tracking-[-.025em]">{{ $name }}</h3>
+                        <h3 class="mt-3 text-[22px] leading-[1.15] font-bold tracking-[-.025em]">{{ $name }}</h3>
                         <p class="mt-2 text-[14.5px] leading-[1.5] text-body">{{ $spec }}</p>
                     </li>
                 @endforeach
@@ -233,7 +241,13 @@
                     Export documentation, Incoterms, port-ready packing and repeat-order colour consistency, handled by the same coordinator.
                 </x-site.section-header>
                 <div class="mt-14 grid items-center gap-16 lg:grid-cols-[1.15fr_.85fr]">
-                    {{-- Schematic, not cartographic: a hub with arcs fanning out. Hidden on narrow screens. --}}
+                    {{-- The client's export map (recoloured for the ink ground). Hidden on narrow screens. --}}
+                    @if ($media['export_map'])
+                        <img src="{{ $media['export_map'] }}" width="1400" height="787" loading="lazy"
+                             class="hidden h-auto w-full min-[900px]:block"
+                             alt="Powerstik exports from Haryana, India to {{ $countries->pluck('name')->join(', ', ' and ') }}">
+                    @else
+                    {{-- Fallback until the artwork is in place: a hub with arcs fanning out. --}}
                     <svg viewBox="0 0 620 420" class="hidden h-auto w-full overflow-visible min-[900px]:block" data-inview role="img" aria-label="Export routes from Haryana, India to {{ $countries->pluck('name')->join(', ', ' and ') }}">
                         @foreach ($arcs as $i => $arc)
                             <path class="ps-arc" d="{{ $arc['d'] }}" fill="none" stroke="{{ $i % 2 ? '#4A4A4A' : '#C7FF00' }}" stroke-width="1.1"
@@ -247,6 +261,7 @@
                         <circle cx="96" cy="300" r="16" fill="none" stroke="#4A4A4A"/>
                         <text x="92" y="340" fill="#FFFFFF" class="text-[17px] font-bold tracking-[-.02em]">Haryana, India</text>
                     </svg>
+                    @endif
 
                     <div>
                         <ul class="grid grid-cols-2 gap-px bg-rule-dark">

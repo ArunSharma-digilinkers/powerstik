@@ -103,3 +103,28 @@ a 2002 founding date, which is 24 years — the brochure's own arithmetic, not o
 
 The WhatsApp number is the brochure's mobile. Confirm it is actually on WhatsApp, or clear
 `contact.whatsapp` in Settings to hide the button.
+
+## Client artwork in `public/media/`
+
+Two more sets arrived with the brochure and are used as-is, beyond recolouring:
+
+- **`home/export-map.webp`** — Design India's own export map, the dotted world with lime flag
+  pills. The original is drawn for white, so it is recoloured for the ink ground of the Global
+  section: the pills and their contents are masked and left alone, and everything else (the dot
+  field, the leader lines, the pin halos) is remapped to a light grey whose opacity follows how
+  dark it was. The script is in the commit that added it; the source is
+  `media-inbox/map.png`.
+- **`machines/*.webp`** — the makers' press cutouts, trimmed and capped at 1200px with their
+  transparency intact, one per card in the machine park teaser.
+
+**Two things to settle with the client.**
+
+1. The map carries nine pins — the brochure's nine markets. The site lists eleven, because
+   Bangladesh and the USA were confirmed separately. Ask Design India for a map with those two
+   added rather than editing their artwork here.
+2. `media-inbox/canon.png` is a **Xerox Color 175** press, while the brochure credits Canon,
+   Japan. The card is labelled "Digital press" with no brand until that is resolved.
+
+The press pictures are manufacturer renders, not photographs of the Sonipat floor. The brochure
+uses them the same way, so they are fine here — but real plant photography would be better, and
+the About page's infrastructure slots need it regardless.
