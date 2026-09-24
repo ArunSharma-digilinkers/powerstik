@@ -33,11 +33,12 @@ Nothing can be run by hand on the server, so every release has to work as it is 
 - Assets are in `public/images/brand/`: `logo.png`, `logo-white.png` (knockout for dark grounds) and `mark.png`, plus the three favicons. All are generated from `docs/design/brand/powerstik-logo-master.png` — see `docs/design/brand/README-assets.md`. Ask the client for SVGs. The wordmark has no tagline; "better ideas" belonged to the old artwork.
 - Raw media inbox: `resources/media-inbox/` (git-ignored). Optimise media before it goes into the app.
 - Design specs: `docs/design/` — `brand.md` for colour and patterns, then the per-page handoffs.
+- **Client facts come from the brochure** (`docs/design/brand/brochure-*.jpg`): the export map, the "Our Major Clientele" row, the Sonipat address and both phone numbers, the founders' roles and bios, "India's most trusted battery sticker" and "5,00,000 labels per day". These are the client's own words and ship in `ContentSeeder` / `config/settings.php`. Anything *not* in the brochure or the brief is still ours and belongs in `DemoContentSeeder`.
 
 ## Decisions
 
 - WhatsApp: click-to-chat (`wa.me`) only.
-- The site shows 8 export countries (the value lives in Settings).
+- The site shows 11 export countries: the nine on the brochure's map plus Bangladesh and the USA, which Arun confirmed. The counter is a setting; the rows are seeded by `ContentSeeder`.
 - CRM integration is undecided. Until then, leads are stored in the DB and emailed.
 - Git: commit messages have **no trailer** (no Co-Authored-By or attribution lines). Default branch `main`.
 

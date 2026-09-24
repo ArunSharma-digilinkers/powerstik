@@ -66,7 +66,7 @@ class DemoContentSeeder extends Seeder
             [2014, 'Corrugation', 'From mono carton to 9-ply', 'A full corrugation line meant we could ship the box as well as the label on it. QSR and appliance clients arrived because one supplier could now do both.', 'Corrugation line commissioned'],
             [2017, 'The paper', 'Battery label paper, developed in-house', 'Existing label stock kept lifting under electrolyte splash and bonnet heat. We developed our own acid- and heat-resistant paper for lead-acid production lines — still our flagship product.', 'Proprietary substrate developed'],
             [2019, 'Roll labels', 'Mark Andy E5 and automatic applicators', 'Flexo roll labels let us supply clients running automatic applicators — defined core size and winding direction, reel after reel.', 'Mark Andy E5 flexo installed'],
-            [2022, 'Going out', 'First export consignment', 'A battery manufacturer in Nepal placed the first export order. Seven more countries followed. Export documentation is now handled by the same coordinators who handle domestic jobs.', 'Exports begin · now 8 countries'],
+            [2022, 'Going out', 'First export consignment', 'A battery manufacturer in Nepal placed the first export order. Seven more countries followed. Export documentation is now handled by the same coordinators who handle domestic jobs.', 'Exports begin · now 11 countries'],
         ];
         foreach ($milestones as [$year, $kicker, $title, $body, $meta]) {
             $event = TimelineEvent::where('year', $year)->first();
@@ -77,13 +77,13 @@ class DemoContentSeeder extends Seeder
             }
         }
 
-        // Written in their likely voice for the design; Amit and Sumit must approve or rewrite them.
-        $leaders = [
-            'Amit Sharma' => ['<div>Amit runs the plant — press scheduling, material buying, quality and dispatch. If your job is on a machine right now, he knows which one and when it comes off. He learned the floor before he ran it, which is why make-ready arguments with pressmen tend to be short.</div>', 'A delivery date is a promise, not an estimate.'],
-            'Sumit Sharma' => ['<div>Sumit handles clients, new business and the design side of the house. He still reviews artwork personally before it goes to plate, and most of the 1,500 client relationships started as a conversation with him. He is the reason the studio never became a back office.</div>', 'Design is the reason they call us. Delivery is the reason they call again.'],
+        // The bios are the client's own, so they ship from ContentSeeder. These pull-quotes are
+        // still the design's invention — written in their likely voice, never approved by them.
+        $quotes = [
+            'Amit Sharma' => 'A delivery date is a promise, not an estimate.',
+            'Sumit Sharma' => 'Design is the reason they call us. Delivery is the reason they call again.',
         ];
-        foreach ($leaders as $name => [$bio, $quote]) {
-            TeamMember::where('name', $name)->whereNull('bio')->update(['bio' => $bio]);
+        foreach ($quotes as $name => $quote) {
             TeamMember::where('name', $name)->whereNull('quote')->update(['quote' => $quote]);
         }
 

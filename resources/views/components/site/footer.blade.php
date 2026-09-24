@@ -3,6 +3,7 @@
     $address = Site::setting('address');
     $email = Site::setting('email');
     $phone = Site::setting('phone');
+    $phoneAlt = Site::setting('phone_alt');
     $social = collect(['linkedin' => 'LinkedIn', 'instagram' => 'Instagram', 'facebook' => 'Facebook', 'youtube' => 'YouTube'])
         ->map(fn ($label, $key) => [$label, Site::setting($key)])->filter(fn ($s) => $s[1]);
 @endphp
@@ -18,9 +19,10 @@
                     Haryana, India
                 @endif
             </address>
-            @if ($phone || $email)
+            @if ($phone || $phoneAlt || $email)
                 <p class="mt-4 flex flex-col gap-1">
                     @if ($phone)<a href="{{ Site::telUrl($phone) }}" data-track="call" class="text-faint hover:text-white">{{ $phone }}</a>@endif
+                    @if ($phoneAlt)<a href="{{ Site::telUrl($phoneAlt) }}" data-track="call" class="text-faint hover:text-white">{{ $phoneAlt }}</a>@endif
                     @if ($email)<a href="mailto:{{ $email }}" class="text-faint hover:text-white">{{ $email }}</a>@endif
                 </p>
             @endif

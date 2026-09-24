@@ -61,20 +61,27 @@ class ContentSeeder extends Seeder
             ]);
         }
 
-        // name, ISO, lat, lng (approximate centroid, used for the export map), card note
+        // name, ISO, lat, lng (approximate centroid, used for the export map), card note.
+        // The list is the brochure's "Powering Brands Worldwide" map plus Bangladesh and the
+        // USA, which the client confirmed separately. The per-country notes are still ours.
         $countries = [
             ['Nepal', 'NP', 28.39, 84.12, 'Battery labels'], ['Bangladesh', 'BD', 23.68, 90.36, 'Labels & cartons'],
             ['Afghanistan', 'AF', 33.94, 67.71, 'Battery labels'], ['Uganda', 'UG', 1.37, 32.29, 'Battery labels'],
             ['USA', 'US', 37.09, -95.71, 'Speciality print'], ['Fiji', 'FJ', -17.71, 178.07, 'Labels'],
             ['Russia', 'RU', 61.52, 105.32, 'Battery labels'], ['Algeria', 'DZ', 28.03, 1.66, 'Battery labels'],
+            ['UAE', 'AE', 23.42, 53.85, 'Battery labels'], ['Nigeria', 'NG', 9.08, 8.68, 'Battery labels'],
+            ['Zimbabwe', 'ZW', -19.02, 29.15, 'Battery labels'],
         ];
         foreach ($countries as $i => [$name, $iso, $lat, $lng, $note]) {
             ExportCountry::firstOrCreate(['iso2' => $iso], ['name' => $name, 'lat' => $lat, 'lng' => $lng, 'sort' => $i + 1]);
             ExportCountry::where('iso2', $iso)->whereNull('note')->update(['note' => $note]);
         }
 
+        // The brochure's "Our Major Clientele" row, after the names already in the brief.
         // show_logo stays off until each client's permission is confirmed (brief §11).
-        foreach (['Livguard', 'Eastman', 'Unique Energos', 'Tata Green', 'Amaron'] as $i => $name) {
+        $clients = ['Livguard', 'Eastman', 'Unique Energos', 'Tata Green', 'Amaron',
+            'Livfast', 'Uno Minda', 'Solance', 'Su-Kam', 'UTL'];
+        foreach ($clients as $i => $name) {
             Client::firstOrCreate(['name' => $name], ['sort' => $i + 1, 'show_logo' => false]);
         }
 
@@ -82,22 +89,38 @@ class ContentSeeder extends Seeder
             'kicker' => 'The beginning', 'body' => 'Powerstik began as a small design studio.', 'meta' => 'Design India founded · Haryana',
         ]);
 
-        TeamMember::firstOrCreate(['name' => 'Amit Sharma'], [
-            'role' => 'Operations & backend', 'department' => 'leadership', 'is_leadership' => true, 'sort' => 1,
-        ]);
-        TeamMember::firstOrCreate(['name' => 'Sumit Sharma'], [
-            'role' => 'Marketing & clients', 'department' => 'leadership', 'is_leadership' => true, 'sort' => 2,
-        ]);
+        // Roles and bios are the client's own words, from the brochure's "Two minds / One spark!".
+        $leaders = [
+            'Amit Sharma' => [
+                'Founder & head of Design India', 'Operations & backend',
+                '<div>Founder and head of Design India. His innovative ideas and focus on improving design and quality have helped Powerstik achieve the No.1 position in the market over 25 years. His dedication and clear vision have driven the company to excellence, making it a leader in the industry.</div>',
+            ],
+            'Sumit Sharma' => [
+                'Co-founder · Marketing & Design', 'Marketing & clients',
+                '<div>Co-founder of Design India, leading the Marketing and Designing Division and focused on delivering unique, client-tailored solutions. His strategic management ensures efficient workflow and product delivery, with a keen market understanding and a passion for design. He continuously refines product quality and creates innovative solutions for clients.</div>',
+            ],
+        ];
+        $sort = 0;
+        foreach ($leaders as $name => [$role, $placeholderRole, $bio]) {
+            TeamMember::firstOrCreate(['name' => $name], [
+                'role' => $role, 'department' => 'leadership', 'is_leadership' => true, 'sort' => ++$sort,
+            ]);
+            // Rows seeded before the brochure arrived carry a role we invented; replace only those.
+            TeamMember::where('name', $name)->where('role', $placeholderRole)->update(['role' => $role]);
+            TeamMember::where('name', $name)->whereNull('bio')->update(['bio' => $bio]);
+        }
         $this->attachPortraits();
 
         $faqs = [
             ['What is the minimum order quantity?', '<div>From 50 units, up to any volume, in sheet or roll form.</div>', 'Orders'],
             ['How quickly do you dispatch?', '<div>Within 2–5 days of artwork approval, including bulk orders.</div>', 'Orders'],
-            ['Do you export?', '<div>Yes. We currently export to Nepal, Bangladesh, Afghanistan, Uganda, the USA, Fiji, Russia and Algeria.</div>', 'Export'],
+            ['Do you export?', '<div>Yes. We currently export to Nepal, Bangladesh, Afghanistan, UAE, Uganda, Nigeria, Zimbabwe, the USA, Fiji, Russia and Algeria.</div>', 'Export'],
         ];
         foreach ($faqs as $i => [$q, $a, $cat]) {
             Faq::firstOrCreate(['question' => $q], ['answer' => $a, 'category' => $cat, 'sort' => $i + 1]);
         }
+        // The export list is a fact, so it is corrected in place when countries are added.
+        Faq::where('question', 'Do you export?')->update(['answer' => $faqs[2][1]]);
 
         $glossary = [
             ['Ply', 'The number of layers in a corrugated board. 3-ply has one fluted layer between two liners; 5, 7 and 9-ply add more flute and liner layers for strength.'],

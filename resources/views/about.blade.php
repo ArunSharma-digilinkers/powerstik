@@ -173,7 +173,7 @@
     @if ($leaders->isNotEmpty())
         <section id="leadership" class="mt-20 border-y border-rule bg-paper-mid lg:mt-[108px]" aria-labelledby="leadership-title">
             <div class="site-container py-20 lg:py-24">
-                <x-site.section-header :num="$num('leadership')" kicker="Leadership" title="Two brothers, two halves." id="leadership-title">
+                <x-site.section-header :num="$num('leadership')" kicker="Leadership" title="Two minds. One spark." id="leadership-title">
                     Between them they cover the whole job — one runs the floor, one runs the relationships. Both still answer the phone.
                 </x-site.section-header>
 

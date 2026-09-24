@@ -3,7 +3,7 @@
 Source brief: `Powerstik_Website_Architecture.docx` (Sept 2026 draft).
 The brief suggests WordPress or Webflow. We're building it in **Laravel 12 with a custom Blade admin panel** instead (no Filament). That still gives the team a place to add case studies and blog posts, as §9 of the brief asks.
 
-**Decisions so far (2026-09-19):** Laravel 12 · custom Blade admin, no Filament · Linux shared hosting with cPanel, **no SSH** · WhatsApp = click-to-chat (`wa.me`) only · show **8 export countries** · CRM integration decided later (leads stored in the DB + emailed until then).
+**Decisions so far (2026-09-19):** Laravel 12 · custom Blade admin, no Filament · Linux shared hosting with cPanel, **no SSH** · WhatsApp = click-to-chat (`wa.me`) only · show **11 export countries** · CRM integration decided later (leads stored in the DB + emailed until then).
 
 ---
 
@@ -147,7 +147,7 @@ From the brief (§11), plus technical ones:
 4. Whether other Design India businesses need space on the site
 5. Date of the plant photo/video shoot. Until then we use placeholders shaped like the final media.
 6. Confirm quote-only (no public pricing). Assumed yes.
-7. ~~8 vs 9 countries~~ → **8 export countries** (decided). The counter is a setting, so it can change without a deploy.
+7. ~~8 vs 9 countries~~ → **11 export countries** (settled 2026-09-24 by the brochure's export map, plus Bangladesh and the USA). The counter is a setting, so it can change without a deploy.
 
 **Technical**
 8. Hosting: **cPanel, no SSH** (decided). Still needed: PHP versions offered, FTP credentials, main or addon domain, whether a staging subdomain is allowed

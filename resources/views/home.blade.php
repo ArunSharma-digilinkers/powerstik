@@ -123,9 +123,9 @@
     <section class="on-dark mt-20 bg-ink-deep text-white lg:mt-[108px]" aria-labelledby="battery-title">
         <div class="site-container grid items-center gap-14 py-20 lg:grid-cols-[1.05fr_.95fr] lg:gap-20 lg:py-[100px]">
             <div class="lg:order-1 max-lg:order-2">
-                <p class="mb-[30px] inline-block border border-brand-500 px-3.5 py-2 font-mono text-[11px] tracking-[.14em] text-brand-500 uppercase">Flagship · Battery labels</p>
+                <p class="mb-[30px] inline-block border border-brand-500 px-3.5 py-2 font-mono text-[11px] tracking-[.14em] text-brand-500 uppercase">Flagship · India’s most trusted battery sticker</p>
                 <h2 id="battery-title" class="text-[clamp(2.25rem,1.2rem+3.4vw,3.875rem)] leading-[.98] font-extrabold tracking-[-.04em] text-balance">Paper that survives<br> the acid and the heat.</h2>
-                <p class="mt-6 max-w-[54ch] text-[17px] leading-[1.55] text-on-dark sm:text-[18px]">Our proprietary battery label paper was developed in-house for Indian and export lead-acid production lines: electrolyte splash, bonnet heat and high-speed applicators. Main, warning, terminal and warranty labels in sheet or roll, plus the corrugated box around them.</p>
+                <p class="mt-6 max-w-[54ch] text-[17px] leading-[1.55] text-on-dark sm:text-[18px]">Twenty-five years of core experience in battery label design and printing sit behind it. Our proprietary battery label paper was developed in-house for Indian and export lead-acid production lines: electrolyte splash, bonnet heat and high-speed applicators. Main, warning, terminal and warranty labels in sheet or roll, plus the corrugated box around them.</p>
                 <dl class="mt-11 grid grid-cols-3 gap-px bg-[#262626]">
                     @foreach ([['Acid', 'No lift, no bleed'], ['Heat', 'Bonnet-temperature stable'], ['Grip', 'Applicator-ready adhesion']] as [$word, $caption])
                         <div class="flex flex-col-reverse bg-ink-deep px-3 py-5 sm:px-5 sm:py-6">
@@ -210,7 +210,7 @@
             <div>
                 <p class="kicker mb-[18px]">04 / Machine park</p>
                 <h2 id="machines-title" class="text-[clamp(2rem,1.2rem+2.6vw,3.25rem)] leading-[1.02] font-extrabold tracking-[-.035em] text-balance">We bought the machines so you wouldn’t have to chase them.</h2>
-                <p class="mt-6 text-[17px] leading-[1.55] text-body">Offset, digital, flexo and corrugation on one floor, ~{{ preg_replace('/\D/', '', Site::setting('people', '200')) }} people running them. No job is subcontracted out of sight.</p>
+                <p class="mt-6 text-[17px] leading-[1.55] text-body">Offset, digital, flexo and corrugation on one floor, ~{{ preg_replace('/\D/', '', Site::setting('people', '200')) }} people running them and {{ Site::setting('labels_per_day', '5,00,000') }} labels a day off the presses. No job is subcontracted out of sight.</p>
                 <a href="{{ url('/about/infrastructure') }}" class="link-underline mt-[30px] text-[15.5px]">Take the plant tour</a>
             </div>
             <ul class="grid gap-px bg-rule-mid sm:grid-cols-2">

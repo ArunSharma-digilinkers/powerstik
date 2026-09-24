@@ -7,11 +7,12 @@ return [
     'contact' => [
         'label' => 'Contact',
         'fields' => [
-            'phone' => ['label' => 'Phone (display)', 'default' => ''],
+            'phone' => ['label' => 'Phone (display)', 'default' => '+91 98992 69999'],
+            'phone_alt' => ['label' => 'Second phone (display)', 'help' => 'Shown in the footer only. Leave empty to hide.', 'default' => '+91 130 310 0105'],
             'email' => ['label' => 'Enquiry email', 'type' => 'email', 'default' => ''],
-            'whatsapp' => ['label' => 'WhatsApp number', 'help' => 'Digits with country code, no + or spaces, e.g. 919812345678', 'default' => ''],
+            'whatsapp' => ['label' => 'WhatsApp number', 'help' => 'Digits with country code, no + or spaces, e.g. 919812345678', 'default' => '919899269999'],
             'whatsapp_message' => ['label' => 'WhatsApp pre-filled message', 'default' => 'Hello Powerstik, I would like a quote.'],
-            'address' => ['label' => 'Plant address', 'type' => 'textarea', 'default' => ''],
+            'address' => ['label' => 'Plant address', 'type' => 'textarea', 'default' => "2184, Sector-38, Phase-II\nRai Industrial Estate\nSonipat, Haryana 131029\nIndia"],
             'map_embed_url' => ['label' => 'Google Maps embed URL', 'type' => 'url', 'default' => ''],
             'careers_email' => ['label' => 'Careers email', 'type' => 'email', 'help' => 'Where job applications and portfolios go.', 'default' => ''],
             'lead_recipients' => ['label' => 'Lead notification emails', 'help' => 'Comma-separated', 'default' => ''],
@@ -22,10 +23,11 @@ return [
         'fields' => [
             'since_year' => ['label' => 'Founded (year)', 'type' => 'number', 'default' => '2002'],
             'clients' => ['label' => 'Domestic clients', 'default' => '1,500+'],
-            'export_countries' => ['label' => 'Export countries', 'type' => 'number', 'default' => '8'],
+            'export_countries' => ['label' => 'Export countries', 'type' => 'number', 'default' => '11'],
             'people' => ['label' => 'Team size', 'default' => '200+'],
             'dispatch_days' => ['label' => 'Dispatch window', 'default' => '2–5 days'],
             'moq' => ['label' => 'Minimum order', 'default' => '50 units'],
+            'labels_per_day' => ['label' => 'Labels per day', 'help' => 'Daily label capacity, shown in the machine park section.', 'default' => '5,00,000'],
         ],
     ],
     'home' => [

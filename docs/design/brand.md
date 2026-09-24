@@ -81,3 +81,25 @@ The new wordmark carries **no tagline**. "better ideas" was part of the old artw
 - Whether the floating WhatsApp button should keep the ink treatment or go back to WhatsApp's
   own green (`--color-whatsapp` is still defined; it is one class in
   `components/site/whatsapp.blade.php`).
+
+## Client facts taken from the brochure
+
+Confirmed by Arun on 2026-09-24 and shipped as real content, not demo copy:
+
+| Fact | Where it lives |
+|---|---|
+| Export map — Algeria, Russia, Afghanistan, UAE, Uganda, Nepal, Nigeria, Zimbabwe, Fiji (plus Bangladesh and the USA, confirmed separately) | `ContentSeeder`, `export_countries` setting |
+| "Our Major Clientele": Livfast, Livguard, Eastman, Amaron, Uno Minda, Solance, Su-Kam, UTL | `ContentSeeder`; `show_logo` stays off until each gives permission |
+| 2184, Sector-38, Phase-II, Rai Industrial Estate, Sonipat, Haryana 131029 | `contact.address` setting |
+| +91 98992 69999 and +91 130 310 0105 | `contact.phone`, `contact.phone_alt` |
+| "India's most trusted battery sticker" | the flagship eyebrow on the home page |
+| "25 years of core experience in battery label design and printing" | the flagship paragraph on the home page |
+| "5,00,000 labels per day" | `stats.labels_per_day`, shown in the machine park section |
+| Amit and Sumit's roles and bios, and "Two minds / One spark!" | `ContentSeeder`; the heading on `/about#leadership` |
+
+**Two things the brochure does not settle.** The pull-quotes under each founder are still the
+design's invention and stay in `DemoContentSeeder`. And "25 years of core experience" sits beside
+a 2002 founding date, which is 24 years — the brochure's own arithmetic, not ours.
+
+The WhatsApp number is the brochure's mobile. Confirm it is actually on WhatsApp, or clear
+`contact.whatsapp` in Settings to hide the button.

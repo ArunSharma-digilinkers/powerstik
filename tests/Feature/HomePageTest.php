@@ -22,7 +22,7 @@ class HomePageTest extends TestCase
             ->assertSee('Delivered like a factory.')
             ->assertSee('Acid & heat resistant')        // industry card note
             ->assertSee('industries/', false)            // seeded card image
-            ->assertSee('Eight countries, one standard.')
+            ->assertSee('Eleven countries, one standard.')
             ->assertSee('Livguard')                     // client wall
             ->assertSee('Amit Sharma')
             ->assertDontSee('Problem, press, result.'); // no featured work until it exists
@@ -43,13 +43,39 @@ class HomePageTest extends TestCase
             ->assertSee('250+');
     }
 
+    public function test_brochure_facts_reach_the_page(): void
+    {
+        $this->seed(ContentSeeder::class);
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('Livfast')                                 // brochure clientele
+            ->assertSee('Su-Kam')
+            ->assertSee('UAE')                                     // brochure export map
+            ->assertSee('Nigeria')
+            ->assertSee('Zimbabwe')
+            ->assertSee('India’s most trusted battery sticker', false)
+            ->assertSee('Twenty-five years of core experience')
+            ->assertSee('5,00,000 labels a day')
+            ->assertSee('Rai Industrial Estate')                   // brochure address
+            ->assertSee('+91 130 310 0105');                       // brochure landline
+    }
+
     public function test_whatsapp_button_uses_the_configured_number(): void
     {
-        $this->get('/')->assertDontSee('https://wa.me/', false);
+        // The brochure's mobile is the default, and Settings overrides it.
+        $this->get('/')->assertSee('https://wa.me/919899269999', false);
 
         Setting::put(['whatsapp' => '919812345678', 'whatsapp_message' => 'Hi there']);
 
         $this->get('/')->assertSee('https://wa.me/919812345678?text=Hi%20there', false);
+    }
+
+    public function test_the_button_disappears_when_no_whatsapp_number_is_set(): void
+    {
+        Setting::put(['whatsapp' => '']);
+
+        $this->get('/')->assertDontSee('https://wa.me/', false);
     }
 
     public function test_demo_content_never_seeds_in_production(): void

@@ -22,8 +22,12 @@ class AboutPageTest extends TestCase
             ->assertSee('It started at a')
             ->assertSee('Every machine has a reason.')
             ->assertSee('Founded as a design setup')
+            ->assertSee('Two minds. One spark.')       // the brochure's own headline
             ->assertSee('Amit Sharma')
+            ->assertSee('Founder &amp; head of Design India', false)
+            ->assertSee('achieve the No.1 position in the market') // bio, from the brochure
             ->assertSee('team/', false)                 // seeded portrait
+            ->assertDontSee('A delivery date is a promise') // pull-quotes stay demo-only
             ->assertSee('No open roles right now')     // careers empty state
             ->assertDontSee('Paper is a recyclable material.') // sustainability hidden until entered
             ->assertDontSee('360° walkthrough');
