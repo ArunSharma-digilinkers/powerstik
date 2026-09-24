@@ -25,12 +25,14 @@ Nothing can be run by hand on the server, so every release has to work as it is 
 
 ## Brand
 
-- Red `#E31E24`, ink `#121212`, paper `#F4F2EE`, tagline "better ideas". These values come from the home page design and supersede the logo samples (`#EC2028`/`#231F20`). All tokens are in `resources/css/tokens.css`.
+- **Lime `#C7FF00` and ink `#221F20` on white.** Straight from the client brochure and the supplied wordmark; this replaced the red `#E31E24` scheme the home design shipped with. **Read `docs/design/brand.md` before touching colour.** All tokens are in `resources/css/tokens.css`.
+- **Lime is a fill, not an ink.** It is unreadable as type on white (1.13:1) and brilliant on ink (15:1). On light grounds it fills blocks, chips, rules and buttons with ink type on top; on dark grounds it is the type colour. Small type on white never gets lime — use `.kicker`, `.chip` or `.label-mark`.
+- Validation errors and destructive actions are **red** (`red-600`), not the brand colour. The focus ring is **ink**; sections on a dark ground carry `on-dark`, which flips it to lime.
 - Fonts: Archivo (everything) and IBM Plex Mono (small-caps labels, kickers, spec lines), self-hosted via @fontsource.
 - Square corners and no shadows. The only circles are the WhatsApp button, the dots and the avatars.
-- Assets are in `public/images/brand/`: `logo.png` and `logo-white.png`, the knockout version for dark grounds. Ask the client for SVGs.
+- Assets are in `public/images/brand/`: `logo.png`, `logo-white.png` (knockout for dark grounds) and `mark.png`, plus the three favicons. All are generated from `docs/design/brand/powerstik-logo-master.png` — see `docs/design/brand/README-assets.md`. Ask the client for SVGs. The wordmark has no tagline; "better ideas" belonged to the old artwork.
 - Raw media inbox: `resources/media-inbox/` (git-ignored). Optimise media before it goes into the app.
-- Design specs: `docs/design/` (the home handoff README is the reference for tokens and patterns).
+- Design specs: `docs/design/` — `brand.md` for colour and patterns, then the per-page handoffs.
 
 ## Decisions
 

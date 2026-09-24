@@ -28,7 +28,7 @@
         <form method="POST" action="{{ route("admin.$slug.destroy", $record->getKey()) }}" class="mt-10 max-w-4xl border-t border-zinc-200 pt-6"
               x-data="{ sure: false }">
             @csrf @method('DELETE')
-            <button type="button" x-show="!sure" @click="sure = true" class="text-sm font-medium text-brand-600 hover:text-brand-800">Delete this {{ strtolower($singular) }}…</button>
+            <button type="button" x-show="!sure" @click="sure = true" class="text-sm font-medium text-red-600 hover:text-red-800">Delete this {{ strtolower($singular) }}…</button>
             <span x-show="sure" x-cloak class="flex items-center gap-3 text-sm">
                 This cannot be undone.
                 <button class="adm-btn">Yes, delete</button>

@@ -44,7 +44,7 @@
                             <a href="{{ route($route) }}"
                                @class([
                                    'block rounded-md px-3 py-1.5 text-sm font-medium',
-                                   'bg-brand-50 text-brand-700' => $active,
+                                   'bg-brand-100 text-ink' => $active,
                                    'text-zinc-700 hover:bg-zinc-100' => ! $active,
                                ])>{{ $label }}</a>
                         @endforeach
@@ -65,7 +65,7 @@
                     <span class="hidden text-zinc-500 sm:inline">{{ $user->name }} · {{ User::ROLES[$user->role] ?? $user->role }}</span>
                     <form method="POST" action="{{ route('admin.logout') }}">
                         @csrf
-                        <button class="font-medium text-zinc-700 hover:text-brand-600">Log out</button>
+                        <button class="font-medium text-zinc-700 hover:text-ink">Log out</button>
                     </form>
                 </div>
             </header>
@@ -75,7 +75,7 @@
                     <div class="mb-6 rounded-md border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800">{{ session('status') }}</div>
                 @endif
                 @if ($errors->any())
-                    <div class="mb-6 rounded-md border border-brand-200 bg-brand-50 px-4 py-3 text-sm text-brand-800">Please fix the highlighted fields.</div>
+                    <div class="mb-6 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">Please fix the highlighted fields.</div>
                 @endif
                 {{ $slot }}
             </main>

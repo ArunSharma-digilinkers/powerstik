@@ -7,7 +7,7 @@
                 <x-admin.field name="email" label="Email" type="email" autocomplete="username" required autofocus />
                 <x-admin.field name="password" label="Password" type="password" autocomplete="current-password" required />
                 <label class="flex items-center gap-2 text-sm text-zinc-600">
-                    <input type="checkbox" name="remember" class="rounded border-zinc-300 text-brand-500"> Remember me
+                    <input type="checkbox" name="remember" class="rounded border-zinc-300 text-ink"> Remember me
                 </label>
                 <button class="adm-btn w-full justify-center">Log in</button>
             </form>

@@ -17,8 +17,10 @@
         @apply bg-paper font-sans text-ink antialiased;
     }
 
+    /* Lime is invisible as a focus ring on white, so the ring is ink and flips to
+       lime on dark grounds (mark those with `on-dark`). */
     :focus-visible {
-        outline: 2px solid var(--color-brand-500);
+        outline: 2px solid var(--color-ink);
         outline-offset: 2px;
     }
 
@@ -26,8 +28,8 @@
         display: none !important;
     }
 
-    .on-red :focus-visible {
-        outline-color: #fff;
+    .on-dark :focus-visible {
+        outline-color: var(--color-brand-500);
     }
 }
 
@@ -46,8 +48,25 @@
         @apply font-mono text-[11px] tracking-[.1em] uppercase;
     }
 
+    /* Lime label box, the brochure's signature. Ink on lime reads at 15:1, so the same
+       chip works on white, on ink and on lime-with-an-ink-tile. Use it for section
+       kickers and any small mono label that used to be brand-coloured type. */
+    .chip {
+        @apply inline-block bg-brand-500 px-2 py-[3px] font-mono text-[11px] leading-[1.45] tracking-[.12em] text-ink uppercase;
+    }
+
     .kicker {
-        @apply font-mono text-[11.5px] tracking-[.14em] text-brand-500 uppercase;
+        @apply inline-block bg-brand-500 px-2.5 py-[4px] font-mono text-[11.5px] leading-[1.45] tracking-[.14em] text-ink uppercase;
+    }
+
+    /* Quieter alternative to .chip for labels inside cards: ink type behind a lime tick. */
+    .label-mark {
+        @apply inline-flex items-center gap-2 font-mono text-[11px] tracking-[.1em] text-ink uppercase;
+    }
+
+    .label-mark::before {
+        content: '';
+        @apply block h-[3px] w-[14px] shrink-0 bg-brand-500;
     }
 
     .h-section {
@@ -58,15 +77,20 @@
     }
 
     .link-underline {
-        @apply inline-block border-b-2 border-brand-500 pb-1 font-bold text-ink transition-colors hover:text-brand-500;
+        @apply inline-block border-b-2 border-brand-500 pb-1 font-bold text-ink transition-colors hover:border-ink;
     }
 
     .btn {
         @apply inline-flex items-center justify-center whitespace-nowrap transition-colors duration-150;
     }
 
-    .btn-red {
-        @apply bg-brand-500 font-bold text-white;
+    /* Primary action: lime fill, ink type. It inverts to ink-on-lime on hover. */
+    .btn-brand {
+        @apply bg-brand-500 font-bold text-ink hover:bg-ink hover:text-brand-500;
+    }
+
+    .btn-ink {
+        @apply bg-ink font-bold text-white hover:bg-brand-500 hover:text-ink;
     }
 
     .btn-ghost-dark {

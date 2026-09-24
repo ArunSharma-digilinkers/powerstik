@@ -1,7 +1,7 @@
 @include('admin.resource.fields._label')
 @if ($value)
     <p class="mb-2 text-sm">
-        <a href="{{ \Illuminate\Support\Facades\Storage::disk('public_uploads')->url($value) }}" target="_blank" class="text-brand-600 hover:underline">{{ basename($value) }}</a>
+        <a href="{{ \Illuminate\Support\Facades\Storage::disk('public_uploads')->url($value) }}" target="_blank" class="text-ink underline hover:no-underline">{{ basename($value) }}</a>
         <label class="ml-3 inline-flex items-center gap-1 text-zinc-600"><input type="checkbox" name="{{ $field->name }}_remove" value="1" class="rounded border-zinc-300"> Remove</label>
     </p>
 @endif

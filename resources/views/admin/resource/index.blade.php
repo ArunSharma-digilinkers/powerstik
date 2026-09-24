@@ -38,7 +38,7 @@
                                         {{ $value?->format('d M Y') ?? '—' }}
                                         @break
                                     @default
-                                        <a href="{{ $url }}" class="hover:text-brand-600">{{ \Illuminate\Support\Str::limit((string) ($value ?? '—'), 70) }}</a>
+                                        <a href="{{ $url }}" class="hover:text-brand-800">{{ \Illuminate\Support\Str::limit((string) ($value ?? '—'), 70) }}</a>
                                 @endswitch
                             </td>
                         @endforeach

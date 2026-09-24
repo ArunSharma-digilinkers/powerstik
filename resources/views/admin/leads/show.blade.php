@@ -42,7 +42,7 @@
                     <h3 class="font-display text-base font-semibold">Attachments</h3>
                     <ul class="mt-3 space-y-1 text-sm">
                         @foreach ($lead->files as $file)
-                            <li><a href="{{ route('admin.leads.file', [$lead, $file]) }}" class="text-brand-600 hover:underline">{{ $file->original_name }}</a> <span class="text-zinc-500">({{ \Illuminate\Support\Number::fileSize($file->size) }})</span></li>
+                            <li><a href="{{ route('admin.leads.file', [$lead, $file]) }}" class="text-ink underline hover:no-underline">{{ $file->original_name }}</a> <span class="text-zinc-500">({{ \Illuminate\Support\Number::fileSize($file->size) }})</span></li>
                         @endforeach
                     </ul>
                 </section>
@@ -83,7 +83,7 @@
             @if (auth()->user()->hasRole(\App\Models\User::ROLE_ADMIN))
                 <form method="POST" action="{{ route('admin.leads.destroy', $lead) }}" x-data="{ sure: false }" class="text-sm">
                     @csrf @method('DELETE')
-                    <button type="button" x-show="!sure" @click="sure = true" class="font-medium text-brand-600 hover:text-brand-800">Delete lead…</button>
+                    <button type="button" x-show="!sure" @click="sure = true" class="font-medium text-red-600 hover:text-red-800">Delete lead…</button>
                     <span x-show="sure" x-cloak class="flex items-center gap-2">Delete permanently? <button class="adm-btn !py-1">Yes</button><button type="button" class="adm-btn-secondary !py-1" @click="sure = false">No</button></span>
                 </form>
             @endif

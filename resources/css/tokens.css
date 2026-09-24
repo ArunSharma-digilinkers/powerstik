@@ -1,5 +1,7 @@
 /* Brand tokens shared by the public site and the admin panel.
-   Values come from the home page design handoff (media-inbox/design_handoff_powerstik_home). */
+   Colours come from the client brochure (media-inbox/brochure.pdf) and the supplied
+   wordmark (media-inbox/powerstik_logo.png): lime #C7FF00 on near-black #221F20, on white.
+   The brochure prints the lime as #D4FD00; that is the CMYK conversion of the same colour. */
 @import '@fontsource-variable/archivo/wght.css';
 @import '@fontsource/ibm-plex-mono/400.css';
 @import '@fontsource/ibm-plex-mono/500.css';
@@ -9,45 +11,47 @@
     --font-display: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif;
     --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
 
-    /* Brand red (#E31E24) */
-    --color-brand-50: #fef2f2;
-    --color-brand-100: #fde3e3;
-    --color-brand-200: #fbcbcc;
-    --color-brand-300: #f6a3a5;
-    --color-brand-400: #ef6b6f;
-    --color-brand-500: #e31e24;
-    --color-brand-600: #c8151b;
-    --color-brand-700: #a81217;
-    --color-brand-800: #8b1418;
-    --color-brand-900: #74161a;
+    /* Brand lime (#C7FF00, straight from the wordmark).
+       READ THIS BEFORE USING IT: lime is a *fill*, not an ink. It is unreadable as text on
+       white (1.1:1) and brilliant as text on ink (15:1). So:
+         - light grounds  -> lime fills blocks, chips, rules and buttons; text on it is ink
+         - dark grounds   -> lime is the text/accent colour
+         - small type on white never gets lime; use .chip or .label-mark (app.css)
+       brand-800 is the only step that passes as text on white (5.2:1). */
+    --color-brand-50: #f7ffe0;
+    --color-brand-100: #edffb8;
+    --color-brand-200: #e2ff85;
+    --color-brand-300: #d6ff4d;
+    --color-brand-400: #ceff1f;
+    --color-brand-500: #c7ff00;
+    --color-brand-600: #a8db00;
+    --color-brand-700: #7fa600;
+    --color-brand-800: #55700a;
+    --color-brand-900: #3a4b10;
 
-    /* Ink and paper grounds */
-    --color-ink: #121212;
-    --color-ink-deep: #0c0c0c;
-    --color-paper: #f4f2ee;
-    --color-paper-mid: #e9e5de;
-    --color-well: #e4e0d9;
+    /* Ink and paper grounds. The brochure is pure white with near-black type. */
+    --color-ink: #221f20;
+    --color-ink-deep: #141213;
+    --color-paper: #ffffff;
+    --color-paper-mid: #f3f3f1;
+    --color-well: #e9e9e6;
 
     /* Rules */
-    --color-rule: #dbd7d0;
-    --color-rule-mid: #cfcac2;
-    --color-rule-dark: #2a2a2a;
+    --color-rule: #e3e3e0;
+    --color-rule-mid: #d3d3cf;
+    --color-rule-dark: #333031;
 
     /* Greys, named by role */
-    --color-body: #55524d;
-    --color-mono: #6f6c66;
-    --color-muted: #8f8b84;
-    --color-faint: #a8a49c;
-    --color-logo: #9a958d;
-    --color-on-dark: #c9c5be;
-    --color-on-dark-soft: #d6d2cb;
+    --color-body: #4c4a4b;
+    --color-mono: #6a6768;
+    --color-muted: #8a8788;
+    --color-faint: #a3a0a1;
+    --color-logo: #979495;
+    --color-on-dark: #c6c4c5;
+    --color-on-dark-soft: #d4d2d3;
 
+    /* WhatsApp's own brand green. The floating button is ink; these stay for any
+       place the official colour is wanted. */
     --color-whatsapp: #25d366;
     --color-whatsapp-dark: #1dae52;
-
-    /* Print-motif accents: the CMYK colour bar only, never UI colour */
-    --color-cmyk-c: #00aeef;
-    --color-cmyk-m: #ec008c;
-    --color-cmyk-y: #fff200;
-    --color-cmyk-k: #121212;
 }

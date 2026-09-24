@@ -1,5 +1,11 @@
 # Handoff: Powerstik.net — About us
 
+> **Superseded on the colour, not the layout.** These handoffs were designed around the red
+> `#E31E24` scheme and the CMYK press bar. The client has since supplied a brochure and a new
+> wordmark, and the site is now lime `#C7FF00` on ink `#221F20` on white, with the CMYK bar
+> replaced by a lime rule. Structure, spacing, typography and copy below still stand — read
+> `docs/design/brand.md` for what every colour reference here maps to.
+
 **Companion document.** Read `README.md` (the home page handoff) first — it carries the full design tokens, typography scale, colour table, shared chrome (CMYK bar, utility bar, sticky header, final CTA band, footer, floating WhatsApp button) and the global production requirements. This document covers only what is **specific to the About us page**.
 
 All shared chrome on this page is **identical to the home page** with one change: the nav's "About" item is marked active with `border-bottom: 2px solid #E31E24; padding-bottom: 3px` and no hover colour change. Build the chrome once as a layout component with an `activeNav` prop.

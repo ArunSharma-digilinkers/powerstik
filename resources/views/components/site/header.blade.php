@@ -3,19 +3,13 @@
     $phone = Site::setting('phone');
     $current = '/'.ltrim(request()->path(), '/');
 @endphp
-{{-- CMYK press colour bar: C, M, Y, K then brand red at 6× --}}
-<div class="flex h-1" aria-hidden="true">
-    <span class="flex-1 bg-cmyk-c"></span>
-    <span class="flex-1 bg-cmyk-m"></span>
-    <span class="flex-1 bg-cmyk-y"></span>
-    <span class="flex-1 bg-cmyk-k"></span>
-    <span class="flex-[6] bg-brand-500"></span>
-</div>
+{{-- Brand rule across the top of every page --}}
+<div class="h-1 bg-brand-500" aria-hidden="true"></div>
 
 {{-- Utility bar --}}
-<div class="bg-ink font-mono text-[11.5px] tracking-[.06em] text-faint uppercase">
+<div class="on-dark bg-ink font-mono text-[11.5px] tracking-[.06em] text-faint uppercase">
     <div class="site-container-wide flex h-[38px] items-center justify-between gap-6">
-        <p class="truncate">A brand of Design India<span class="hidden md:inline"> · Branding / Design / Print / Packaging</span></p>
+        <p class="truncate">A brand of Design India<span class="hidden md:inline"> · Offset / Flexo / Digital</span></p>
         <div class="flex shrink-0 items-center gap-[26px]">
             @foreach (config('site.utility') as [$label, $href])
                 <a href="{{ url($href) }}" class="hidden transition-colors hover:text-white lg:inline">{{ $label }}</a>
@@ -32,7 +26,7 @@
         class="sticky top-0 z-40 border-b border-rule bg-paper/94 backdrop-blur-[8px]">
     <div class="site-container-wide flex h-[72px] items-center justify-between gap-10 min-[1100px]:h-[84px]">
         <a href="{{ url('/') }}" class="shrink-0" aria-label="Powerstik home">
-            <img src="{{ asset('images/brand/logo.png') }}" alt="Powerstik — better ideas" width="500" height="127" class="h-8 w-auto min-[1100px]:h-10">
+            <img src="{{ asset('images/brand/logo.png') }}" alt="Powerstik" width="960" height="217" class="h-7 w-auto min-[1100px]:h-9">
         </a>
 
         <nav aria-label="Main" class="hidden min-[1100px]:block">
@@ -40,9 +34,9 @@
                 @foreach (config('site.nav') as $item)
                     <li>
                         <a href="{{ url($item[1]) }}" @if (str_starts_with($current, $item[1])) aria-current="page" @endif
-                           class="flex items-center gap-2 border-b-2 border-transparent pt-[5px] pb-[3px] transition-colors hover:text-brand-500 aria-[current=page]:border-brand-500 aria-[current=page]:hover:text-ink">
+                           class="flex items-center gap-2 border-b-2 border-transparent pt-[5px] pb-[3px] transition-colors hover:border-rule-mid aria-[current=page]:border-brand-500 aria-[current=page]:hover:border-brand-500">
                             @if ($item['flagship'] ?? false)
-                                <span class="size-1.5 rounded-full bg-brand-500" aria-hidden="true"></span>
+                                <span class="size-1.5 rounded-full bg-brand-700" aria-hidden="true"></span>
                             @endif
                             {{ $item[0] }}
                         </a>
@@ -53,7 +47,7 @@
 
         <div class="flex items-center gap-2">
             <a href="{{ url(config('site.quote_url')) }}" data-track="quote_header"
-               class="btn btn-red px-4 py-3 text-[14px] tracking-[-.01em] hover:bg-ink sm:px-[22px] sm:py-[13px]">Get a quote</a>
+               class="btn btn-brand px-4 py-3 text-[14px] tracking-[-.01em] sm:px-[22px] sm:py-[13px]">Get a quote</a>
             <button type="button" @click="open = !open" :aria-expanded="open.toString()" aria-controls="mobile-nav"
                     class="-mr-2 grid size-11 place-items-center min-[1100px]:hidden">
                 <span class="sr-only">Menu</span>
@@ -68,9 +62,9 @@
         <ul class="site-container-wide py-3 text-lg font-semibold tracking-[-.01em]">
             @foreach (config('site.nav') as $item)
                 <li class="border-b border-rule last:border-0">
-                    <a href="{{ url($item[1]) }}" class="flex items-center gap-2 py-3.5 hover:text-brand-500">
+                    <a href="{{ url($item[1]) }}" class="flex items-center gap-2 py-3.5 hover:text-body">
                         @if ($item['flagship'] ?? false)
-                            <span class="size-1.5 rounded-full bg-brand-500" aria-hidden="true"></span>
+                            <span class="size-1.5 rounded-full bg-brand-700" aria-hidden="true"></span>
                         @endif
                         {{ $item[0] }}
                     </a>

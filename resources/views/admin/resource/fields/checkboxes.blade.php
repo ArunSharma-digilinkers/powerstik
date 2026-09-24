@@ -10,7 +10,7 @@
             @foreach ($field->options as $id => $label)
                 <label class="flex items-center gap-2 text-sm">
                     <input type="checkbox" name="{{ $field->name }}[]" value="{{ $id }}" @checked(in_array((string) $id, $selected, true))
-                           class="size-4 rounded border-zinc-300 text-brand-500 focus:ring-brand-500">
+                           class="size-4 rounded border-zinc-300 text-ink focus:ring-ink">
                     {{ $label }}
                 </label>
             @endforeach

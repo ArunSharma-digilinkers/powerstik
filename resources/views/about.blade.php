@@ -65,7 +65,7 @@
 
 <x-layouts.site title="About us" description="Powerstik is the print and packaging arm that grew out of a design studio. Since {{ $since }}: one plant in Haryana, ~{{ $people }} people and the same two founders.">
     {{-- 1. Page hero --}}
-    <section class="bg-ink text-white" aria-labelledby="about-title">
+    <section class="on-dark bg-ink text-white" aria-labelledby="about-title">
         <div class="site-container pt-14 pb-16 lg:pt-[88px] lg:pb-[84px]">
             <x-site.breadcrumb :items="['About us' => url('/about')]" />
             <div class="grid gap-8 lg:grid-cols-[1.15fr_.85fr] lg:items-end lg:gap-20">
@@ -131,10 +131,10 @@
                                 @class([
                                     'min-w-[112px] flex-1 snap-start px-4 py-[18px] text-left text-[21px] font-bold tracking-[-.02em] transition-colors duration-150',
                                     'border-r border-rule' => ! $loop->last,
-                                    'bg-brand-500 text-white' => $i === $active,
+                                    'bg-brand-500 text-ink' => $i === $active,
                                     'text-faint hover:text-ink' => $i !== $active,
                                 ])
-                                :class="{ 'bg-brand-500 text-white': active === {{ $i }}, 'text-faint hover:text-ink': active !== {{ $i }} }">
+                                :class="{ 'bg-brand-500 text-ink': active === {{ $i }}, 'text-faint hover:text-ink': active !== {{ $i }} }">
                             {{ $m->year }}
                         </button>
                     @endforeach
@@ -148,7 +148,7 @@
                      class="grid items-center gap-10 pt-10 lg:grid-cols-2 lg:gap-16 lg:pt-14">
                     <div>
                         @if ($m->kicker)
-                            <p class="font-mono text-[11.5px] tracking-[.12em] text-brand-500 uppercase">{{ $m->kicker }}</p>
+                            <p class="label-mark">{{ $m->kicker }}</p>
                         @endif
                         <h3 class="mt-[18px] text-[clamp(1.625rem,1.1rem+1.8vw,2.625rem)] leading-[1.04] font-extrabold tracking-[-.035em] text-balance">{{ $m->title }}</h3>
                         @if ($m->body)
@@ -188,7 +188,7 @@
                             </div>
                             <div class="px-6 pt-[34px] pb-[38px] sm:px-8">
                                 @if ($person->role)
-                                    <p class="font-mono text-[11px] tracking-[.1em] text-brand-500 uppercase">{{ $person->role }}</p>
+                                    <p class="label-mark">{{ $person->role }}</p>
                                 @endif
                                 <h3 class="mt-3.5 text-[clamp(1.625rem,1.3rem+1vw,2.125rem)] leading-none font-extrabold tracking-[-.03em]">{{ $person->name }}</h3>
                                 @if ($person->bio)
@@ -269,7 +269,7 @@
                 <ol class="grid gap-px bg-rule-mid md:grid-cols-3">
                     @foreach ($stages as $i => [$name, $body])
                         <li class="bg-paper px-[26px] pt-[30px] pb-[34px]">
-                            <p class="font-mono text-[11px] tracking-[.1em] text-brand-500 uppercase">Stage {{ sprintf('%02d', $i + 1) }}</p>
+                            <p class="label-mark">Stage {{ sprintf('%02d', $i + 1) }}</p>
                             <h3 class="mt-3 text-[22px] leading-[1.15] font-bold tracking-[-.025em]">{{ $name }}</h3>
                             <p class="mt-2.5 text-[15px] leading-[1.55] text-body">{{ $body }}</p>
                         </li>
@@ -303,7 +303,7 @@
     </section>
 
     {{-- 8. Infrastructure --}}
-    <section id="infrastructure" class="bg-ink text-white" aria-labelledby="infra-title">
+    <section id="infrastructure" class="on-dark bg-ink text-white" aria-labelledby="infra-title">
         <div class="site-container py-20 lg:py-24">
             <header class="flex flex-col gap-6 border-b border-[#2e2e2e] pb-[26px] sm:flex-row sm:items-end sm:justify-between">
                 <div>
@@ -397,7 +397,7 @@
                                             {{ collect([$role->department, $role->location, JobOpening::EMPLOYMENT_TYPES[$role->employment_type] ?? null])->filter()->join(' · ') }}
                                         </span>
                                     </span>
-                                    <span class="font-mono text-[13px] text-brand-500" aria-hidden="true">→</span>
+                                    <span class="font-mono text-[13px] text-ink" aria-hidden="true">→</span>
                                 </a>
                             </li>
                         @endforeach
@@ -415,7 +415,7 @@
                         @endif
                     </div>
                     <a href="{{ $apply('Portfolio') }}" data-track="portfolio"
-                       class="mt-4 flex items-center justify-between gap-4 bg-ink px-6 py-5 text-base font-bold text-white transition-colors hover:bg-brand-500">
+                       class="mt-4 flex items-center justify-between gap-4 bg-ink px-6 py-5 text-base font-bold text-white transition-colors hover:bg-brand-500 hover:text-ink">
                         Send us your portfolio <span class="font-mono text-[13px]" aria-hidden="true">→</span>
                     </a>
                 </div>

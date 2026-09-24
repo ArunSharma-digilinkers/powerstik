@@ -1,5 +1,11 @@
 # Handoff: Powerstik.net Home Page
 
+> **Superseded on the colour, not the layout.** These handoffs were designed around the red
+> `#E31E24` scheme and the CMYK press bar. The client has since supplied a brochure and a new
+> wordmark, and the site is now lime `#C7FF00` on ink `#221F20` on white, with the CMYK bar
+> replaced by a lime rule. Structure, spacing, typography and copy below still stand — read
+> `docs/design/brand.md` for what every colour reference here maps to.
+
 ## Overview
 
 A complete redesign of the home page for **powerstik.net** — Powerstik is a design-studio-turned-print-and-packaging-manufacturer (a brand of Design India), based in Haryana, India. It supplies labels, mono cartons and corrugated packaging to ~1,500 domestic clients across nine industries, exports to eight countries, and its flagship product is a proprietary acid- and heat-resistant **battery label paper**.

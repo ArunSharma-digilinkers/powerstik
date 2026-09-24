@@ -33,7 +33,7 @@
 
 <x-layouts.site>
     {{-- 3. Hero --}}
-    <section class="relative flex h-[88svh] max-h-[760px] min-h-[600px] items-end overflow-hidden bg-ink text-white lg:h-[760px]" aria-labelledby="hero-title">
+    <section class="on-dark relative flex h-[88svh] max-h-[760px] min-h-[600px] items-end overflow-hidden bg-ink text-white lg:h-[760px]" aria-labelledby="hero-title">
         @if ($media['hero_video'])
             <video class="absolute inset-0 size-full object-cover" autoplay muted loop playsinline preload="none"
                    @if ($media['hero_poster']) poster="{{ $media['hero_poster'] }}" @endif data-hero-video aria-hidden="true">
@@ -57,7 +57,7 @@
                 We began as a small design setup and built the plant to match — Heidelberg offset, flexo roll labels and a full corrugation line, all fed by our own designers. Labels and packaging from {{ preg_replace('/\D/', '', Site::setting('moq', '50')) }} units to any volume, dispatched in {{ $counters[4]['value'] }} days.
             </p>
             <div class="mt-10 flex flex-wrap gap-3.5">
-                <a href="{{ $quote }}" data-track="quote_hero" class="btn btn-red px-8 py-[18px] text-base hover:bg-white hover:text-ink">Get a quote</a>
+                <a href="{{ $quote }}" data-track="quote_hero" class="btn btn-brand px-8 py-[18px] text-base hover:bg-white hover:text-ink">Get a quote</a>
                 <a href="#capabilities" class="btn btn-ghost-dark px-[30px] py-[17px] text-base">Explore capabilities</a>
             </div>
         </div>
@@ -109,18 +109,18 @@
         </x-site.section-header>
         <div class="grid gap-px bg-rule sm:grid-cols-2 lg:grid-cols-4">
             @foreach ($tiles as [$num, $title, $body, $spec, $href])
-                <a href="{{ url($href) }}" class="flex min-h-[280px] flex-col bg-paper px-8 pt-10 pb-[34px] transition-colors hover:bg-white lg:min-h-[320px]">
+                <a href="{{ url($href) }}" class="flex min-h-[280px] flex-col bg-paper px-8 pt-10 pb-[34px] transition-colors hover:bg-paper-mid lg:min-h-[320px]">
                     <span class="font-mono text-[11.5px] text-faint">{{ $num }}</span>
                     <h3 class="mt-5 text-[27px] leading-[1.1] font-bold tracking-[-.025em]">{{ $title }}</h3>
                     <p class="mt-3.5 text-[15.5px] leading-[1.55] text-body">{{ $body }}</p>
-                    <span class="mt-auto pt-[26px] font-mono text-[11.5px] tracking-[.1em] text-brand-500 uppercase">{{ $spec }}</span>
+                    <span class="label-mark mt-auto pt-[26px]">{{ $spec }}</span>
                 </a>
             @endforeach
         </div>
     </section>
 
     {{-- 7. Battery labels spotlight --}}
-    <section class="mt-20 bg-ink-deep text-white lg:mt-[108px]" aria-labelledby="battery-title">
+    <section class="on-dark mt-20 bg-ink-deep text-white lg:mt-[108px]" aria-labelledby="battery-title">
         <div class="site-container grid items-center gap-14 py-20 lg:grid-cols-[1.05fr_.95fr] lg:gap-20 lg:py-[100px]">
             <div class="lg:order-1 max-lg:order-2">
                 <p class="mb-[30px] inline-block border border-brand-500 px-3.5 py-2 font-mono text-[11px] tracking-[.14em] text-brand-500 uppercase">Flagship · Battery labels</p>
@@ -135,7 +135,7 @@
                     @endforeach
                 </dl>
                 <div class="mt-10 flex flex-wrap gap-3.5">
-                    <a href="{{ url(config('site.sample_url')) }}" data-track="sample" class="btn btn-red px-7 py-4 text-[15.5px] hover:bg-white hover:text-ink">Request a sample</a>
+                    <a href="{{ url(config('site.sample_url')) }}" data-track="sample" class="btn btn-brand px-7 py-4 text-[15.5px] hover:bg-white hover:text-ink">Request a sample</a>
                     <a href="{{ url('/resources/downloads') }}" data-track="datasheet" class="btn border border-[#3a3a3a] px-7 py-4 text-[15.5px] font-semibold text-white hover:border-white">Download data sheet</a>
                 </div>
             </div>
@@ -163,7 +163,7 @@
             @foreach ($steps as $i => [$title, $body])
                 <li class="pr-[22px]">
                     <div class="mb-[22px] flex items-center gap-2.5" aria-hidden="true">
-                        <span class="size-[11px] shrink-0 rounded-full bg-brand-500"></span>
+                        <span class="size-[11px] shrink-0 rounded-full border border-ink bg-brand-500"></span>
                         <span class="h-px flex-1 bg-rule-mid"></span>
                     </div>
                     <p class="font-mono text-[11px] tracking-[.1em] text-faint uppercase">Step {{ sprintf('%02d', $i + 1) }}</p>
@@ -192,7 +192,7 @@
                                 @endif
                             </div>
                             <div class="mt-3.5 flex items-baseline justify-between gap-4 border-t border-ink px-0.5 pt-4">
-                                <h3 class="text-[22px] font-bold tracking-[-.02em] transition-colors group-hover:text-brand-500">{{ $industry->name }}</h3>
+                                <h3 class="-mx-1 px-1 text-[22px] font-bold tracking-[-.02em] transition-colors group-hover:bg-brand-500">{{ $industry->name }}</h3>
                                 @if ($industry->note)
                                     <span class="text-right font-mono text-[11px] tracking-[.08em] text-mono uppercase">{{ $industry->note }}</span>
                                 @endif
@@ -216,7 +216,7 @@
             <ul class="grid gap-px bg-rule-mid sm:grid-cols-2">
                 @foreach ($machines as [$kind, $name, $spec])
                     <li class="bg-paper px-7 py-[30px]">
-                        <p class="font-mono text-[11px] tracking-[.1em] text-brand-500 uppercase">{{ $kind }}</p>
+                        <p class="label-mark">{{ $kind }}</p>
                         <h3 class="mt-3.5 text-[24px] leading-[1.15] font-bold tracking-[-.025em]">{{ $name }}</h3>
                         <p class="mt-2 text-[14.5px] leading-[1.5] text-body">{{ $spec }}</p>
                     </li>
@@ -227,7 +227,7 @@
 
     {{-- 11. Global reach --}}
     @if ($countries->isNotEmpty())
-        <section class="bg-ink text-white" aria-labelledby="global-title">
+        <section class="on-dark bg-ink text-white" aria-labelledby="global-title">
             <div class="site-container py-20 lg:py-[100px]">
                 <x-site.section-header num="05" kicker="Global reach" :title="$countriesTitle" :dark="true" id="global-title">
                     Export documentation, Incoterms, port-ready packing and repeat-order colour consistency, handled by the same coordinator.
@@ -236,12 +236,12 @@
                     {{-- Schematic, not cartographic: a hub with arcs fanning out. Hidden on narrow screens. --}}
                     <svg viewBox="0 0 620 420" class="hidden h-auto w-full overflow-visible min-[900px]:block" data-inview role="img" aria-label="Export routes from Haryana, India to {{ $countries->pluck('name')->join(', ', ' and ') }}">
                         @foreach ($arcs as $i => $arc)
-                            <path class="ps-arc" d="{{ $arc['d'] }}" fill="none" stroke="{{ $i % 2 ? '#4A4A4A' : '#E31E24' }}" stroke-width="1.1"
+                            <path class="ps-arc" d="{{ $arc['d'] }}" fill="none" stroke="{{ $i % 2 ? '#4A4A4A' : '#C7FF00' }}" stroke-width="1.1"
                                   style="animation-delay: {{ 0.25 + $i * 0.14 }}s"/>
                         @endforeach
                         @foreach ($arcs as $arc)
-                            <circle cx="{{ $arc['x'] }}" cy="{{ $arc['y'] }}" r="3.6" fill="#E31E24"/>
-                            <text x="{{ $arc['lx'] }}" y="{{ $arc['ly'] }}" text-anchor="{{ $arc['anchor'] }}" fill="#C9C5BE" class="font-mono text-[11.5px] tracking-[.06em]">{{ $arc['name'] }}</text>
+                            <circle cx="{{ $arc['x'] }}" cy="{{ $arc['y'] }}" r="3.6" fill="#C7FF00"/>
+                            <text x="{{ $arc['lx'] }}" y="{{ $arc['ly'] }}" text-anchor="{{ $arc['anchor'] }}" fill="#C6C4C5" class="font-mono text-[11.5px] tracking-[.06em]">{{ $arc['name'] }}</text>
                         @endforeach
                         <circle cx="96" cy="300" r="7" fill="#FFFFFF"/>
                         <circle cx="96" cy="300" r="16" fill="none" stroke="#4A4A4A"/>
@@ -259,7 +259,7 @@
                                 </li>
                             @endforeach
                         </ul>
-                        <a href="{{ url(config('site.international_url')) }}" data-track="international" class="btn mt-[34px] bg-white px-7 py-4 text-[15.5px] font-bold text-ink hover:bg-brand-500 hover:text-white">International enquiry</a>
+                        <a href="{{ url(config('site.international_url')) }}" data-track="international" class="btn mt-[34px] bg-white px-7 py-4 text-[15.5px] font-bold text-ink hover:bg-brand-500">International enquiry</a>
                     </div>
                 </div>
             </div>
@@ -270,7 +270,7 @@
     @if ($cases->isNotEmpty())
         <section class="site-container pt-20 lg:pt-[108px]" aria-labelledby="work-title">
             <x-site.section-header num="06" kicker="Featured work" title="Problem, press, result." id="work-title">
-                <a href="{{ url('/work') }}" class="inline-block border-b-2 border-brand-500 pb-1 font-mono text-[12px] tracking-[.1em] whitespace-nowrap text-ink uppercase hover:text-brand-500">See full portfolio</a>
+                <a href="{{ url('/work') }}" class="inline-block border-b-2 border-brand-500 pb-1 font-mono text-[12px] tracking-[.1em] whitespace-nowrap text-ink uppercase transition-colors hover:border-ink">See full portfolio</a>
             </x-site.section-header>
             <ul class="mt-10 grid gap-7 md:grid-cols-3">
                 @foreach ($cases as $case)
@@ -284,7 +284,7 @@
                             </div>
                             <div class="flex flex-1 flex-col px-[26px] pt-[26px] pb-[30px]">
                                 @if ($case->card_tag)
-                                    <p class="font-mono text-[11px] tracking-[.1em] text-brand-500 uppercase">{{ $case->card_tag }}</p>
+                                    <p class="label-mark">{{ $case->card_tag }}</p>
                                 @endif
                                 <h3 class="mt-3.5 text-[25px] leading-[1.15] font-bold tracking-[-.025em]">{{ $case->title }}</h3>
                                 @if ($case->summary)
@@ -339,7 +339,7 @@
                 <ul class="grid gap-px bg-rule-mid md:grid-cols-3">
                     @foreach ($testimonials as $t)
                         <li class="flex flex-col bg-paper px-8 pt-[38px] pb-[34px]">
-                            <span class="text-[34px] leading-none font-extrabold text-brand-500" aria-hidden="true">“</span>
+                            <span class="grid size-9 place-items-center bg-brand-500 text-[30px] leading-none font-extrabold text-ink" aria-hidden="true">“</span>
                             <blockquote class="mt-3.5 text-[17.5px] leading-[1.5] tracking-[-.01em]">{{ $t->quote }}</blockquote>
                             <div class="mt-auto flex items-center gap-3.5 pt-7">
                                 <div class="size-11 shrink-0 overflow-hidden rounded-full bg-rule">

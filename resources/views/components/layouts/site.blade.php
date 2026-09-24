@@ -22,7 +22,7 @@
         <meta property="og:description" content="{{ $pageDescription }}">
     @endif
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta name="theme-color" content="#121212">
+    <meta name="theme-color" content="#221f20">
     <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">

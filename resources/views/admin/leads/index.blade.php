@@ -33,7 +33,7 @@
                     <tr @class(['hover:bg-zinc-50', 'font-semibold' => $lead->status === 'new'])>
                         <td class="px-4 py-2.5 whitespace-nowrap text-zinc-500">{{ $lead->created_at->format('d M, H:i') }}</td>
                         <td class="px-4 py-2.5">{{ Lead::TYPES[$lead->type] ?? $lead->type }}@if ($lead->files_count) <span title="Has attachments">📎</span>@endif</td>
-                        <td class="px-4 py-2.5"><a href="{{ route('admin.leads.show', $lead) }}" class="hover:text-brand-600">{{ $lead->name }}</a></td>
+                        <td class="px-4 py-2.5"><a href="{{ route('admin.leads.show', $lead) }}" class="hover:text-brand-800">{{ $lead->name }}</a></td>
                         <td class="px-4 py-2.5">{{ $lead->company ?? '—' }}</td>
                         <td class="px-4 py-2.5 font-normal">{{ $lead->phone }}<br><span class="text-zinc-500">{{ $lead->email }}</span></td>
                         <td class="px-4 py-2.5"><x-admin.lead-status :status="$lead->status" /></td>

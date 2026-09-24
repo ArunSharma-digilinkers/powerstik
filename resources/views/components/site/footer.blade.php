@@ -6,10 +6,10 @@
     $social = collect(['linkedin' => 'LinkedIn', 'instagram' => 'Instagram', 'facebook' => 'Facebook', 'youtube' => 'YouTube'])
         ->map(fn ($label, $key) => [$label, Site::setting($key)])->filter(fn ($s) => $s[1]);
 @endphp
-<footer class="bg-ink text-[14.5px] text-muted">
+<footer class="on-dark bg-ink text-[14.5px] text-muted">
     <div class="site-container-wide grid gap-12 pt-16 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-14 lg:pt-[76px]">
         <div class="sm:col-span-2 lg:col-span-1">
-            <img src="{{ asset('images/brand/logo-white.png') }}" alt="Powerstik — better ideas" width="500" height="127" loading="lazy" class="h-[34px] w-auto">
+            <img src="{{ asset('images/brand/logo-white.png') }}" alt="Powerstik" width="960" height="217" loading="lazy" class="h-[30px] w-auto">
             <p class="mt-6 max-w-[34ch] leading-[1.6] text-faint">Powerstik is a brand of Design India. Labels, cartons and corrugated packaging, designed and printed in-house.</p>
             <address class="mt-5 leading-[1.6] not-italic text-mono">
                 @if ($address)
@@ -35,7 +35,7 @@
 
         @foreach (config('site.footer') as $heading => $links)
             <nav aria-label="{{ $heading }}">
-                <h2 class="mono mb-[18px] tracking-[.12em] text-white">{{ $heading }}</h2>
+                <h2 class="mono mb-[18px] tracking-[.12em] text-brand-500">{{ $heading }}</h2>
                 <ul class="flex flex-col gap-[11px]">
                     @foreach ($links as [$label, $href])
                         <li><a href="{{ url($href) }}" class="text-faint transition-colors hover:text-white">{{ $label }}</a></li>

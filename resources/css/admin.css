@@ -8,14 +8,16 @@
 @layer components {
     .adm-input {
         @apply block w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm text-ink shadow-xs
-            focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none;
+            focus:border-ink focus:ring-2 focus:ring-brand-500 focus:outline-none;
     }
     .adm-label {
         @apply mb-1 block text-sm font-medium text-zinc-700;
     }
+    /* Primary action: ink, flipping to the brand lime on hover. Lime can't carry white
+       type, so anything on a lime fill is ink. */
     .adm-btn {
-        @apply inline-flex items-center gap-2 rounded-md bg-brand-500 px-4 py-2 text-sm font-semibold text-white
-            hover:bg-brand-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500
+        @apply inline-flex items-center gap-2 rounded-md bg-ink px-4 py-2 text-sm font-semibold text-white
+            hover:bg-brand-500 hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink
             disabled:opacity-50;
     }
     .adm-btn-secondary {
@@ -34,4 +36,4 @@ trix-toolbar [data-trix-button-group='file-tools'] { display: none; }
 .trix-content h1 { @apply text-lg font-semibold; }
 .trix-content ul { @apply list-disc pl-5; }
 .trix-content ol { @apply list-decimal pl-5; }
-.trix-content a { @apply text-brand-600 underline; }
+.trix-content a { @apply text-ink underline; }

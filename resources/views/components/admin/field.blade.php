@@ -11,6 +11,6 @@
         <p class="mt-1 text-xs text-zinc-500">{{ $help }}</p>
     @endif
     @error($name)
-        <p class="mt-1 text-xs text-brand-600">{{ $message }}</p>
+        <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
     @enderror
 </div>

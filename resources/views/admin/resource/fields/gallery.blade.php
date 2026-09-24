@@ -15,4 +15,4 @@
        class="block text-sm file:mr-3 file:rounded-md file:border-0 file:bg-zinc-100 file:px-3 file:py-1.5 file:text-sm file:font-medium">
 <p class="mt-1 text-xs text-zinc-500">Select several images to add. Up to 20 per save.</p>
 @include('admin.resource.fields._meta')
-@error($field->name.'_new.*')<p class="mt-1 text-xs text-brand-600">{{ $message }}</p>@enderror
+@error($field->name.'_new.*')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror

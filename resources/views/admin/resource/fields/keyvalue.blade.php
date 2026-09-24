@@ -6,7 +6,7 @@
             <div class="flex gap-2">
                 <input :name="`{{ $field->name }}[${i}][label]`" x-model="row.label" placeholder="Label" class="adm-input w-2/5">
                 <input :name="`{{ $field->name }}[${i}][value]`" x-model="row.value" placeholder="Value" class="adm-input flex-1">
-                <button type="button" @click="rows.splice(i, 1)" class="px-2 text-zinc-400 hover:text-brand-600" aria-label="Remove row">✕</button>
+                <button type="button" @click="rows.splice(i, 1)" class="px-2 text-zinc-400 hover:text-red-600" aria-label="Remove row">✕</button>
             </div>
         </template>
     </div>

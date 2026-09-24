@@ -1,9 +1,9 @@
 @php use App\Models\Lead; @endphp
 <x-admin.layouts.app title="Dashboard">
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <a href="{{ route('admin.leads.index', ['status' => 'new']) }}" class="adm-card block p-5 hover:border-brand-300">
+        <a href="{{ route('admin.leads.index', ['status' => 'new']) }}" class="adm-card block p-5 hover:border-ink">
             <p class="text-sm text-zinc-500">New leads</p>
-            <p class="mt-1 font-display text-3xl font-semibold text-brand-600">{{ $newLeads }}</p>
+            <p class="mt-1 font-display text-3xl font-semibold text-ink">{{ $newLeads }}</p>
         </a>
         <div class="adm-card p-5">
             <p class="text-sm text-zinc-500">Leads this month</p>
