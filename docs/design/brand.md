@@ -121,9 +121,11 @@ Three sets came from the client and are used as-is, beyond a crop and a mild lev
   edge. It runs as a proof band under the flagship section, so "Acid / Heat / Grip" is evidenced
   rather than asserted. Processing was a tray-lip crop to 3:2 and a 1.14 contrast bump so the
   pencil and the stain read at all — nothing that changes what the test shows. Source is
-  `media-inbox/acid-paper.jpeg`. **Ask the client for the protocol behind it** (which acid, what
-  temperature, how long, and the date in the corner), so the caption can state the test instead
-  of describing the photograph.
+  `media-inbox/acid-paper.jpeg`. The protocol beside it is the client's, given by Arun on
+  2026-09-24: **sulphuric acid at 1.280 specific gravity — full battery electrolyte strength —
+  60 °C, 24 hours.** It is set as fixed copy in `home.blade.php`; reuse the same three rows on
+  the battery-labels and capabilities pages when they are built, rather than restating it in
+  prose.
 
 **Two things to settle with the client.**
 

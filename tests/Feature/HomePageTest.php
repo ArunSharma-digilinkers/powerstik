@@ -69,7 +69,10 @@ class HomePageTest extends TestCase
         $this->get('/')
             ->assertOk()
             ->assertSee('From the test bench')
-            ->assertSee('media/home/acid-test.webp');
+            ->assertSee('media/home/acid-test.webp')
+            // The client's own test protocol, so a copy edit cannot quietly soften it.
+            ->assertSee('Sulphuric acid, 1.280 sp. gr.')
+            ->assertSee('24 hours');
     }
 
     public function test_whatsapp_button_uses_the_configured_number(): void
