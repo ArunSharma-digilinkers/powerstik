@@ -3,11 +3,14 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BatteryLabelsController;
 use App\Http\Controllers\CapabilityController;
+use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\GlobalController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndustryController;
+use App\Http\Controllers\InsightController;
 use App\Http\Controllers\OpsController;
+use App\Http\Controllers\ResourcesController;
 use App\Http\Controllers\WorkController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +25,18 @@ Route::get('capabilities/machine-park', [CapabilityController::class, 'machines'
 Route::get('capabilities/{capability}', [CapabilityController::class, 'show'])->name('capabilities.show');
 
 Route::get('global', GlobalController::class)->name('global');
+
+// resources/downloads is declared before the file route so the slugs cannot collide
+Route::get('resources', [ResourcesController::class, 'index'])->name('resources.index');
+Route::get('resources/downloads', [DownloadController::class, 'index'])->name('downloads.index');
+Route::post('resources/downloads/{download}', [DownloadController::class, 'request'])
+    ->middleware('throttle:10,1')->name('downloads.request');
+Route::get('resources/downloads/{download}/file', [DownloadController::class, 'file'])->name('downloads.file');
+Route::get('resources/faqs', [ResourcesController::class, 'faqs'])->name('resources.faqs');
+Route::get('resources/material-guide', [ResourcesController::class, 'materialGuide'])->name('resources.material-guide');
+
+Route::get('insights', [InsightController::class, 'index'])->name('insights.index');
+Route::get('insights/{post}', [InsightController::class, 'show'])->name('insights.show');
 
 Route::get('work', [WorkController::class, 'index'])->name('work.index');
 Route::get('work/{project}', [WorkController::class, 'show'])->name('work.show');
@@ -44,6 +59,10 @@ Route::post('enquiry/{type}', [EnquiryController::class, 'store'])
 Route::get('thank-you/{type}', [EnquiryController::class, 'thanks'])
     ->whereIn('type', ['quote', 'sample', 'international', 'contact', 'callback'])
     ->name('thanks');
+
+// Phase 2 (PLAN.md §3). The utility bar and footer link here, so it is a real
+// placeholder page rather than a 404 until the client zone is built.
+Route::view('client/login', 'client.login')->name('client.login');
 
 // Token-authenticated (see OpsController); CSRF is exempted in bootstrap/app.php.
 Route::post('_ops/deploy', [OpsController::class, 'deploy'])->middleware('throttle:5,1');

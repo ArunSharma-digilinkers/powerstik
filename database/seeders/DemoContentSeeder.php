@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Industry;
 use App\Models\JobOpening;
+use App\Models\Post;
+use App\Models\PostCategory;
 use App\Models\ProductType;
 use App\Models\Project;
 use App\Models\Setting;
@@ -95,6 +97,7 @@ class DemoContentSeeder extends Seeder
 
         $this->aboutPage();
         $this->industryPages();
+        $this->insights();
     }
 
     private function aboutPage(): void
@@ -268,5 +271,50 @@ class DemoContentSeeder extends Seeder
         $html = $intro ? '<div>'.e($intro).'</div>' : '';
 
         return $html.'<ul>'.implode('', array_map(fn ($point) => '<li>'.e($point).'</li>', $points)).'</ul>';
+    }
+
+    /**
+     * Illustrative blog posts, so /insights and the post template can be seen
+     * with something in them. Ours, not the client's.
+     */
+    private function insights(): void
+    {
+        foreach (['Materials', 'Packaging', 'Printing'] as $i => $name) {
+            PostCategory::firstOrCreate(['name' => $name], ['sort' => $i + 1]);
+        }
+
+        // title, category, days ago, excerpt, body paragraphs
+        $posts = [
+            ['Why your label lifts at one corner', 'Materials', 12,
+                'It is almost never the adhesive on its own. It is the adhesive, the surface and the twenty minutes after application.',
+                [
+                    'A label that lifts at a corner has usually been applied to a surface that was not ready for it — dusty, oily, still warm from a process upstream, or curved more tightly than the stock will take.',
+                    'The fix is rarely a stronger adhesive. A stronger adhesive on a bad surface just fails more slowly. What works is matching the stock to the surface and giving the bond the time it needs before the product is stacked.',
+                    'If a label is lifting on you, send us one that has failed rather than one from the box. The failed one tells us far more.',
+                ]],
+            ['Ply is a load decision, not a quality one', 'Packaging', 34,
+                'More ply is not better packaging. It is heavier packaging, and you are paying to ship the difference.',
+                [
+                    'People ask for 7-ply the way they ask for a bigger engine — on the assumption that more is safer. Often it is, but it is also heavier, dearer and takes more space flat.',
+                    'The right answer comes from three things: the weight going inside, how high it will be stacked, and how far it travels. Get those and the board picks itself.',
+                    'We would rather send you 5-ply that holds than 9-ply you did not need.',
+                ]],
+            ['When digital beats offset, and when it does not', 'Printing', 61,
+                'The crossover is a real number, and it is worth knowing where yours sits.',
+                [
+                    'Offset spreads the cost of plates and make-ready across the run, so the more you print the less each piece costs. Digital has no plates, so a short run is cheap — but the unit cost stays flat however many you print.',
+                    'That means there is a crossover quantity for every job. Below it, digital wins. Above it, offset wins, usually by a lot.',
+                    'Because we own both, we have no reason to push you to the wrong side of that line. Ask for the arithmetic when you ask for the quote.',
+                ]],
+        ];
+
+        foreach ($posts as $i => [$title, $category, $daysAgo, $excerpt, $paragraphs]) {
+            Post::firstOrCreate(['title' => $title], [
+                'post_category_id' => PostCategory::where('name', $category)->value('id'),
+                'excerpt' => $excerpt,
+                'body' => implode('', array_map(fn ($line) => '<div>'.e($line).'</div>', $paragraphs)),
+                'published_at' => now()->subDays($daysAgo),
+            ]);
+        }
     }
 }

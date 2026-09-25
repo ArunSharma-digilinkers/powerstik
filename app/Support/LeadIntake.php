@@ -97,6 +97,11 @@ class LeadIntake
                 'email' => ['nullable', 'email:rfc', 'max:190'],
                 'preferred_time' => ['nullable', 'string', 'max:60'],
             ],
+            // A gated download asks as little as it can get away with
+            'download' => [
+                'phone' => ['nullable', 'string', 'max:40'],
+                'download' => ['nullable', 'string', 'max:190'],
+            ],
             default => [],
         });
     }
