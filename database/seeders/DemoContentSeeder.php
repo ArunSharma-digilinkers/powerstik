@@ -4,9 +4,11 @@ namespace Database\Seeders;
 
 use App\Models\Industry;
 use App\Models\JobOpening;
+use App\Models\ProductType;
 use App\Models\Project;
 use App\Models\Setting;
 use App\Models\TeamMember;
+use App\Models\Technology;
 use App\Models\Testimonial;
 use App\Models\TimelineEvent;
 use Illuminate\Database\Seeder;
@@ -28,17 +30,54 @@ class DemoContentSeeder extends Seeder
             return;
         }
 
+        // title, industry, card tag, summary, result headline, product types,
+        // technologies, then Problem / What we did / Result.
         $cases = [
-            ['A label that stopped peeling in transit', 'Battery', 'Battery · Case study', 'Electrolyte splash was lifting a client’s existing labels before the batteries reached the dealer.', 'Zero field rejections across 1.2M units'],
-            ['9-ply that survives a delivery fleet', 'Pizza & QSR', 'QSR · Corrugated', 'Grease-resistant print and a flute spec rebuilt for stacking in bike boxes.', 'Damage claims down 60%'],
-            ['Legible at 6pt, compliant in three states', 'Pharma', 'Pharma · Design + print', 'Carton redesign that fit mandated copy without losing the brand block.', 'Approved first submission'],
+            [
+                'A label that stopped peeling in transit', 'Battery', 'Battery · Case study',
+                'Electrolyte splash was lifting a client’s existing labels before the batteries reached the dealer.',
+                'Zero field rejections across 1.2M units',
+                ['Battery labels', 'Roll labels'], ['Offset'],
+                'Batteries were arriving at dealers with the main label lifted at one corner and the terminal label bleeding. The dealer was refusing them on sight, so a label worth a few paise was writing off a battery.',
+                'We ran the existing stock and ours side by side in full-strength electrolyte at bonnet temperature for a day, and showed the client both trays. The job moved onto our own battery paper, and the terminal label was redrawn a few millimetres clear of the post.',
+                'Twelve months and 1.2 million units later, no field rejection has come back to the label. The client moved the rest of their range across the following quarter.',
+            ],
+            [
+                '9-ply that survives a delivery fleet', 'Pizza & QSR', 'QSR · Corrugated',
+                'Grease-resistant print and a flute spec rebuilt for stacking in bike boxes.',
+                'Damage claims down 60%',
+                ['Corrugated boxes'], ['Flexo'],
+                'Boxes were going soft in the delivery bag. Stacked four high on a bike in monsoon season, the bottom box was arriving crushed and the print was smearing where the grease had come through.',
+                'The flute was changed for one that holds its stack when it is warm and damp, and the printed face moved to a grease-resistant coating. We also cut the box down: it had been sized for a pizza half an inch larger than the one they actually make.',
+                'Damage claims dropped by around 60% over the next two quarters, and the smaller box took a little off the freight as well.',
+            ],
+            [
+                'Legible at 6pt, compliant in three states', 'Pharma', 'Pharma · Design + print',
+                'Carton redesign that fit mandated copy without losing the brand block.',
+                'Approved first submission',
+                ['Mono cartons', 'Branding & design'], ['Offset'],
+                'A product going into three states needed all of the mandated copy on a carton that was already full. The previous version had shrunk the type to fit, and one reviewer had already called it out.',
+                'The studio rebuilt the carton from the dieline up, moving the mandated blocks to a panel of their own and rebuilding the brand block around what was left. Nothing went below the agreed point size.',
+                'It went through on the first submission in all three states, and the same layout has carried four SKU additions since without another redesign.',
+            ],
         ];
-        foreach ($cases as $i => [$title, $industry, $tag, $summary, $result]) {
+        foreach ($cases as $i => [$title, $industry, $tag, $summary, $result, $products, $technologies, $problem, $solution, $outcome]) {
             $project = Project::firstOrCreate(['title' => $title], [
                 'card_tag' => $tag, 'summary' => $summary, 'result_headline' => $result,
                 'is_case_study' => true, 'is_featured' => true, 'sort' => $i + 1,
             ]);
+
             $project->industries()->syncWithoutDetaching(Industry::where('name', $industry)->pluck('id'));
+            $project->productTypes()->syncWithoutDetaching(ProductType::whereIn('name', $products)->pluck('id'));
+            $project->technologies()->syncWithoutDetaching(Technology::whereIn('name', $technologies)->pluck('id'));
+
+            if (blank($project->problem)) {
+                $project->update([
+                    'problem' => '<div>'.e($problem).'</div>',
+                    'solution' => '<div>'.e($solution).'</div>',
+                    'result' => '<div>'.e($outcome).'</div>',
+                ]);
+            }
         }
 
         $quotes = [
