@@ -60,6 +60,12 @@ document.querySelectorAll('[data-hero-video]').forEach((video) => {
     video.play().catch(() => {});
 });
 
+// The thank-you page fires the conversion itself, once, on load.
+const conversion = document.querySelector('[data-lead-event]');
+if (conversion && typeof window.gtag === 'function') {
+    window.gtag('event', 'generate_lead', { lead_type: conversion.dataset.leadEvent });
+}
+
 // Conversion tracking: any element with data-track sends a GA4 event when clicked.
 document.addEventListener('click', (e) => {
     const el = e.target.closest('[data-track]');

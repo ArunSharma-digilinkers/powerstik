@@ -68,8 +68,8 @@ There is **no SSH**, so nothing can run `composer`, `npm` or `artisan` by hand o
 | Our work | `/work`, `/work/{slug}` | Filter by industry / product type / technology; case studies use Problem → What we did → Result |
 | Global | `/global` | Export map, why partner with us, international enquiry (country + port) |
 | Resources | `/resources/downloads`, `/resources/material-guide`, `/resources/faqs`, `/insights`, `/insights/{slug}` | Downloads can optionally ask for an email address first |
-| Quote | `/get-a-quote` | Smart RFQ wizard |
-| Contact | `/contact` | Map, department contacts, callback request |
+| Quote | `/get-a-quote`, `/request-a-sample`, `/international-enquiry` | One RFQ wizard, three intents. The last two move to `/battery-labels#sample` and `/global#enquiry` when those pages are built. |
+| Contact | `/contact`, `/thank-you/{type}` | Map, which-desk rows, message form and `#callback` strip |
 | Client zone | `/client/*` | **Phase 2.** Only a placeholder login link at launch |
 | System | `/sitemap.xml`, `/robots.txt`, `/admin` (custom Blade admin) | |
 

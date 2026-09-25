@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Middleware\AdminAccess;
+use App\Http\Middleware\CaptureUtm;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Support\Facades\Route;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -10,11 +13,12 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
         then: function () {
-            Illuminate\Support\Facades\Route::middleware('web')->group(base_path('routes/admin.php'));
+            Route::middleware('web')->group(base_path('routes/admin.php'));
         },
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->alias(['admin' => \App\Http\Middleware\AdminAccess::class]);
+        $middleware->alias(['admin' => AdminAccess::class]);
+        $middleware->web(append: [CaptureUtm::class]);
         $middleware->redirectGuestsTo(fn () => route('admin.login'));
         $middleware->redirectUsersTo(fn () => route('admin.dashboard'));
         $middleware->validateCsrfTokens(except: ['_ops/*']);

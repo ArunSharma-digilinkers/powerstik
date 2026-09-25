@@ -43,9 +43,11 @@ return [
         ],
     ],
 
-    // Conversion links used across the site
+    // Conversion links used across the site. The sample and international forms
+    // have pages of their own until /battery-labels and /global are built and can
+    // carry them as anchored sections.
     'quote_url' => '/get-a-quote',
     'callback_url' => '/contact#callback',
-    'sample_url' => '/battery-labels#sample',
-    'international_url' => '/global#enquiry',
+    'sample_url' => '/request-a-sample',
+    'international_url' => '/international-enquiry',
 ];
