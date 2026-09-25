@@ -79,11 +79,15 @@ client supplied (`media-inbox/clientele.png`, a 2-column transparent grid) — s
 commit that added them. "Unique Energos" is the one name on the site with no logo on
 that sheet; the views fall back to setting the name in type, so nothing breaks.
 
-**`show_logo` is `false` on every client and attaching artwork does not change that.**
-The logo sits on the record unpublished until that client's permission is confirmed
-(brief §11). Flipping it is one toggle per client in Admin → Clients. Where a logo does
-show, it is rendered greyscale at reduced opacity, so a wall of competing brand colours
-does not fight the lime.
+**`show_logo` ships `true`**, confirmed by Arun on 2026-09-25: Design India already
+prints these logos in its own brochure, so the site is the same public act. Turn one off
+in Admin → Clients if a client objects. `attachClientLogos()` never touches the flag —
+it only fills an empty `logo`.
+
+Logos render through **`.logo-mark`** (in `app.css`): greyscale at 75%, full colour on
+hover. Fourteen competing brand colours would fight the lime, and hovering is there for
+anyone who wants to look. There is no hover on touch, so phone visitors see the quiet
+version throughout — a known trade-off of the chosen treatment.
 - **Conversion pages (the lead engine).** `EnquiryController` serves all of them. `/get-a-quote`, `/request-a-sample` and `/international-enquiry` are one Alpine wizard (`enquiry/form.blade.php` plus a partial per step in `enquiry/steps/`), switched by `EnquiryController::INTENTS`; `/contact` carries the message form and the `#callback` panel on ink. The sample and international forms have pages of their own **only until `/battery-labels#sample` and `/global#enquiry` exist** — `config/site.php` points at them meanwhile.
 - Every form posts to `POST /enquiry/{type}` and goes through `App\Support\LeadIntake`, which holds the rules per lead type, splits the submission between the `leads` columns and `payload`, stores artwork on the private `local` disk and queues `LeadReceived` (to Settings → Lead notification emails) and `LeadAcknowledged` (to the enquirer). A rejected submission bounces back with its errors in a **bag named after the lead type**, so the two forms on `/contact` never show each other's messages. `/thank-you/{type}` shows the reference number and fires the GA4 `generate_lead` event.
 - Form parts: `<x-site.field>` (label, control, help, error — `conditional` takes an Alpine expression for a field that is only sometimes required, like the roll specs), `<x-site.form-errors>` and `<x-site.honeypot>`. Classes are `.site-input`, `.site-label`, `.site-choice` and `.site-error`. The wizard works without JavaScript: `x-show` leaves every step open and `x-cloak` hides the step nav, so it degrades to one long form.

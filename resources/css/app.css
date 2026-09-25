@@ -106,6 +106,17 @@
         @apply bg-well object-cover;
     }
 
+    /* Client logos. Calm by default, because fourteen competing brand colours
+       would fight the lime; full colour for anyone who hovers one. There is no
+       hover on touch, so those visitors see the quiet version throughout. */
+    .logo-mark {
+        @apply opacity-75 grayscale transition duration-300;
+    }
+
+    .logo-mark:hover {
+        @apply opacity-100 grayscale-0;
+    }
+
     /* ---- Forms -------------------------------------------------------------
        Square, ink-ruled, white ground. Lime appears only as the fill of a
        chosen option; errors are red-600, never the brand colour. */

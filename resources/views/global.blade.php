@@ -167,7 +167,7 @@
                 @foreach ($exportClients as $client)
                     <li class="flex h-[128px] flex-col items-center justify-center gap-3 border-r border-b border-rule px-5">
                         @if ($client->logo)
-                            <img src="{{ ImageStore::url($client->logo) }}" alt="{{ $client->name }}" loading="lazy" class="max-h-10 w-auto opacity-75 grayscale">
+                            <img src="{{ ImageStore::url($client->logo) }}" alt="{{ $client->name }}" loading="lazy" class="max-h-10 w-auto logo-mark">
                         @else
                             <span class="text-center text-[22px] font-bold tracking-[-.035em] text-logo">{{ $client->name }}</span>
                         @endif

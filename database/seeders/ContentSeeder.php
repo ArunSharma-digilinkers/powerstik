@@ -89,14 +89,14 @@ class ContentSeeder extends Seeder
         }
 
         // The brochure's "Our Major Clientele" row, plus the names on the logo sheet
-        // the client supplied (media-inbox/clientele.png).
-        // show_logo stays off until each client's permission is confirmed (brief §11);
-        // attaching the artwork below does not publish it.
+        // the client supplied (media-inbox/clientele.png). show_logo is on because
+        // Design India already prints these logos in its own brochure; confirmed by
+        // Arun on 2026-09-25. Turn one off in Admin → Clients if a client objects.
         $clients = ['Livguard', 'Eastman', 'Unique Energos', 'Tata Green', 'Amaron',
             'Livfast', 'Uno Minda', 'Solance', 'Su-Kam', 'UTL',
             'Exide', 'Gold Star', 'Pacific', 'Green Energy Plus', 'Noor Batt'];
         foreach ($clients as $i => $name) {
-            Client::firstOrCreate(['name' => $name], ['sort' => $i + 1, 'show_logo' => false]);
+            Client::firstOrCreate(['name' => $name], ['sort' => $i + 1, 'show_logo' => true]);
         }
         $this->attachClientLogos();
 
@@ -170,8 +170,7 @@ class ContentSeeder extends Seeder
     /**
      * Client logos, cut from the sheet the client supplied and kept as transparent
      * PNGs at seeders/media/clients/{name-slug}.png. Only fills an empty logo, and
-     * never touches show_logo — the artwork sits on the record unpublished until
-     * that client's permission is confirmed.
+     * never touches show_logo, which is the client's own permission flag.
      */
     private function attachClientLogos(): void
     {

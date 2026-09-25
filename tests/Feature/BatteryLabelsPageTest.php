@@ -43,7 +43,7 @@ class BatteryLabelsPageTest extends TestCase
         $this->get('/battery-labels')->assertSee('clients/logo.webp', false);
     }
 
-    public function test_the_supplied_logos_are_attached_but_not_published(): void
+    public function test_the_supplied_logos_are_attached_and_shown(): void
     {
         $this->seed(ContentSeeder::class);
 
@@ -51,12 +51,19 @@ class BatteryLabelsPageTest extends TestCase
 
         // The sheet the client supplied covers 14 of the 15 names
         $this->assertSame(14, $clients->whereNotNull('logo')->count());
-        $this->assertNull($clients->firstWhere('name', 'Unique Energos')->logo);
-        $this->assertNotNull($clients->firstWhere('name', 'Exide')?->logo);
+        $exide = $clients->firstWhere('name', 'Exide');
+        $this->assertNotNull($exide->logo);
 
-        // Attaching artwork does not publish it — permission is a separate decision
-        $this->assertSame(0, $clients->where('show_logo', true)->count());
-        $this->get('/battery-labels')->assertOk()->assertDontSee('uploads/clients/', false);
+        // Permission is granted for every name; the flag simply waits on artwork
+        // for the one the sheet does not cover, which falls back to type.
+        $this->assertSame(15, $clients->where('show_logo', true)->count());
+        $this->assertNull($clients->firstWhere('name', 'Unique Energos')->logo);
+
+        $this->get('/battery-labels')
+            ->assertOk()
+            ->assertSee($exide->logo, false)
+            ->assertSee('logo-mark', false)       // greyscale until hovered
+            ->assertSee('Unique Energos');
     }
 
     public function test_sections_are_numbered_over_what_is_actually_shown(): void
