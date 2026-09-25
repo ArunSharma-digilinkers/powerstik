@@ -224,6 +224,19 @@ class EnquiryTest extends TestCase
         $this->get('/thank-you/contact')->assertOk()->assertSee('Message received.')->assertDontSee('Reference');
     }
 
+    public function test_a_sample_needs_somewhere_to_send_it(): void
+    {
+        $this->from('/request-a-sample')
+            ->post('/enquiry/sample', [
+                'name' => 'Asha', 'email' => 'asha@example.com', 'phone' => '+91 90000 00000',
+                'application' => '150Ah tubular battery',
+            ])
+            ->assertRedirect('/request-a-sample#form')
+            ->assertSessionHasErrors('address', null, 'sample');
+
+        $this->assertSame(0, Lead::count());
+    }
+
     public function test_unknown_lead_types_are_not_routable(): void
     {
         $this->post('/enquiry/job_application', ['name' => 'Asha'])->assertNotFound();

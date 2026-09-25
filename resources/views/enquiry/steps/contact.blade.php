@@ -3,12 +3,12 @@
     <x-site.field name="name" label="Your name" :bag="$intent" :required="true" autocomplete="name" />
     <x-site.field name="company" label="Company" :bag="$intent" autocomplete="organization" />
     <x-site.field name="email" label="Email" :bag="$intent" type="email" :required="true" autocomplete="email"
-                  help="The quote goes here." />
+                  :help="$intent === 'sample' ? 'We confirm the dispatch here.' : 'The quote goes here.'" />
     <x-site.field name="phone" label="Phone" :bag="$intent" type="tel" :required="true" autocomplete="tel"
                   placeholder="+91 " help="A call settles in two minutes what email takes a day to." />
     @if ($intent === 'sample')
         <x-site.field class="sm:col-span-2" name="address" label="Where to send the sample" :bag="$intent" type="textarea" :rows="3"
-                      autocomplete="street-address" placeholder="Street, city, state, PIN" />
+                      :required="true" autocomplete="street-address" placeholder="Street, city, state, PIN" />
     @else
         <x-site.field name="city" label="City" :bag="$intent" autocomplete="address-level2" />
         @if ($intent === 'quote')

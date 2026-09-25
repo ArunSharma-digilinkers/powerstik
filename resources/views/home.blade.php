@@ -144,7 +144,7 @@
             <div class="relative max-lg:order-1 lg:order-2 max-lg:mx-auto max-lg:w-full max-lg:max-w-md">
                 <div class="aspect-[4/5] bg-[#161616]">
                     @if ($media['battery'])
-                        <img src="{{ $media['battery'] }}" alt="Powerstik battery label on a lead-acid battery" loading="lazy" class="size-full object-cover">
+                        <img src="{{ $media['battery'] }}" alt="A roll of printed battery labels on Powerstik battery paper" loading="lazy" class="size-full object-cover">
                     @endif
                 </div>
                 {{-- Acid-test badge: one droplet ring, pulsing --}}

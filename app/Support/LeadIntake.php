@@ -79,7 +79,7 @@ class LeadIntake
                 'application' => ['required', 'string', 'max:160'],
                 'label_type' => ['nullable', 'string', 'max:120'],
                 'sample_quantity' => ['nullable', 'string', 'max:60'],
-                'address' => ['nullable', 'string', 'max:500'],
+                'address' => ['required', 'string', 'max:500'], // there is no sample without somewhere to send it
             ],
             'international' => [
                 'country' => ['required', 'string', 'max:120'],
