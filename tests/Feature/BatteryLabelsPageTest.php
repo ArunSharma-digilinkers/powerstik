@@ -43,6 +43,22 @@ class BatteryLabelsPageTest extends TestCase
         $this->get('/battery-labels')->assertSee('clients/logo.webp', false);
     }
 
+    public function test_the_supplied_logos_are_attached_but_not_published(): void
+    {
+        $this->seed(ContentSeeder::class);
+
+        $clients = Client::ordered()->get();
+
+        // The sheet the client supplied covers 14 of the 15 names
+        $this->assertSame(14, $clients->whereNotNull('logo')->count());
+        $this->assertNull($clients->firstWhere('name', 'Unique Energos')->logo);
+        $this->assertNotNull($clients->firstWhere('name', 'Exide')?->logo);
+
+        // Attaching artwork does not publish it — permission is a separate decision
+        $this->assertSame(0, $clients->where('show_logo', true)->count());
+        $this->get('/battery-labels')->assertOk()->assertDontSee('uploads/clients/', false);
+    }
+
     public function test_sections_are_numbered_over_what_is_actually_shown(): void
     {
         // No clients and no case studies: the two optional sections drop out and

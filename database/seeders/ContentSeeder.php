@@ -88,13 +88,17 @@ class ContentSeeder extends Seeder
             ExportCountry::where('iso2', $iso)->whereNull('note')->update(['note' => $note]);
         }
 
-        // The brochure's "Our Major Clientele" row, after the names already in the brief.
-        // show_logo stays off until each client's permission is confirmed (brief §11).
+        // The brochure's "Our Major Clientele" row, plus the names on the logo sheet
+        // the client supplied (media-inbox/clientele.png).
+        // show_logo stays off until each client's permission is confirmed (brief §11);
+        // attaching the artwork below does not publish it.
         $clients = ['Livguard', 'Eastman', 'Unique Energos', 'Tata Green', 'Amaron',
-            'Livfast', 'Uno Minda', 'Solance', 'Su-Kam', 'UTL'];
+            'Livfast', 'Uno Minda', 'Solance', 'Su-Kam', 'UTL',
+            'Exide', 'Gold Star', 'Pacific', 'Green Energy Plus', 'Noor Batt'];
         foreach ($clients as $i => $name) {
             Client::firstOrCreate(['name' => $name], ['sort' => $i + 1, 'show_logo' => false]);
         }
+        $this->attachClientLogos();
 
         TimelineEvent::firstOrCreate(['year' => 2002, 'title' => 'Founded as a design setup'], [
             'kicker' => 'The beginning', 'body' => 'Powerstik began as a small design studio.', 'meta' => 'Design India founded · Haryana',
@@ -163,6 +167,29 @@ class ContentSeeder extends Seeder
      *   seeders/media/industries/hero/{slug}.jpg  → hero_image (16:9, the detail page)
      * Only fills fields that are still empty, so uploads made in the admin win.
      */
+    /**
+     * Client logos, cut from the sheet the client supplied and kept as transparent
+     * PNGs at seeders/media/clients/{name-slug}.png. Only fills an empty logo, and
+     * never touches show_logo — the artwork sits on the record unpublished until
+     * that client's permission is confirmed.
+     */
+    private function attachClientLogos(): void
+    {
+        $clients = Client::all()->keyBy(fn (Client $client) => Str::slug($client->name));
+
+        foreach (glob(database_path('seeders/media/clients/*.png')) as $file) {
+            $client = $clients->get(pathinfo($file, PATHINFO_FILENAME));
+
+            if (! $client || filled($client->logo)) {
+                continue;
+            }
+
+            $client->update([
+                'logo' => ImageStore::store(new UploadedFile($file, basename($file), 'image/png', null, true), 'clients'),
+            ]);
+        }
+    }
+
     private function attachIndustryCards(): void
     {
         foreach (['' => 'card_image', 'hero/' => 'hero_image'] as $dir => $field) {

@@ -28,6 +28,17 @@ class IndustryPagesTest extends TestCase
             ->assertDontSee('Retired sector');
     }
 
+    public function test_every_seeded_sector_has_a_card_photograph(): void
+    {
+        $this->seed(ContentSeeder::class);
+
+        $missing = Industry::published()->ordered()->get()
+            ->filter(fn (Industry $industry) => blank($industry->card_image))
+            ->pluck('slug');
+
+        $this->assertTrue($missing->isEmpty(), 'sectors without a card image: '.$missing->join(', '));
+    }
+
     public function test_a_sector_page_is_built_from_its_own_record(): void
     {
         $industry = Industry::create([
