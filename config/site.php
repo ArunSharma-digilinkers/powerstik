@@ -43,11 +43,11 @@ return [
         ],
     ],
 
-    // Conversion links used across the site. /request-a-sample stays reachable as a
-    // direct landing page; the international form keeps a page of its own until
-    // /global is built and can carry it as an anchored section.
+    // Conversion links used across the site. The sample and international forms
+    // live on the pages that sell them; /request-a-sample and
+    // /international-enquiry stay reachable as direct landing pages.
     'quote_url' => '/get-a-quote',
     'callback_url' => '/contact#callback',
     'sample_url' => '/battery-labels#sample',
-    'international_url' => '/international-enquiry',
+    'international_url' => '/global#enquiry',
 ];

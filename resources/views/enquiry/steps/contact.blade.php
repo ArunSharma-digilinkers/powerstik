@@ -4,8 +4,10 @@
     <x-site.field name="company" label="Company" :bag="$intent" autocomplete="organization" />
     <x-site.field name="email" label="Email" :bag="$intent" type="email" :required="true" autocomplete="email"
                   :help="$intent === 'sample' ? 'We confirm the dispatch here.' : 'The quote goes here.'" />
+    {{-- Don't suggest an Indian dialling code to someone enquiring from abroad --}}
     <x-site.field name="phone" label="Phone" :bag="$intent" type="tel" :required="true" autocomplete="tel"
-                  placeholder="+91 " help="A call settles in two minutes what email takes a day to." />
+                  :placeholder="$intent === 'international' ? 'With your country code' : '+91 '"
+                  help="A call settles in two minutes what email takes a day to." />
     @if ($intent === 'sample')
         <x-site.field class="sm:col-span-2" name="address" label="Where to send the sample" :bag="$intent" type="textarea" :rows="3"
                       :required="true" autocomplete="street-address" placeholder="Street, city, state, PIN" />

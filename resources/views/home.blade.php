@@ -288,9 +288,9 @@
                     @endif
 
                     <div>
-                        <ul class="grid grid-cols-2 gap-px bg-rule-dark">
+                        <ul class="grid grid-cols-2 border-t border-l border-rule-dark">
                             @foreach ($countries as $country)
-                                <li class="bg-ink px-[18px] py-5">
+                                <li class="border-r border-b border-rule-dark px-[18px] py-5">
                                     <p class="text-[19px] font-bold tracking-[-.02em]">{{ $country->name }}</p>
                                     @if ($country->note)
                                         <p class="mt-1.5 font-mono text-[10.5px] tracking-[.08em] text-muted uppercase">{{ $country->note }}</p>

@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BatteryLabelsController;
 use App\Http\Controllers\CapabilityController;
 use App\Http\Controllers\EnquiryController;
+use App\Http\Controllers\GlobalController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndustryController;
 use App\Http\Controllers\OpsController;
@@ -18,6 +19,8 @@ Route::get('battery-labels', BatteryLabelsController::class)->name('battery-labe
 Route::get('capabilities', [CapabilityController::class, 'index'])->name('capabilities.index');
 Route::get('capabilities/machine-park', [CapabilityController::class, 'machines'])->name('capabilities.machines');
 Route::get('capabilities/{capability}', [CapabilityController::class, 'show'])->name('capabilities.show');
+
+Route::get('global', GlobalController::class)->name('global');
 
 Route::get('industries', [IndustryController::class, 'index'])->name('industries.index');
 Route::get('industries/{industry}', [IndustryController::class, 'show'])->name('industries.show');
