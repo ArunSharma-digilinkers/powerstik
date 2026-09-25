@@ -237,7 +237,7 @@
                 <p class="kicker mb-[18px]">04 / Machine park</p>
                 <h2 id="machines-title" class="text-[clamp(2rem,1.2rem+2.6vw,3.25rem)] leading-[1.02] font-extrabold tracking-[-.035em] text-balance">We bought the machines so you wouldn’t have to chase them.</h2>
                 <p class="mt-6 text-[17px] leading-[1.55] text-body">Offset, digital, flexo and corrugation on one floor, ~{{ preg_replace('/\D/', '', Site::setting('people', '200')) }} people running them and {{ Site::setting('labels_per_day', '5,00,000') }} labels a day off the presses. No job is subcontracted out of sight.</p>
-                <a href="{{ url('/about/infrastructure') }}" class="link-underline mt-[30px] text-[15.5px]">Take the plant tour</a>
+                <a href="{{ url('/capabilities/machine-park') }}" class="link-underline mt-[30px] text-[15.5px]">See the machine park</a>
             </div>
             <ul class="grid gap-px bg-rule-mid sm:grid-cols-2">
                 @foreach ($machines as [$kind, $name, $spec, $file])

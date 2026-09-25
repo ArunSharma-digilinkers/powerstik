@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BatteryLabelsController;
+use App\Http\Controllers\CapabilityController;
 use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndustryController;
@@ -12,6 +13,11 @@ Route::get('/', HomeController::class)->name('home');
 Route::get('about', AboutController::class)->name('about');
 Route::permanentRedirect('about-us', '/about');
 Route::get('battery-labels', BatteryLabelsController::class)->name('battery-labels');
+
+// machine-park is declared before the wildcard so it is not read as a discipline
+Route::get('capabilities', [CapabilityController::class, 'index'])->name('capabilities.index');
+Route::get('capabilities/machine-park', [CapabilityController::class, 'machines'])->name('capabilities.machines');
+Route::get('capabilities/{capability}', [CapabilityController::class, 'show'])->name('capabilities.show');
 
 Route::get('industries', [IndustryController::class, 'index'])->name('industries.index');
 Route::get('industries/{industry}', [IndustryController::class, 'show'])->name('industries.show');

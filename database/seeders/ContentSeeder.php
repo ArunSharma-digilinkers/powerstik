@@ -48,17 +48,28 @@ class ContentSeeder extends Seeder
             ProductType::firstOrCreate(['name' => $name], ['sort' => $i + 1]);
         }
 
+        // The descriptions are the home page's machine-park teaser copy, already live.
+        // The digital press carries no make: the brochure credits Canon, but the only
+        // picture we have is a Xerox Color 175, so the brand stays off until the client
+        // settles it (docs/design/brand.md). The home card is unbranded for the same reason.
         $machines = [
-            ['Heidelberg Speedmaster SM-74', 'offset', 'Heidelberg', 'SM-74'],
-            ['Heidelberg Speedmaster CD-102', 'offset', 'Heidelberg', 'CD-102'],
-            ['Canon digital press', 'digital', 'Canon', null],
-            ['Mark Andy E5', 'flexo', 'Mark Andy', 'E5'],
-            ['Corrugation line', 'corrugation', null, null, 'Full line from mono cartons to 9-ply boxes.'],
+            ['Heidelberg Speedmaster SM-74', 'offset', 'Heidelberg', 'SM-74', 'Five-colour, for cartons and sheet labels.'],
+            ['Heidelberg Speedmaster CD-102', 'offset', 'Heidelberg', 'CD-102', 'Large format, for long runs and heavy stock.'],
+            ['Digital press', 'digital', null, null, 'Short runs, samples and variable data, without a plate or a minimum.'],
+            ['Mark Andy E5', 'flexo', 'Mark Andy', 'E5', 'Roll label press — applicator-ready reels, core size and winding direction to spec.'],
+            ['Corrugation line', 'corrugation', null, null, 'Print, slot and die-cut in line: mono cartons through 3, 5, 7 and 9-ply, in-house.'],
         ];
         foreach ($machines as $i => $m) {
-            Machine::firstOrCreate(['name' => $m[0]], [
-                'category' => $m[1], 'make' => $m[2], 'model' => $m[3], 'description' => $m[4] ?? null, 'sort' => $i + 1,
+            $machine = Machine::firstOrCreate(['name' => $m[0]], [
+                'category' => $m[1], 'make' => $m[2], 'model' => $m[3], 'sort' => $i + 1,
             ]);
+
+            // Backfill the description onto rows seeded before it existed, without
+            // overwriting anything an editor has since written. (Note: calling
+            // whereNull() on the instance would query the whole table, not this row.)
+            if (blank($machine->description)) {
+                $machine->update(['description' => $m[4]]);
+            }
         }
 
         // name, ISO, lat, lng (approximate centroid, used for the export map), card note.
