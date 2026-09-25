@@ -2,7 +2,9 @@
 <div class="grid gap-7 sm:grid-cols-2">
     <x-site.field name="product_type" label="What do you need?" :bag="$intent" :options="$productTypes"
                   :required="true" placeholder="Choose a product…" />
+    {{-- ?industry=Battery, as the industry pages' CTA links send it --}}
     <x-site.field name="industry" label="What is it for?" :bag="$intent" :options="$industries"
+                  :value="request('industry')"
                   placeholder="Choose a sector…" help="Helps us pick the right paper and adhesive." />
 </div>
 

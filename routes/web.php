@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BatteryLabelsController;
 use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IndustryController;
 use App\Http\Controllers\OpsController;
 use Illuminate\Support\Facades\Route;
 
@@ -11,6 +12,9 @@ Route::get('/', HomeController::class)->name('home');
 Route::get('about', AboutController::class)->name('about');
 Route::permanentRedirect('about-us', '/about');
 Route::get('battery-labels', BatteryLabelsController::class)->name('battery-labels');
+
+Route::get('industries', [IndustryController::class, 'index'])->name('industries.index');
+Route::get('industries/{industry}', [IndustryController::class, 'show'])->name('industries.show');
 
 // Conversion pages. The three wizard forms share one controller action; the
 // route default picks which set of steps EnquiryController::INTENTS renders.

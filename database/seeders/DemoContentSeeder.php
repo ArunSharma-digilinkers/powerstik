@@ -14,7 +14,8 @@ use Illuminate\Database\Seeder;
 /**
  * ILLUSTRATIVE content from the home and About page designs: case studies, testimonials,
  * the founders' note, the story milestones after 2002, leadership bios and quotes, open
- * roles and sustainability claims. None of it is real, so it must never reach production.
+ * roles, sustainability claims and the industry page copy. None of it is real, so it must
+ * never reach production.
  * Local only: php artisan db:seed --class=DemoContentSeeder
  */
 class DemoContentSeeder extends Seeder
@@ -54,6 +55,7 @@ class DemoContentSeeder extends Seeder
         }
 
         $this->aboutPage();
+        $this->industryPages();
     }
 
     private function aboutPage(): void
@@ -107,5 +109,125 @@ class DemoContentSeeder extends Seeder
                 'Right-first-time: Fewer reprints is the largest single saving we make.',
             ])]);
         }
+    }
+
+    /**
+     * Sector copy for the industry pages. The `note` on each industry is real —
+     * it came from the home page design and ships in ContentSeeder. Everything
+     * here is ours, written to show the template with copy in it.
+     *
+     * `what_we_supply` is deliberately left empty on every sector: the detail
+     * page falls back to the product-type list, and leaving it blank keeps that
+     * fallback under review. Only sectors with a genuine rulebook get a
+     * compliance note, so both the filled and the empty state are visible.
+     */
+    private function industryPages(): void
+    {
+        // name => [excerpt, challenges, compliance notes or null]
+        $sectors = [
+            'Battery' => [
+                'Main, warning, terminal and warranty labels on paper built in-house for electrolyte splash, bonnet heat and high-speed applicators.',
+                ['A battery label does not fail slowly. It lifts at a corner, the ink bleeds, or it never gripped properly in the first place — and a return on a battery is never just the label.', [
+                    'Electrolyte splash on and around the terminals',
+                    'Bonnet temperatures for hours at a time',
+                    'High-speed applicators that punish a soft adhesive',
+                ]],
+                null,
+            ],
+            'RO & water purifiers' => [
+                'Labels that go on wet, stay on wet, and still look new after a year of condensation.',
+                ['Purifier bodies are wiped down, dripped on and sweated against. Most label stock is specified dry and tested dry; this one is not.', [
+                    'Condensation between the label and a cold surface',
+                    'Curved and textured housings',
+                    'Detergent wipe-downs in a showroom',
+                ]],
+                null,
+            ],
+            'Pharma' => [
+                'Cartons and labels where the mandated copy is laid out first and the brand block is fitted around it.',
+                ['Pharma artwork is the only category where the regulator writes part of the layout. The job is fitting everything that must be there, at a size that can still be read, without the pack losing its shelf identity.', [
+                    'Mandated copy at legible point sizes',
+                    'Batch, expiry and serialisation blocks that survive over-printing',
+                    'Tamper-evidence that does not fight the die-line',
+                ]],
+                ['Mandated copy, batch and expiry blocks are placed before the brand block, at sizes agreed with your regulatory team.', 'Artwork changes are versioned and the approved proof is retained, so a reorder prints the approved version and not the newest file on someone\'s desk.'],
+            ],
+            'Cosmetics' => [
+                'Foil, spot UV and small type on curved surfaces — the category where the finish is half the product.',
+                ['Cosmetics packaging is read at arm\'s length in a shop and at 20cm in a bathroom. It has to work at both, on a surface that curves away from you.', [
+                    'Foil and spot UV registered to fine artwork',
+                    'Small type wrapping a tight radius',
+                    'Oils and creams on the label face',
+                ]],
+                null,
+            ],
+            'Toys' => [
+                'Child-safe inks, age marking and retail hanging, on packs built to be handled by children.',
+                ['A toy pack is opened by an adult and handled by a child. Everything on it has to be safe in a mouth and strong enough to survive a shelf being rummaged through.', [
+                    'Inks and coatings safe for mouth contact',
+                    'Age and safety marks that must not be trimmed off',
+                    'Hanging tabs that take repeated handling',
+                ]],
+                ['Inks, coatings and adhesives are specified for mouth contact and confirmed with the supplier for each run.', 'Age grading and safety marks are placed inside the trim tolerance so they cannot be cut away by a die that drifts.'],
+            ],
+            'Food' => [
+                'Food-safe inks and coatings, for packs that go from a cold chain to a counter.',
+                ['Food packaging changes temperature more than any other category we print. It is filled warm, chilled, frozen, thawed and then handled — and the label has to be legible at every step.', [
+                    'Migration-safe inks and coatings',
+                    'Freezer and chiller adhesion',
+                    'Condensation on the way back up to room temperature',
+                ]],
+                ['Inks, varnishes and adhesives are specified as food-safe for the contact type of the pack, direct or indirect.', 'Batch and best-before blocks are laid out for whatever coding equipment you run, so they stay legible after over-printing.'],
+            ],
+            'Pizza & QSR' => [
+                'Grease-resistant print and a flute spec rebuilt for stacking in a delivery bag.',
+                ['A QSR box is filled hot, stacked, carried on a bike and opened at a table. By then the print has had twenty minutes of steam and grease against it.', [
+                    'Grease and steam against the printed face',
+                    'Stacking strength when the board is warm and damp',
+                    'Repeat colour across weekly reorders',
+                ]],
+                null,
+            ],
+            'Surgical' => [
+                'Sterile-pack ready labels and cartons, with the traceability blocks laid out to be read after sterilisation.',
+                ['A surgical pack is sterilised after it is labelled. Whatever the label was before that, it has to be legible and still attached afterwards.', [
+                    'Adhesion and legibility through the sterilisation cycle',
+                    'Lot and traceability blocks that survive the process',
+                    'No particulates or loose fibre from the label edge',
+                ]],
+                ['Lot, reference and sterilisation-method blocks are laid out to remain legible after the cycle your pack goes through.', 'Stock and adhesive are chosen for the sterilisation method and confirmed on a trial run before the first production order.'],
+            ],
+            'Electrical' => [
+                'Warning and rating labels that have to stay readable for the life of the product.',
+                ['An electrical rating label is the last thing anyone reads before they work on a product, sometimes years after it was made. It is also the one nobody looks at until it matters.', [
+                    'Legibility after years of dust, heat and handling',
+                    'Warning marks that must not fade or lift',
+                    'Ratings that stay accurate across a product\'s variants',
+                ]],
+                ['Rating and warning marks are printed at the size and contrast your approvals require, and the approved proof is retained for reorders.'],
+            ],
+        ];
+
+        foreach ($sectors as $name => [$excerpt, [$intro, $points], $compliance]) {
+            $industry = Industry::where('name', $name)->first();
+
+            if (! $industry) {
+                continue;
+            }
+
+            $industry->fill(array_filter([
+                'excerpt' => $industry->excerpt ?: $excerpt,
+                'challenges' => $industry->challenges ?: $this->richtext($intro, $points),
+                'compliance_notes' => $industry->compliance_notes ?: ($compliance ? $this->richtext(null, $compliance) : null),
+            ]))->save();
+        }
+    }
+
+    /** Trix-shaped HTML: a lead paragraph and a bullet list, the way the editor saves it. */
+    private function richtext(?string $intro, array $points): string
+    {
+        $html = $intro ? '<div>'.e($intro).'</div>' : '';
+
+        return $html.'<ul>'.implode('', array_map(fn ($point) => '<li>'.e($point).'</li>', $points)).'</ul>';
     }
 }

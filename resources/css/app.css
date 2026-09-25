@@ -158,6 +158,63 @@
         @apply size-4 shrink-0 accent-ink;
     }
 
+    /* ---- Editor rich text ---------------------------------------------------
+       Trix output, already purified on save. Deliberately plain: the site's own
+       type scale, square rules, lime only on the list marks. */
+
+    .prose-site {
+        @apply text-[17px] leading-[1.6] text-body;
+    }
+
+    .prose-site > * + * {
+        @apply mt-5;
+    }
+
+    .prose-site h1,
+    .prose-site h2,
+    .prose-site h3 {
+        @apply mt-10 text-[22px] leading-[1.2] font-bold tracking-[-.02em] text-ink;
+    }
+
+    .prose-site strong {
+        @apply font-bold text-ink;
+    }
+
+    .prose-site a {
+        @apply border-b-2 border-brand-500 font-semibold text-ink transition-colors hover:border-ink;
+    }
+
+    .prose-site ul,
+    .prose-site ol {
+        @apply flex flex-col gap-2.5 pl-0;
+    }
+
+    .prose-site li {
+        @apply relative pl-7;
+    }
+
+    .prose-site ul > li::before {
+        content: '';
+        @apply absolute top-[11px] left-0 h-[3px] w-[16px] bg-brand-500;
+    }
+
+    .prose-site ol {
+        counter-reset: prose-item;
+    }
+
+    .prose-site ol > li {
+        counter-increment: prose-item;
+    }
+
+    .prose-site ol > li::before {
+        content: counter(prose-item, decimal-leading-zero);
+        @apply absolute top-[3px] left-0 font-mono text-[11px] tracking-[.08em] text-mono;
+    }
+
+    .prose-site blockquote {
+        @apply border-l-[3px] border-brand-500 pl-6 text-ink;
+    }
+
     /* One step of the wizard: a numbered mono heading over a 2px ink rule. */
     .site-step-title {
         @apply flex items-baseline gap-3 border-b-2 border-ink pb-4 text-[19px] font-extrabold tracking-[-.02em];
