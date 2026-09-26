@@ -73,6 +73,18 @@ class WorkController extends Controller
         ]);
     }
 
+    /**
+     * The qualified slug column for a facet, taken from the model rather than
+     * built out of the relation name: `productTypes` lives in `product_types`,
+     * and only `industries` and `technologies` are spelled the same both ways.
+     */
+    private static function slugColumn(string $key): string
+    {
+        [, $model] = self::FACETS[$key];
+
+        return (new $model)->getTable().'.slug';
+    }
+
     /** @param  array<string, string>  $active */
     private function filtered(array $active): Builder
     {
@@ -80,7 +92,7 @@ class WorkController extends Controller
 
         foreach ($active as $key => $slug) {
             [$relation] = self::FACETS[$key];
-            $query->whereRelation($relation, "{$relation}.slug", $slug);
+            $query->whereRelation($relation, self::slugColumn($key), $slug);
         }
 
         return $query;
@@ -112,7 +124,7 @@ class WorkController extends Controller
                         }
 
                         [$otherRelation] = self::FACETS[$otherKey];
-                        $query->whereRelation($otherRelation, "{$otherRelation}.slug", $slug);
+                        $query->whereRelation($otherRelation, self::slugColumn($otherKey), $slug);
                     }
                 }])
                 ->orderBy('sort')->orderBy('id')->get()

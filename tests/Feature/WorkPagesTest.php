@@ -166,6 +166,48 @@ class WorkPagesTest extends TestCase
             ->assertSee('/work?tech=flexo', false);
     }
 
+    /**
+     * Every facet, one at a time. `product` filtered on `productTypes.slug`
+     * for a while and threw: the relation is camel case but the table is
+     * `product_types`, and the other two are spelled the same both ways, so
+     * filtering by industry or technology hid it.
+     */
+    public function test_each_facet_filters_on_its_own(): void
+    {
+        $this->portfolio();
+
+        $expected = [
+            'industry=battery' => 'Peeling label fixed',
+            'product=roll-labels' => 'Peeling label fixed',
+            'tech=flexo' => 'Peeling label fixed',
+            'industry=pharma' => 'Carton redesign',
+            'product=mono-cartons' => 'Carton redesign',
+        ];
+
+        foreach ($expected as $query => $title) {
+            $this->get("/work?{$query}")
+                ->assertOk()
+                ->assertSee($title)
+                // "Showing 1 of 2" — the chip above it counts the whole portfolio
+                ->assertSee('Showing 1 of 2.');
+        }
+    }
+
+    /** Follow the links the page prints, rather than only asserting they are there. */
+    public function test_every_filter_link_the_listing_offers_resolves(): void
+    {
+        $this->portfolio();
+
+        preg_match_all('~/work\?[a-z]+=[a-z0-9-]+~', $this->get('/work')->getContent(), $matches);
+
+        $links = array_unique($matches[0]);
+        $this->assertNotEmpty($links);
+
+        foreach ($links as $link) {
+            $this->get($link)->assertOk();
+        }
+    }
+
     public function test_related_work_comes_from_the_shared_sector(): void
     {
         [$one, $two] = $this->portfolio();
