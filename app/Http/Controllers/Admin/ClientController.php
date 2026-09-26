@@ -23,7 +23,7 @@ class ClientController extends ResourceController
     {
         return [
             Field::text('name', 'Name')->required(),
-            Field::image('logo', 'Logo', 'clients')->allowSvg()->help('SVG or transparent PNG preferred.'),
+            Field::image('logo', 'Logo', 'clients')->allowSvg()->help('SVG, or a transparent PNG about 400px on its long edge. Trim it tight - no white box, no built-in margin. Shown greyscale until hovered.'),
             Field::url('website', 'Website'),
             Field::select('export_country_id', 'Export country', ExportCountry::ordered()->pluck('name', 'id')->all())
                 ->help('Leave empty for domestic clients.'),

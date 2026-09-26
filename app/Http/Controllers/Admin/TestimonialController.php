@@ -27,7 +27,7 @@ class TestimonialController extends ResourceController
             Field::text('company', 'Company'),
             Field::select('client_id', 'Linked client', Client::ordered()->pluck('name', 'id')->all()),
             Field::textarea('quote', 'Quote')->required(),
-            Field::image('photo', 'Photo', 'testimonials'),
+            Field::image('photo', 'Photo', 'testimonials')->help('Square. Drawn as a 44px circle, so 600x600 is plenty.'),
             Field::url('video_url', 'Video URL')->help('YouTube link for a video testimonial.'),
             Field::toggle('is_published', 'Published')->default(true),
             Field::number('sort', 'Sort order')->default(0),

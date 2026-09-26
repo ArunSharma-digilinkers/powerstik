@@ -27,7 +27,7 @@ class PostController extends ResourceController
             Field::slug()->help('Leave empty to generate from the title.'),
             Field::select('post_category_id', 'Category', PostCategory::ordered()->pluck('name', 'id')->all()),
             Field::textarea('excerpt', 'Excerpt')->rules('max:500'),
-            Field::image('cover_image', 'Cover image', 'posts'),
+            Field::image('cover_image', 'Cover image', 'posts')->help('3:2, at least 1800px wide. Cropped to 16:7 for the hero on the post itself.'),
             Field::richtext('body', 'Body'),
             Field::datetime('published_at', 'Publish date')->help('Empty = draft. A future date schedules the post.'),
             Field::text('seo_title', 'SEO title'),

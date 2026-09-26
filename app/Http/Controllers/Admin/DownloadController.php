@@ -25,7 +25,7 @@ class DownloadController extends ResourceController
             Field::select('category', 'Category', Download::CATEGORIES),
             Field::textarea('description', 'Description')->rules('max:500'),
             Field::file('file', 'File', 'downloads')->required()->help('PDF preferred. Max 30 MB.'),
-            Field::image('cover_image', 'Cover thumbnail', 'downloads'),
+            Field::image('cover_image', 'Cover thumbnail', 'downloads')->help('3:4 portrait, like the front page of the PDF. 600x800 is enough.'),
             Field::toggle('requires_email', 'Ask for email before download'),
             Field::toggle('is_published', 'Published')->default(true),
             Field::number('sort', 'Sort order')->default(0),

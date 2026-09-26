@@ -26,7 +26,7 @@ class TimelineEventController extends ResourceController
             Field::text('title', 'Title')->required(),
             Field::textarea('body', 'Text'),
             Field::text('meta', 'Footnote')->help('One line under the text, e.g. "Heidelberg SM-74 installed".'),
-            Field::image('image', 'Photo', 'timeline')->help('4:3. An archive photo of that year works best.'),
+            Field::image('image', 'Photo', 'timeline')->help('4:3, at least 1600px wide. An archive photo of that year works best.'),
             Field::number('sort', 'Order within the year')->default(0),
         ];
     }

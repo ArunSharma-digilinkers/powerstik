@@ -27,7 +27,7 @@ class MachineController extends ResourceController
             Field::text('model', 'Model'),
             Field::textarea('description', 'Description'),
             Field::keyvalue('specs', 'Specifications')->help('e.g. Max sheet size → 520 × 740 mm'),
-            Field::image('image', 'Photo', 'machines'),
+            Field::image('image', 'Photo', 'machines')->help('4:3, at least 1600px wide. The press on the floor beats a maker cutout.'),
             Field::number('sort', 'Sort order')->default(0),
             Field::toggle('is_published', 'Published')->default(true),
         ];
