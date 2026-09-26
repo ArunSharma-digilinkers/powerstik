@@ -86,8 +86,10 @@
 
         <div class="grid gap-12 pt-12 lg:grid-cols-[.85fr_1.15fr] lg:items-center lg:gap-16">
             {{-- A fixed height rather than an aspect ratio: at 4:5 this column runs
-                 taller than the copy beside it and takes over the section. --}}
-            <div class="grid h-[340px] place-items-center bg-paper-mid p-8 sm:h-[420px] lg:h-[440px]">
+                 taller than the copy beside it and takes over the section.
+                 grid-rows-1 is load-bearing: without a definite row the image's
+                 max-h-full has nothing to resolve against and it overflows. --}}
+            <div class="grid h-[340px] grid-rows-1 place-items-center bg-paper-mid p-8 sm:h-[420px] lg:h-[440px]">
                 @if ($media['battery'])
                     {{-- A cutout product shot on white, so it is contained on a tint
                          rather than cropped to fill, the same as the machine cards. --}}
