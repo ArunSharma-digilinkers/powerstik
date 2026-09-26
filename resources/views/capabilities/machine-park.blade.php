@@ -70,10 +70,15 @@
                              credits, and a single picture cannot stand for two Speedmasters.
                              See docs/design/brand.md. --}}
                         @if ($machine->image)
-                            <div class="mb-7 grid h-[150px] place-items-center bg-paper-mid p-5">
+                            {{-- aspect-ratio and overflow-hidden, like the industry cards. A
+                                 fixed-height grid well does not constrain the photograph: the
+                                 implicit row is auto, so max-h-full has nothing definite to
+                                 resolve against and the image spills over the card. --}}
+                            <div class="mb-7 aspect-[4/3] overflow-hidden bg-well">
                                 <img src="{{ ImageStore::url($machine->image) }}" srcset="{{ ImageStore::srcset($machine->image) }}"
-                                     sizes="(min-width: 640px) 50vw, 100vw" alt="{{ $machine->name }}" loading="lazy"
-                                     class="max-h-full w-auto max-w-full object-contain">
+                                     sizes="(min-width: 640px) 50vw, 100vw"
+                                     alt="The {{ $machine->name }} on the floor at Powerstik" loading="lazy"
+                                     class="size-full object-cover">
                             </div>
                         @endif
 

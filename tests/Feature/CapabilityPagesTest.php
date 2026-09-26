@@ -118,7 +118,12 @@ class CapabilityPagesTest extends TestCase
     {
         Machine::create(['name' => 'Mark Andy E5', 'category' => 'flexo', 'image' => 'machines/e5.webp']);
 
-        $this->get('/capabilities/machine-park')->assertSee('machines/e5.webp', false);
+        $response = $this->get('/capabilities/machine-park')->assertSee('machines/e5.webp', false);
+
+        // The well has to bound the photograph itself. A fixed-height grid well
+        // did not: the implicit row is auto, so the image sized to its own
+        // content and spilled over the name and the spec list underneath.
+        $response->assertSee('aspect-[4/3] overflow-hidden', false);
     }
 
     public function test_every_capability_link_on_the_live_pages_resolves(): void
