@@ -241,13 +241,19 @@
             </div>
             <ul class="grid gap-px bg-rule-mid sm:grid-cols-2">
                 @foreach ($machines as [$kind, $name, $spec, $file])
-                    @php($cutout = is_file(public_path("media/machines/{$file}.webp")) ? asset("media/machines/{$file}.webp") : null)
+                    {{-- The four pictures are different shapes — three maker cutouts and one
+                         knocked-out photograph — so the intrinsic size is read off the file
+                         rather than hard-coded, and the box reserved while it loads is the
+                         box it ends up filling. --}}
+                    @php($path = public_path("media/machines/{$file}.webp"))
+                    @php($size = is_file($path) ? getimagesize($path) : null)
+                    @php($cutout = $size ? asset("media/machines/{$file}.webp") : null)
                     <li class="flex flex-col bg-paper px-7 py-[26px]">
                         {{-- grid-rows-1 is load-bearing: without a definite row the
                              cutout's max-h-full has nothing to resolve against. --}}
                         <div class="mb-[22px] grid h-[92px] grid-rows-1 place-items-center @unless ($cutout) bg-well @endunless">
                             @if ($cutout)
-                                <img src="{{ $cutout }}" alt="{{ $name }}" width="1200" height="420" loading="lazy" class="max-h-full w-auto max-w-full object-contain">
+                                <img src="{{ $cutout }}" alt="{{ $name }}" width="{{ $size[0] }}" height="{{ $size[1] }}" loading="lazy" class="max-h-full w-auto max-w-full object-contain">
                             @endif
                         </div>
                         <p class="label-mark">{{ $kind }}</p>

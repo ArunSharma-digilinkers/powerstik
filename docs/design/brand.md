@@ -141,8 +141,10 @@ Three sets came from the client and are used as-is, beyond a crop and a mild lev
   field, the leader lines, the pin halos) is remapped to a light grey whose opacity follows how
   dark it was. The script is in the commit that added it; the source is
   `media-inbox/map.png`.
-- **`machines/*.webp`** — the makers' press cutouts, trimmed and capped at 1200px with their
-  transparency intact, one per card in the machine park teaser.
+- **`machines/*.webp`** — the cutouts behind the machine park teaser, trimmed and capped at
+  1200px with their transparency intact, one per card. Three are the makers' own; `digital`
+  is Arun's photograph of the Canon with the wall and floor knocked out, because Canon
+  artwork was never supplied. See `media-spec.md` for how the knockout was done.
 - **`home/acid-test.webp`** — the client's own photograph of a sheet of the battery paper in the
   test tray, marked "Heat Test" in pencil and dated, with the acid stain climbing from the lower
   edge. It runs as a proof band under the flagship section, so "Acid / Heat / Grip" is evidenced
@@ -163,9 +165,12 @@ Three sets came from the client and are used as-is, beyond a crop and a mild lev
    photographed the press: it is a **Canon imagePRESS V900**, M/C no. 17, which is what
    the brochure said all along. The machine record and the home card both carry the name
    now. `media-inbox/canon.png` is still a Xerox and is not the press, so the cutout cut
-   from it was deleted rather than relabelled — the home card shows its tinted well until
-   somebody supplies Canon artwork.
+   from it was deleted rather than relabelled, and the home card stood empty until the
+   photograph was knocked out to replace it. **Still worth asking Canon India for the
+   V900 render**, which would match the other three cards exactly.
 
-The press pictures are manufacturer renders, not photographs of the Sonipat floor. The brochure
-uses them the same way, so they are fine here — but real plant photography would be better, and
-the About page's infrastructure slots need it regardless.
+Three of the four press pictures are manufacturer renders, not photographs of the Sonipat floor.
+The brochure uses them the same way, so they are fine here — but real plant photography would be
+better, and the About page's infrastructure slots need it regardless. The Canon card is the first
+one to be a real photograph, and the row survives the mix: the cards are not a matched set of
+renders, they are one picture per press.

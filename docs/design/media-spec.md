@@ -85,9 +85,16 @@ release. Export WebP at quality ~82.
 
 ### `public/media/machines/`
 
-Maker cutouts for the home teaser only, **never** for a machine record. Transparent
-PNG converted to WebP, wide and short — **1200 × 420, about 2.9:1**. Drawn 92px tall.
-`heidelberg`, `mark-andy`, `digital`, `corrugation`.
+Cutouts for the home teaser only, **never** for a machine record. Transparent WebP,
+capped at 1200px wide. `heidelberg`, `mark-andy`, `digital`, `corrugation`.
+
+They are not one shape. Three are maker renders of long machines (about 2.6–3.5:1);
+`digital` is a knocked-out photograph of a squarer press (1200 × 879, 1.37:1), so it
+draws about half the width of its neighbours in the same 92px-tall row. That is the
+machine's actual proportion, not a fault. **The `width`/`height` attributes are read
+off the file with `getimagesize()`**, so the box reserved while the picture loads is
+the box it ends up filling; a hard-coded 1200 × 420 made every card but one reserve
+the wrong width and then jump.
 
 ### `public/media/battery-labels/`
 
@@ -145,6 +152,7 @@ are in `resources/media-inbox/`, git-ignored.
 | `machines/rhyguan-label-converter` | `IMG_7275.HEIC` | full frame |
 | `machines/flat-bed-die-cutter` | `IMG_7283.HEIC` | full frame |
 | `machines/canon-imagepress-v900` | `IMG_6964.HEIC` | full frame |
+| `home/machines/digital.webp` | `IMG_6963.HEIC` (4032 × 3024) | x 287–3278, y 515–2705, background knocked out |
 | `machines/hpm-92-guillotine` | `IMG_7285.HEIC` | full frame |
 | `about/plant-corrugation.webp` | `IMG_6521.HEIC` | **rotated 90° CW first** |
 | `about/team-production.webp` | `IMG_6523.MOV` (1080 × 1920) | 2.0s |
@@ -183,6 +191,17 @@ Two things to know before cutting any more of these:
   the softest strip of the frame was cropped away and the rest sharpened. Measure the
   candidate bands (Laplacian variance at a common width) rather than eyeballing them —
   the sharpest band of a frame is rarely the one the subject is centred in.
+- **A photograph can be knocked out when the background is warm and the machine is not.**
+  The Canon stands against a cream wall, a brown floor and a yellow chair, all of which
+  have chroma; the press is neutral grey. So the mask is `R - B > 16 || V < 105`, flooded
+  **from the border inwards** rather than applied to the whole frame — a global threshold
+  would have taken the press's own black panels and the red mark with it. Grow the mask
+  2px afterwards or a cream fringe survives on the anti-aliased edge. Two patches of wall
+  are as neutral as the press (a pinned notice and the painted window frame) and had to be
+  cleared by hand; they sit clear of the machine, so a rectangle does it. **This only works
+  where the ground is a different colour from the subject** — it would not have worked
+  against the white paper stacks a metre to the right, which is why the crop stops short
+  of them.
 - `about/design-india.webp` is the one file under its slot: 868px into a 566px well, so
   it is sharp at 1× and about three-quarters resolution on a retina screen. It is the
   largest version of that photograph that exists.
