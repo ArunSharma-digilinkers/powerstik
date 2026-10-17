@@ -5,11 +5,13 @@ Source of truth: the client brochure (`docs/design/brand/brochure-1..4.jpg`, ful
 **`docs/design/brand/powerstick-logo-master.png`, 2729 × 522, transparent**, which arrived
 on 2026-10-17 and replaced `powerstik-logo-master.png`.
 
-> ⚠️ **The brand is being renamed: Powerstik → Powerstick.** The new wordmark is on the
-> site; **the copy has not been changed yet** — around 115 occurrences across views, seeders,
-> config, mail and docs still read "Powerstik", so the footer currently sets the new name in
-> the logo and the old one in the sentence beneath it. Don't fix that piecemeal: it is one
-> pass, and it needs decisions about the domain, the ® and the registered name first.
+> ⚠️ **The brand is being renamed: Powerstik → Powerstick.** The new wordmark is on the site.
+> **The copy is deliberately not renamed** — Arun's call on 2026-10-17: hold until the
+> trademark and the domain are settled. So around 115 occurrences across views, seeders,
+> config, mail and docs still read "Powerstik", and the footer sets the new name in the logo
+> and the old one in the sentence beneath it. **That inconsistency is known and intentional.**
+> Don't fix it piecemeal, and don't rename one file because it looks wrong: it is one pass,
+> and it starts when the ®, the registered name and the domain are decided.
 
 This replaces the red scheme (`#E31E24`) that the home page design handoff used. Nothing of the
 red brand survives; if you find a red that is not a validation error, it is a leftover.
@@ -26,11 +28,11 @@ red brand survives; if you find a red that is not a validation error, it is a le
 The brochure prints the lime as `#D4FD00`; that is the CMYK conversion of the same colour, so
 screen work uses `#C7FF00`.
 
-> ⚠️ **The new wordmark was supplied in `#DBE836`, not `#C7FF00`** — a duller, yellower green.
-> Beside a `#C7FF00` button it reads as a mistake, so the installed artwork is **recoloured to
-> `#C7FF00`** and the original sits untouched at `docs/design/brand/powerstick-logo-master.png`.
-> If `#DBE836` is the new brand lime then the token changes and the whole site follows, which is
-> a different job. Ask before assuming either way.
+> **The new wordmark was supplied in `#DBE836`, not `#C7FF00`** — a duller, yellower green.
+> Beside a `#C7FF00` button it reads as a mistake. **Settled on 2026-10-17: `#C7FF00` stays the
+> brand lime**, so the installed artwork is recoloured to it and the original sits untouched at
+> `docs/design/brand/powerstick-logo-master.png`. Any future artwork in `#DBE836` gets the same
+> treatment — recolour the file, don't move the token.
 
 ### The one rule that matters
 
@@ -96,9 +98,12 @@ not apply. A logo is allowed its own geometry; nothing else on the site may borr
 ## Still to ask the client
 
 - Vector artwork (SVG/AI/EPS) for the wordmark. Everything here is rebuilt from a 2729px PNG.
-- **Which lime is canonical**, `#C7FF00` or the `#DBE836` the new artwork shipped in.
-- **Whether the registered mark covers "Powerstick"** — the artwork carries ®, and the site
-  prints it in the footer.
+- **Whether the registered mark covers "Powerstick"** — the artwork carries ®, the site prints
+  it in the footer, and the copy rename waits on this.
+- **The domain.** The site is served from a Powerstik address; the rename needs a decision about
+  whether that moves, and a 301 map if it does.
+- Why the new artwork came in `#DBE836` when the brochure lime is `#C7FF00` — not blocking
+  anything, but worth knowing whether a second swatch is in circulation.
 - Whether "better ideas" survives as a tagline anywhere off the logo.
 - Whether the floating WhatsApp button should keep the ink treatment or go back to WhatsApp's
   own green (`--color-whatsapp` is still defined; it is one class in
