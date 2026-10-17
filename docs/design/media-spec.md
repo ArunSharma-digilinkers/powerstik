@@ -133,7 +133,7 @@ are in `resources/media-inbox/`, git-ignored.
 | `home/hero.mp4` | `IMG_9026.MOV` (2160 × 3840, 23s) | 2.5–9.0s, 16:9 band from y 1312 |
 | `home/hero.webp` | the same clip | 4.0s |
 | `battery-labels/roll.webp` | the same clip | 12.0s |
-| `battery-labels/sheet.webp` | `2345a5e0….MOV` (1080 × 1920) | 28s |
+| `battery-labels/sheet.webp` | `2345a5e0….MOV` (1080 × 1920) | 28s, band from y 450, light unsharp |
 | `about/plant-labels.webp` | the same clip | 42s |
 | `about/team-quality.webp` | `2AC0896D….MOV` (1080 × 1920) | 24s |
 | `about/careers.webp` | `IMG_5874.HEIC` (4032 × 3024) | — |
@@ -148,6 +148,11 @@ Two things to know before cutting any more of these:
 - **Two of the three video sources carry a baked-in "Powerstik / packaging experts"
   wordmark** low in the frame, and it is not the wordmark this site uses. Every crop
   taken from them stops above it. Check for it in any new frame.
+- **A video frame wants a light unsharp mask**, applied after the crop. 1080p handheld
+  video is soft next to a photograph, and `sheet.webp` read as blurry on the page until
+  the softest strip of the frame was cropped away and the rest sharpened. Measure the
+  candidate bands (Laplacian variance at a common width) rather than eyeballing them —
+  the sharpest band of a frame is rarely the one the subject is centred in.
 - `about/design-india.webp` is the one file under its slot: 868px into a 566px well, so
   it is sharp at 1× and about three-quarters resolution on a retina screen. It is the
   largest version of that photograph that exists.
