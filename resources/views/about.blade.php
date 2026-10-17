@@ -29,7 +29,7 @@
     $teams = [
         ['Design studio', 'Packaging and label design, dielines, 3D mockups and artwork prep. Where every job starts.', 'team_design', 'Designers at their screens in the Powerstik studio'],
         ['Sales & coordination', 'One named coordinator per client, from enquiry through dispatch and reorder.', 'team_sales', 'The coordination desk'],
-        ['Production', 'Pressmen, flexo operators and the corrugation crew running three shifts.', 'team_production', 'Pressmen at the Heidelberg SM-74'],
+        ['Production', 'Pressmen, flexo operators and the corrugation crew running three shifts.', 'team_production', 'The corrugation crew feeding board through the cutter'],
         ['Quality & dispatch', 'Incoming inspection, in-process checks, PDI, packing and export documentation.', 'team_quality', 'Packing a finished lot for dispatch'],
     ];
 
@@ -329,7 +329,7 @@
                 </div>
                 <div class="aspect-[4/3] min-w-0 bg-[#161616]">
                     @if ($media['plant_corrugation'])
-                        <img src="{{ $media['plant_corrugation'] }}" alt="The corrugation line" loading="lazy" class="size-full object-cover">
+                        <img src="{{ $media['plant_corrugation'] }}" alt="Corrugated board stacked beside the cutting line" loading="lazy" class="size-full object-cover">
                     @endif
                 </div>
                 <div class="aspect-[4/3] min-w-0 bg-[#161616]">

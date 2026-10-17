@@ -145,6 +145,9 @@ are in `resources/media-inbox/`, git-ignored.
 | `machines/rhyguan-label-converter` | `IMG_7275.HEIC` | full frame |
 | `machines/flat-bed-die-cutter` | `IMG_7283.HEIC` | full frame |
 | `machines/canon-imagepress-v900` | `IMG_6964.HEIC` | full frame |
+| `machines/hpm-92-guillotine` | `IMG_7285.HEIC` | full frame |
+| `about/plant-corrugation.webp` | `IMG_6521.HEIC` | **rotated 90° CW first** |
+| `about/team-production.webp` | `IMG_6523.MOV` (1080 × 1920) | 2.0s |
 | `timeline/2019` | `IMG-20190104-WA0053.JPG` (1280 × 961) | the office the week it opened |
 | `about/careers.webp` | `IMG_5874.HEIC` (4032 × 3024) | — |
 | `about/design-india.webp` | `e49bf162….JPG` (868 × 1280) | — |
@@ -166,6 +169,10 @@ Two things to know before cutting any more of these:
   composition now rather than for the mark. The one place the marks are deliberately
   avoided is `2345a5e0….MOV`, whose first five seconds are the puja itself — a ceremony
   with garlands is a different picture from a mark painted on a machine.
+- **Some of the phone stills are stored sideways with no EXIF orientation tag**, so nothing
+  rotates them for you — `sips -g orientation` returns `<nil>` and the image opens on its side.
+  `IMG_6505`, `6513`, `6521` and `6570` are all 90° out and need rotating clockwise before
+  anything else. Check every new still before cropping it.
 - **A video frame wants a light unsharp mask**, applied after the crop. 1080p handheld
   video is soft next to a photograph, and `sheet.webp` read as blurry on the page until
   the softest strip of the frame was cropped away and the rest sharpened. Measure the
@@ -199,6 +206,12 @@ photograph matters as much as what it shows.
   labels printed to generic type codes (N40 MF, NS40Z MF). No client brand is legible.
 - **`about/plant-hall.webp`** runs a **Gold Star** web through the flexo line. Gold Star
   is a seeded client with `show_logo` on.
+- **`about/plant-corrugation.webp` and `about/team-production.webp`** are the corrugated
+  board cutter and the three men working it. Nothing branded is legible.
+- **`media-inbox/IMG_6570.HEIC` is the sample shelf and is not used.** It is a wall of other
+  companies' cartons — Pedigree, Park Avenue, PrintWeek, Peri Bakers among them — and only
+  Amaron on that shelf is a client with `show_logo` set. Showing the rest would name clients
+  the site has no permission to name.
 - **`about/careers.webp`** is about sixty identifiable staff at a cake-cutting outside
   the plant, April 2025. It is the client's own photograph of their own people, but it is
   the only image on the site that shows a crowd of faces — worth their nod.

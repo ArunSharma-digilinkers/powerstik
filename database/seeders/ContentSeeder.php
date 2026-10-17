@@ -61,6 +61,7 @@ class ContentSeeder extends Seeder
             ['Corrugation line', 'corrugation', null, null, 'Print, slot and die-cut in line: mono cartons through 3, 5, 7 and 9-ply, in-house.'],
             ['Rhyguan label converter', 'finishing', 'Rhyguan', null, 'Die-cutting and rewinding for roll labels, with the web on a screen while it runs.'],
             ['Flat-bed die-cutter', 'finishing', null, null, 'Shapes a printed label between an unwind and a rewind, for dies the roll press does not carry.'],
+            ['HPM 92 guillotine', 'finishing', 'HPM', '92', 'Trims the sheet square before it is printed and cuts the job down after it, to a programmed stack.'],
         ];
         Machine::where('name', 'Digital press')->whereNull('make')
             ->update(['name' => 'Canon imagePRESS V900', 'make' => 'Canon', 'model' => 'imagePRESS V900']);
