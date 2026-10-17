@@ -29,7 +29,7 @@ it is free up to 2400. Going under it is the only way to get a soft image.
 | Where | Field | Ratio | Min width | Recommended |
 |---|---|---|---|---|
 | Industries | Card photo | **4:3** | 880 | 1600 × 1200 |
-| Industries | Page hero photo | **16:7** | 2400 | 2400 × 1050 |
+| Industries | Page hero cutout | **~2:1, transparent PNG** | 1600 | 1980 × 994 |
 | Our work | Cover image | **3:2** | 800 | 1800 × 1200 |
 | Our work | Gallery | **4:3** | 800 | 1600 × 1200 |
 | Insights | Cover image | **3:2** | 800 | 1800 × 1200 |
@@ -46,9 +46,13 @@ Two notes on that table:
   home page, and the full-bleed hero on the case study itself, which is cropped to
   16:7. Compose so the subject survives losing the top and bottom — the hero crop
   is centred.
-- **An industry needs both photos.** The 4:3 card is the grid on `/industries`; the
-  16:7 hero is the band at the top of the sector page, and the band is hidden
-  entirely when it is empty, so a sector with only a card still looks finished.
+- **An industry's two images are not the same kind of picture.** The 4:3 card is a
+  photograph, and it fills the grid cell on `/industries` under `object-cover`. The
+  hero is a **cutout on transparency**, and it sits on the ink beside the headline at
+  the top of the sector page — a photograph with a white ground will read there as a
+  white rectangle floating on black. The hero column is hidden and the headline takes
+  the full width while the field is empty, so a sector with only a card still looks
+  finished.
 
 ### Client logos
 
@@ -110,8 +114,9 @@ The list is `AboutController::MEDIA`. All 1600px on the long edge.
 
 `database/seeders/media/` holds starter images that must reach production, attached
 by `ContentSeeder` **only where the field is empty**. Same ratios as the admin slots
-they fill: `industries/{slug}.jpg` (4:3), `industries/hero/{slug}.jpg` (16:7),
-`team/{name-slug}.jpg` (5:4), `clients/{name-slug}.png` (transparent).
+they fill: `industries/{slug}.jpg` (4:3), `industries/hero/{slug}.png` (~2:1 cutout,
+PNG so the transparency survives), `team/{name-slug}.jpg` (5:4),
+`clients/{name-slug}.png` (transparent).
 
 There is no `machines/` folder here yet — a machine photographed locally has to be
 re-uploaded in Admin → Machines on the server.

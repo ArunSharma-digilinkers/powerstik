@@ -16,17 +16,24 @@
     ]));
     $num = fn (string $section) => sprintf('%02d', array_search($section, $shown) + 1);
 
+    $intro = $industry->excerpt ?: 'Labels, cartons and the corrugated around them — designed, printed and dispatched from one floor in Haryana.';
+
     // Carries the sector through to the RFQ, where the industry select reads it
     $quoteUrl = url(config('site.quote_url')).'?industry='.rawurlencode($industry->name);
 @endphp
 
 <x-layouts.site :title="$industry->seo_title ?: $industry->name.' packaging'"
                 :description="$industry->seo_description ?: $industry->excerpt ?: 'Labels, cartons and corrugated packaging for '.strtolower($industry->name).', printed in-house in Haryana since '.Site::setting('since_year', '2002').'.'">
-    {{-- 1. Hero --}}
+    {{-- 1. Hero. The sector photograph is a cutout and sits in the hero beside the
+         copy; a sector without one keeps the headline and the intro side by side. --}}
     <section class="on-dark bg-ink text-white" aria-labelledby="industry-title">
-        <div class="site-container pt-14 pb-16 lg:pt-[88px] lg:pb-[84px]">
+        <div class="site-container pt-14 pb-16 lg:pt-[88px] lg:pb-[100px]">
             <x-site.breadcrumb :items="['Industries' => route('industries.index'), $industry->name => route('industries.show', $industry)]" />
-            <div class="grid gap-9 lg:grid-cols-[1.15fr_.85fr] lg:items-end lg:gap-20">
+            <div @class([
+                'grid gap-9',
+                'lg:min-h-[420px] lg:grid-cols-2 lg:items-center lg:gap-16' => $industry->hero_image,
+                'lg:grid-cols-[1.15fr_.85fr] lg:items-end lg:gap-20' => ! $industry->hero_image,
+            ])>
                 <div>
                     @if ($industry->note)
                         <p class="chip mb-[26px]">{{ $industry->note }}</p>
@@ -34,24 +41,22 @@
                     <h1 id="industry-title" class="text-[clamp(2.25rem,1rem+4.6vw,4.875rem)] leading-[.96] font-extrabold tracking-[-.04em] text-balance">
                         {{ $industry->name }} packaging.
                     </h1>
+                    @if ($industry->hero_image)
+                        <p class="mt-7 max-w-[46ch] text-[17px] leading-[1.55] text-on-dark sm:text-[19px]">{{ $intro }}</p>
+                    @endif
                 </div>
-                <p class="text-[17px] leading-[1.55] text-on-dark sm:text-[19px]">
-                    {{ $industry->excerpt ?: 'Labels, cartons and the corrugated around them — designed, printed and dispatched from one floor in Haryana.' }}
-                </p>
+                @if ($industry->hero_image)
+                    <img src="{{ ImageStore::url($industry->hero_image) }}" srcset="{{ ImageStore::srcset($industry->hero_image) }}"
+                         sizes="(min-width: 1024px) 604px, 100vw" alt="{{ $industry->name }} packaging printed by Powerstik"
+                         class="w-full object-contain lg:max-h-[420px]">
+                @else
+                    <p class="text-[17px] leading-[1.55] text-on-dark sm:text-[19px]">{{ $intro }}</p>
+                @endif
             </div>
         </div>
     </section>
 
-    {{-- 2. Hero photograph --}}
-    @if ($industry->hero_image)
-        <div class="bg-ink">
-            <img src="{{ ImageStore::url($industry->hero_image) }}" srcset="{{ ImageStore::srcset($industry->hero_image) }}"
-                 sizes="100vw" alt="{{ $industry->name }} packaging printed by Powerstik"
-                 class="aspect-[16/7] w-full object-cover">
-        </div>
-    @endif
-
-    {{-- 3. The constraint. The note is the one fact we hold for every sector. --}}
+    {{-- 2. The constraint. The note is the one fact we hold for every sector. --}}
     @if ($industry->note)
         <section class="border-b border-rule bg-paper-mid" aria-labelledby="constraint-title">
             <div class="site-container flex flex-col gap-6 py-12 sm:flex-row sm:items-center sm:justify-between sm:gap-12 lg:py-[68px]">
@@ -66,7 +71,7 @@
         </section>
     @endif
 
-    {{-- 4. Sector challenges (editor copy; hidden until written) --}}
+    {{-- 3. Sector challenges (editor copy; hidden until written) --}}
     @if (filled($industry->challenges))
         <section class="site-container pt-20 lg:pt-[108px]" aria-labelledby="challenges-title">
             <x-site.section-header :num="$num('challenges')" kicker="What makes it hard" title="The failure we design against." id="challenges-title" />
@@ -76,7 +81,7 @@
         </section>
     @endif
 
-    {{-- 5. What we supply --}}
+    {{-- 4. What we supply --}}
     <section class="site-container pt-20 lg:pt-[108px]" aria-labelledby="supply-title">
         <x-site.section-header :num="$num('supply')" kicker="What we supply" title="Everything that goes round it." id="supply-title">
             Artwork, plates, print and box never change hands between vendors, so the colour on the label and the colour on the carton are the same colour.
@@ -111,7 +116,7 @@
         </dl>
     </section>
 
-    {{-- 6. Compliance notes (editor copy; hidden until written) --}}
+    {{-- 5. Compliance notes (editor copy; hidden until written) --}}
     @if (filled($industry->compliance_notes))
         <section class="site-container pt-20 lg:pt-[108px]" aria-labelledby="compliance-title">
             <x-site.section-header :num="$num('compliance')" kicker="Compliance" title="What the rulebook says." id="compliance-title" />
@@ -121,7 +126,7 @@
         </section>
     @endif
 
-    {{-- 7. Work in this sector --}}
+    {{-- 6. Work in this sector --}}
     @if ($cases->isNotEmpty())
         <section class="site-container pt-20 lg:pt-[108px]" aria-labelledby="work-title">
             <x-site.section-header :num="$num('work')" kicker="In this sector" title="What it looked like." id="work-title">
@@ -148,7 +153,7 @@
         </section>
     @endif
 
-    {{-- 8. The other sectors --}}
+    {{-- 7. The other sectors --}}
     @if ($others->isNotEmpty())
         <section class="site-container pt-20 pb-20 lg:pt-[108px] lg:pb-[104px]" aria-labelledby="others-title">
             <x-site.section-header :num="$num('others')" kicker="Other sectors" title="Different rule, same floor." id="others-title" />

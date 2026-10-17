@@ -189,13 +189,18 @@ class ContentSeeder extends Seeder
         }
     }
 
+    /**
+     * Industry photography. A card is a photograph and ships as JPG; a hero is a
+     * cutout that sits on the ink, so it ships as PNG and keeps its transparency.
+     */
     private function attachIndustryCards(): void
     {
         foreach (['' => 'card_image', 'hero/' => 'hero_image'] as $dir => $field) {
-            foreach (glob(database_path("seeders/media/industries/{$dir}*.jpg")) as $file) {
+            foreach (glob(database_path("seeders/media/industries/{$dir}*.{jpg,png}"), GLOB_BRACE) as $file) {
                 $industry = Industry::where('slug', pathinfo($file, PATHINFO_FILENAME))->whereNull($field)->first();
+                $mime = pathinfo($file, PATHINFO_EXTENSION) === 'png' ? 'image/png' : 'image/jpeg';
 
-                $industry?->update([$field => ImageStore::store(new UploadedFile($file, basename($file), 'image/jpeg', null, true), 'industries')]);
+                $industry?->update([$field => ImageStore::store(new UploadedFile($file, basename($file), $mime, null, true), 'industries')]);
             }
         }
     }

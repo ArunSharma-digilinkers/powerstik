@@ -26,7 +26,7 @@ class IndustryController extends ResourceController
             Field::textarea('excerpt', 'Short intro')->rules('max:500')->help('Shown on the industry card and as the page intro.'),
             Field::text('note', 'Card note')->rules('max:120')->help('The technical constraint shown on the home page card, e.g. "Acid & heat resistant".'),
             Field::image('card_image', 'Card photo', 'industries')->help('4:3, at least 1600px wide.'),
-            Field::image('hero_image', 'Page hero photo', 'industries')->help('16:7 letterbox, 2400px wide. The band is hidden while this is empty.'),
+            Field::image('hero_image', 'Page hero cutout', 'industries')->help('Transparent PNG, about 2:1, at least 1600px wide. Sits on the dark hero beside the headline; the hero runs full width while this is empty.'),
             Field::richtext('challenges', 'Sector challenges'),
             Field::richtext('what_we_supply', 'What Powerstik supplies'),
             Field::richtext('compliance_notes', 'Compliance notes')->help('e.g. pharma legibility, food-safe inks'),
