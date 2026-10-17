@@ -116,10 +116,14 @@ The list is `AboutController::MEDIA`. All 1600px on the long edge.
 by `ContentSeeder` **only where the field is empty**. Same ratios as the admin slots
 they fill: `industries/{slug}.jpg` (4:3), `industries/hero/{slug}.png` (~2:1 cutout,
 PNG so the transparency survives), `team/{name-slug}.jpg` (5:4),
-`clients/{name-slug}.png` (transparent).
+`clients/{name-slug}.png` (transparent) and `machines/{name-slug}.jpg` (4:3).
 
-There is no `machines/` folder here yet — a machine photographed locally has to be
-re-uploaded in Admin → Machines on the server.
+`machines/` is matched on the slug of the machine's **name**, so a record called
+"Flat-bed die-cutter" takes `flat-bed-die-cutter.jpg`. Rename the machine and the
+photograph stops attaching — the row keeps the image it already has, and a new row gets
+nothing. The SM-74 and CD-102 photographs are **not** here: they were uploaded in the
+admin before this route existed, so they live in `public/uploads` and exist locally
+only.
 
 ## Where the plant photography comes from
 
@@ -136,7 +140,10 @@ are in `resources/media-inbox/`, git-ignored.
 | `battery-labels/sheet.webp` | `2345a5e0….MOV` (1080 × 1920) | 28s, band from y 450, light unsharp |
 | `about/plant-labels.webp` | the same clip | 42s |
 | `about/team-quality.webp` | `2AC0896D….MOV` (1080 × 1920) | 24s |
-| `about/plant-hall.webp` | `IMG_7278.HEIC` (4032 × 3024) | left half only — see below |
+| `about/plant-hall.webp` | `IMG_7278.HEIC` (4032 × 3024) | left half, for composition |
+| `machines/mark-andy-e5` | `IMG_7277.HEIC` | full frame |
+| `machines/rhyguan-label-converter` | `IMG_7275.HEIC` | full frame |
+| `machines/flat-bed-die-cutter` | `IMG_7283.HEIC` | full frame |
 | `about/careers.webp` | `IMG_5874.HEIC` (4032 × 3024) | — |
 | `about/design-india.webp` | `e49bf162….JPG` (868 × 1280) | — |
 | `home/founders.webp` | `FullSizeRender.HEIC` (1991 × 3370) | — |
@@ -149,15 +156,14 @@ Two things to know before cutting any more of these:
 - **Two of the three video sources carry a baked-in "Powerstik / packaging experts"
   wordmark** low in the frame, and it is not the wordmark this site uses. Every crop
   taken from them stops above it. Check for it in any new frame.
-- **Every machine in the flexo hall carries a painted red swastika**, usually at eye
-  level on the main housing — the marks from the machine puja. `IMG_7275`–`7284` is a
-  sharp ten-shot set of that hall and nine of the ten show at least one. The site sells
-  into eleven countries, so nothing goes out with one in frame. `plant-hall.webp` is the
-  **left half** of `IMG_7278` for exactly this reason: the two marks on that press sit at
-  x ≈ 2067 and x ≈ 3506 of 4032, so the crop stops at x = 2000. The same applies to
-  `2345a5e0….MOV`, whose first five seconds are the puja itself. Before shipping any
-  frame from the plant, scan it for saturated red (R > 120, R − G > 55, R − B > 50) and
-  look at what the clusters are.
+- **The machines carry a painted red swastika**, usually at eye level on the main
+  housing — the marks from the machine puja. **Arun decided on 2026-10-17 that they stay
+  visible**, so the three machine photographs show them and nothing is retouched. Don't
+  quietly crop or paint one out in a later pass; if the decision is ever revisited it is
+  his to revisit. `about/plant-hall.webp` is still the left half of its frame, but for
+  composition now rather than for the mark. The one place the marks are deliberately
+  avoided is `2345a5e0….MOV`, whose first five seconds are the puja itself — a ceremony
+  with garlands is a different picture from a mark painted on a machine.
 - **A video frame wants a light unsharp mask**, applied after the crop. 1080p handheld
   video is soft next to a photograph, and `sheet.webp` read as blurry on the page until
   the softest strip of the frame was cropped away and the rest sharpened. Measure the

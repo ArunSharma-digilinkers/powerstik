@@ -58,6 +58,8 @@ class ContentSeeder extends Seeder
             ['Digital press', 'digital', null, null, 'Short runs, samples and variable data, without a plate or a minimum.'],
             ['Mark Andy E5', 'flexo', 'Mark Andy', 'E5', 'Roll label press — applicator-ready reels, core size and winding direction to spec.'],
             ['Corrugation line', 'corrugation', null, null, 'Print, slot and die-cut in line: mono cartons through 3, 5, 7 and 9-ply, in-house.'],
+            ['Rhyguan label converter', 'finishing', 'Rhyguan', null, 'Die-cutting and rewinding for roll labels, with the web on a screen while it runs.'],
+            ['Flat-bed die-cutter', 'finishing', null, null, 'Shapes a printed label between an unwind and a rewind, for dies the roll press does not carry.'],
         ];
         foreach ($machines as $i => $m) {
             $machine = Machine::firstOrCreate(['name' => $m[0]], [
@@ -71,6 +73,7 @@ class ContentSeeder extends Seeder
                 $machine->update(['description' => $m[4]]);
             }
         }
+        $this->attachMachinePhotos();
 
         // name, ISO, lat, lng (approximate centroid, used for the export map), card note.
         // The list is the brochure's "Powering Brands Worldwide" map plus Bangladesh and the
@@ -177,6 +180,28 @@ class ContentSeeder extends Seeder
                 ->first(fn (TeamMember $m) => Str::slug($m->name) === pathinfo($file, PATHINFO_FILENAME));
 
             $member?->update(['photo' => ImageStore::store(new UploadedFile($file, basename($file), 'image/jpeg', null, true), 'team')]);
+        }
+    }
+
+    /**
+     * Machine photographs (seeders/media/machines/{name-slug}.jpg), only where no photo
+     * is set yet. Uploads made in Admin → Machines land in public/uploads, which is
+     * git-ignored, so this is the only route a machine photograph has to the server.
+     */
+    private function attachMachinePhotos(): void
+    {
+        $machines = Machine::all()->keyBy(fn (Machine $machine) => Str::slug($machine->name));
+
+        foreach (glob(database_path('seeders/media/machines/*.jpg')) as $file) {
+            $machine = $machines->get(pathinfo($file, PATHINFO_FILENAME));
+
+            if (! $machine || filled($machine->image)) {
+                continue;
+            }
+
+            $machine->update([
+                'image' => ImageStore::store(new UploadedFile($file, basename($file), 'image/jpeg', null, true), 'machines'),
+            ]);
         }
     }
 

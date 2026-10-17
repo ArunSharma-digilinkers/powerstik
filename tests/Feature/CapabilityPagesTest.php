@@ -24,8 +24,10 @@ class CapabilityPagesTest extends TestCase
             ->assertSee('Label printing')
             ->assertSee('Corrugated packaging')
             ->assertSee('Print technologies')
-            ->assertSee('5 presses and lines')   // counted from the machines table
-            ->assertSee('4 processes')
+            // Counted from the machines table, so adding a machine moves the number
+            // rather than breaking the page. Assert the count the seeder actually made.
+            ->assertSee(Machine::count().' presses and lines')
+            ->assertSee(Machine::distinct()->count('category').' processes')
             ->assertSee('Mark Andy E5');         // the flexo group's names
     }
 
@@ -105,7 +107,7 @@ class CapabilityPagesTest extends TestCase
 
         $descriptions = Machine::ordered()->pluck('description', 'name');
 
-        $this->assertCount(5, $descriptions->unique(), 'every press should describe itself, not the first one');
+        $this->assertCount($descriptions->count(), $descriptions->unique(), 'every press should describe itself, not the first one');
         $this->assertSame('Large format, for long runs and heavy stock.', $descriptions['Heidelberg Speedmaster CD-102']);
 
         // The brochure credits Canon but the only press picture we hold is a Xerox,
