@@ -317,7 +317,7 @@
                 {{-- Row-spanning item: sized by its span; min-w-0 keeps it from inflating the 2fr track --}}
                 <div class="relative aspect-video min-w-0 bg-[#161616] lg:row-span-2 lg:aspect-auto lg:h-full">
                     @if ($media['plant_hall'])
-                        <img src="{{ $media['plant_hall'] }}" alt="The main press hall" loading="lazy" class="size-full object-cover">
+                        <img src="{{ $media['plant_hall'] }}" alt="The flexo line running down the press hall" loading="lazy" class="size-full object-cover">
                     @endif
                     @if ($walkthrough)
                         <a href="{{ $walkthrough }}" target="_blank" rel="noopener" data-track="walkthrough"

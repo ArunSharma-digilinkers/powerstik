@@ -136,6 +136,7 @@ are in `resources/media-inbox/`, git-ignored.
 | `battery-labels/sheet.webp` | `2345a5e0….MOV` (1080 × 1920) | 28s, band from y 450, light unsharp |
 | `about/plant-labels.webp` | the same clip | 42s |
 | `about/team-quality.webp` | `2AC0896D….MOV` (1080 × 1920) | 24s |
+| `about/plant-hall.webp` | `IMG_7278.HEIC` (4032 × 3024) | left half only — see below |
 | `about/careers.webp` | `IMG_5874.HEIC` (4032 × 3024) | — |
 | `about/design-india.webp` | `e49bf162….JPG` (868 × 1280) | — |
 | `home/founders.webp` | `FullSizeRender.HEIC` (1991 × 3370) | — |
@@ -148,6 +149,15 @@ Two things to know before cutting any more of these:
 - **Two of the three video sources carry a baked-in "Powerstik / packaging experts"
   wordmark** low in the frame, and it is not the wordmark this site uses. Every crop
   taken from them stops above it. Check for it in any new frame.
+- **Every machine in the flexo hall carries a painted red swastika**, usually at eye
+  level on the main housing — the marks from the machine puja. `IMG_7275`–`7284` is a
+  sharp ten-shot set of that hall and nine of the ten show at least one. The site sells
+  into eleven countries, so nothing goes out with one in frame. `plant-hall.webp` is the
+  **left half** of `IMG_7278` for exactly this reason: the two marks on that press sit at
+  x ≈ 2067 and x ≈ 3506 of 4032, so the crop stops at x = 2000. The same applies to
+  `2345a5e0….MOV`, whose first five seconds are the puja itself. Before shipping any
+  frame from the plant, scan it for saturated red (R > 120, R − G > 55, R − B > 50) and
+  look at what the clusters are.
 - **A video frame wants a light unsharp mask**, applied after the crop. 1080p handheld
   video is soft next to a photograph, and `sheet.webp` read as blurry on the page until
   the softest strip of the frame was cropped away and the rest sharpened. Measure the
@@ -179,6 +189,8 @@ photograph matters as much as what it shows.
   web and reel. Amaron is a seeded client with `show_logo` on.
 - **`battery-labels/sheet.webp` and `about/plant-labels.webp`** are battery warranty
   labels printed to generic type codes (N40 MF, NS40Z MF). No client brand is legible.
+- **`about/plant-hall.webp`** runs a **Gold Star** web through the flexo line. Gold Star
+  is a seeded client with `show_logo` on.
 - **`about/careers.webp`** is about sixty identifiable staff at a cake-cutting outside
   the plant, April 2025. It is the client's own photograph of their own people, but it is
   the only image on the site that shows a crowd of faces — worth their nod.
