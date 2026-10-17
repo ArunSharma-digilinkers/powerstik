@@ -75,17 +75,22 @@ The page's one piece of real interactivity, and the brief's explicit ask ("inter
 
 **Content — the seven milestones.** `active` index defaults to `0` (2002).
 
-| Year | Kicker | Title | Body | Meta |
-| --- | --- | --- | --- | --- |
-| 2002 | The beginning | A design table and borrowed press time | Amit and Sumit Sharma set up Design India as a small design consultancy in Haryana — logos, labels and packaging artwork for local manufacturers. Every job was printed by somebody else, and every job came back slightly wrong. | Design India founded · Haryana |
-| 2006 | First press | We stopped sending work out | The first offset press arrived because a battery client needed a run we could not trust a vendor with. Powerstik became the name on the invoice for anything printed in-house. | Powerstik® brand established |
-| 2010 | Heidelberg SM-74 | Five colours, and a real carton business | The Heidelberg SM-74 turned occasional print into a production line. Mono cartons for pharma and cosmetics followed within the year. | Heidelberg SM-74 installed |
-| 2014 | Corrugation | From mono carton to 9-ply | A full corrugation line meant we could ship the box as well as the label on it. QSR and appliance clients arrived because one supplier could now do both. | Corrugation line commissioned |
-| 2017 | The paper | Battery label paper, developed in-house | Existing label stock kept lifting under electrolyte splash and bonnet heat. We developed our own acid- and heat-resistant paper for lead-acid production lines — still our flagship product. | Proprietary substrate developed |
-| 2019 | Roll labels | Mark Andy E5 and automatic applicators | Flexo roll labels let us supply clients running automatic applicators — defined core size and winding direction, reel after reel. | Mark Andy E5 flexo installed |
-| 2022 | Going out | First export consignment | A battery manufacturer in Nepal placed the first export order. Seven more countries followed. Export documentation is now handled by the same coordinators who handle domestic jobs. | Exports begin · now 8 countries |
+| Year | Kicker | Title | Meta |
+| --- | --- | --- | --- |
+| 2002 | The beginning | Design India opens in Haryana | Design India founded · Haryana |
+| 2007 | First press | Printing comes in-house | — |
+| 2019 | New office | The team moves into a new office | — |
+| 2021 | Export | The first consignment leaves India | Exports begin · now 11 countries |
+| 2022 | Roll labels | Roll labels join the sheet line | — |
+| 2024 | New plant | A new plant at Rai | Rai · Haryana |
+| 2025 | Corrugation | Corrugation comes in-house | 3, 5, 7 and 9-ply |
 
-> ⚠️ **Placeholder years and events.** The brief confirms only **2002 (founding)**, the machine list, and that exports now reach eight countries. The **intermediate dates (2006, 2010, 2014, 2017, 2019, 2022) and the narrative attached to each are reconstructed, not verified.** Get the real install years and the real first-export year and country from Amit before launch — this section's whole credibility rests on the dates being true.
+> **These seven are the client's own, given on 2026-10-17**, and they replaced the
+> reconstruction this handoff shipped with — the old years (2006 / 2010 / 2014 / 2017)
+> were invented and are gone. **The `body` paragraph under each one is still unwritten.**
+> The panel prints the kicker, the title and the meta line and simply leaves the paragraph
+> out while it is empty, so the section is honest rather than padded. Write them in
+> Admin → About us → Our story timeline; don't put invented copy back in a seeder.
 
 **Production notes**
 - Each milestone should have **its own archive image**; the prototype reuses a single slot (`ps-ab-story`) because there is no photography yet. Add an `image` field to the milestone model and swap on selection with a short cross-fade (~200ms).
@@ -319,7 +324,7 @@ Not designed. Page-specific guidance on top of the home page README's notes:
 
 ## Open items specific to this page
 
-1. **Real milestone dates and events** for 2006 / 2010 / 2014 / 2017 / 2019 / 2022 — currently reconstructed. Highest priority on this page.
+1. ~~Real milestone dates and events~~ — **answered 2026-10-17**: the seven above. What is still missing is a paragraph and an archive photograph for each year.
 2. **Founder bios and quotes** — written, not spoken. Need Amit's and Sumit's approval.
 3. **Certifications held** — dashed placeholder box must be replaced or removed.
 4. **Real QC test list** — the nine tests are a reconstruction.

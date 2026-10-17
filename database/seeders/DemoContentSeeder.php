@@ -12,14 +12,12 @@ use App\Models\Setting;
 use App\Models\TeamMember;
 use App\Models\Technology;
 use App\Models\Testimonial;
-use App\Models\TimelineEvent;
 use Illuminate\Database\Seeder;
 
 /**
  * ILLUSTRATIVE content from the home and About page designs: case studies, testimonials,
- * the founders' note, the story milestones after 2002, leadership bios and quotes, open
- * roles, sustainability claims and the industry page copy. None of it is real, so it must
- * never reach production.
+ * the founders' note, leadership bios and quotes, open roles, sustainability claims and
+ * the industry page copy. None of it is real, so it must never reach production.
  * Local only: php artisan db:seed --class=DemoContentSeeder
  */
 class DemoContentSeeder extends Seeder
@@ -102,24 +100,8 @@ class DemoContentSeeder extends Seeder
 
     private function aboutPage(): void
     {
-        // Only the 2002 founding is confirmed by the brief; the later years and stories are the design's reconstruction.
-        $milestones = [
-            [2002, 'The beginning', 'A design table and borrowed press time', 'Amit and Sumit Sharma set up Design India as a small design consultancy in Haryana — logos, labels and packaging artwork for local manufacturers. Every job was printed by somebody else, and every job came back slightly wrong.', 'Design India founded · Haryana'],
-            [2006, 'First press', 'We stopped sending work out', 'The first offset press arrived because a battery client needed a run we could not trust a vendor with. Powerstik became the name on the invoice for anything printed in-house.', 'Powerstik® brand established'],
-            [2010, 'Heidelberg SM-74', 'Five colours, and a real carton business', 'The Heidelberg SM-74 turned occasional print into a production line. Mono cartons for pharma and cosmetics followed within the year.', 'Heidelberg SM-74 installed'],
-            [2014, 'Corrugation', 'From mono carton to 9-ply', 'A full corrugation line meant we could ship the box as well as the label on it. QSR and appliance clients arrived because one supplier could now do both.', 'Corrugation line commissioned'],
-            [2017, 'The paper', 'Battery label paper, developed in-house', 'Existing label stock kept lifting under electrolyte splash and bonnet heat. We developed our own acid- and heat-resistant paper for lead-acid production lines — still our flagship product.', 'Proprietary substrate developed'],
-            [2019, 'Roll labels', 'Mark Andy E5 and automatic applicators', 'Flexo roll labels let us supply clients running automatic applicators — defined core size and winding direction, reel after reel.', 'Mark Andy E5 flexo installed'],
-            [2022, 'Going out', 'First export consignment', 'A battery manufacturer in Nepal placed the first export order. Seven more countries followed. Export documentation is now handled by the same coordinators who handle domestic jobs.', 'Exports begin · now 11 countries'],
-        ];
-        foreach ($milestones as [$year, $kicker, $title, $body, $meta]) {
-            $event = TimelineEvent::where('year', $year)->first();
-            if (! $event) {
-                TimelineEvent::create(compact('year', 'kicker', 'title', 'body', 'meta'));
-            } elseif ($event->body === 'Powerstik began as a small design studio.') {
-                $event->update(compact('kicker', 'title', 'body', 'meta')); // replace the brief's one-line stub
-            }
-        }
+        // The story milestones used to be invented here. The client gave us the real
+        // seven on 2026-10-17, so they ship from ContentSeeder now — nothing to add.
 
         // The bios are the client's own, so they ship from ContentSeeder. These pull-quotes are
         // still the design's invention — written in their likely voice, never approved by them.

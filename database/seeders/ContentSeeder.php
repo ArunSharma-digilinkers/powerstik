@@ -100,9 +100,28 @@ class ContentSeeder extends Seeder
         }
         $this->attachClientLogos();
 
-        TimelineEvent::firstOrCreate(['year' => 2002, 'title' => 'Founded as a design setup'], [
-            'kicker' => 'The beginning', 'body' => 'Powerstik began as a small design studio.', 'meta' => 'Design India founded · Haryana',
-        ]);
+        // The story milestones, as the client gave them on 2026-10-17. Matched on the
+        // year alone, so a correction lands on the row that is already there instead of
+        // adding a second tab for the same year. The paragraph under each one is still
+        // unwritten: `body` is filled in Admin → Our story timeline, not here.
+        $milestones = [
+            [2002, 'The beginning', 'Design India opens in Haryana', 'Design India founded · Haryana'],
+            [2007, 'First press', 'Printing comes in-house', null],
+            [2019, 'New office', 'The team moves into a new office', null],
+            [2021, 'Export', 'The first consignment leaves India', 'Exports begin · now 11 countries'],
+            [2022, 'Roll labels', 'Roll labels join the sheet line', null],
+            [2024, 'New plant', 'A new plant at Rai', 'Rai · Haryana'],
+            [2025, 'Corrugation', 'Corrugation comes in-house', '3, 5, 7 and 9-ply'],
+        ];
+        foreach ($milestones as [$year, $kicker, $title, $meta]) {
+            $event = TimelineEvent::firstOrCreate(['year' => $year], compact('kicker', 'title', 'meta'));
+
+            // Rows seeded before the client confirmed the dates carry the brief's one-line
+            // stub. Replace that, but never a paragraph an editor has since written.
+            if ($event->body === 'Powerstik began as a small design studio.') {
+                $event->update(compact('kicker', 'title', 'meta') + ['body' => null]);
+            }
+        }
 
         // Roles and bios are the client's own words, from the brochure's "Two minds / One spark!".
         $leaders = [

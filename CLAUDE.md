@@ -97,7 +97,7 @@ version throughout — a known trade-off of the chosen treatment.
 - Spam control is the honeypot plus `throttle:8,1`. **A filled honeypot files the lead as `spam` rather than dropping it**, because the admin inbox hides spam by default and a real person is never silently lost. Turnstile (PLAN.md §2) is not built.
 - `CaptureUtm` middleware parks `utm_*` and `gclid` in the session on any GET; `LeadIntake` writes them onto the lead.
 - **No admin alert goes out until Settings → Contact has `lead_recipients` or `email` filled in.** The lead is still stored and the enquirer still gets their receipt.
-- **`DemoContentSeeder`** loads the designs' illustrative case studies, testimonials, founders' quote, the story milestones after 2002, leadership bios and quotes, open roles and sustainability claims for local work only. It refuses to run in production. Never present that copy as real.
+- **`DemoContentSeeder`** loads the designs' illustrative case studies, testimonials, founders' quote, leadership bios and quotes, open roles and sustainability claims for local work only. It refuses to run in production. Never present that copy as real.
 
 ## Admin panel architecture
 
