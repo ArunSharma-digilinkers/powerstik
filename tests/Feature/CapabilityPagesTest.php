@@ -110,10 +110,14 @@ class CapabilityPagesTest extends TestCase
         $this->assertCount($descriptions->count(), $descriptions->unique(), 'every press should describe itself, not the first one');
         $this->assertSame('Large format, for long runs and heavy stock.', $descriptions['Heidelberg Speedmaster CD-102']);
 
-        // The brochure credits Canon but the only press picture we hold is a Xerox,
-        // so the digital press stays unbranded until the client settles it.
-        $this->assertTrue($descriptions->has('Digital press'));
-        $this->assertNull(Machine::where('name', 'Digital press')->value('make'));
+        // The digital press was unbranded for a year because the only picture we held
+        // was a Xerox. Arun photographed it on 2026-10-17: a Canon imagePRESS V900.
+        $this->assertTrue($descriptions->has('Canon imagePRESS V900'));
+        $this->assertSame('Canon', Machine::where('name', 'Canon imagePRESS V900')->value('make'));
+
+        // Seeding twice must not leave the old row beside the renamed one.
+        $this->seed(ContentSeeder::class);
+        $this->assertSame(0, Machine::where('name', 'Digital press')->count());
     }
 
     public function test_an_admin_uploaded_photo_is_shown(): void

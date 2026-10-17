@@ -49,18 +49,22 @@ class ContentSeeder extends Seeder
         }
 
         // The descriptions are the home page's machine-park teaser copy, already live.
-        // The digital press carries no make: the brochure credits Canon, but the only
-        // picture we have is a Xerox Color 175, so the brand stays off until the client
-        // settles it (docs/design/brand.md). The home card is unbranded for the same reason.
+        // The digital press shipped with no make for a year: the brochure credited Canon
+        // but the only picture we held was a Xerox Color 175. Arun photographed the press
+        // on 2026-10-17 and it is a Canon imagePRESS V900, M/C no. 17, so the row is
+        // renamed in place rather than added beside the old one.
         $machines = [
             ['Heidelberg Speedmaster SM-74', 'offset', 'Heidelberg', 'SM-74', 'Five-colour, for cartons and sheet labels.'],
             ['Heidelberg Speedmaster CD-102', 'offset', 'Heidelberg', 'CD-102', 'Large format, for long runs and heavy stock.'],
-            ['Digital press', 'digital', null, null, 'Short runs, samples and variable data, without a plate or a minimum.'],
+            ['Canon imagePRESS V900', 'digital', 'Canon', 'imagePRESS V900', 'Short runs, samples and variable data, without a plate or a minimum.'],
             ['Mark Andy E5', 'flexo', 'Mark Andy', 'E5', 'Roll label press — applicator-ready reels, core size and winding direction to spec.'],
             ['Corrugation line', 'corrugation', null, null, 'Print, slot and die-cut in line: mono cartons through 3, 5, 7 and 9-ply, in-house.'],
             ['Rhyguan label converter', 'finishing', 'Rhyguan', null, 'Die-cutting and rewinding for roll labels, with the web on a screen while it runs.'],
             ['Flat-bed die-cutter', 'finishing', null, null, 'Shapes a printed label between an unwind and a rewind, for dies the roll press does not carry.'],
         ];
+        Machine::where('name', 'Digital press')->whereNull('make')
+            ->update(['name' => 'Canon imagePRESS V900', 'make' => 'Canon', 'model' => 'imagePRESS V900']);
+
         foreach ($machines as $i => $m) {
             $machine = Machine::firstOrCreate(['name' => $m[0]], [
                 'category' => $m[1], 'make' => $m[2], 'model' => $m[3], 'sort' => $i + 1,
@@ -125,6 +129,7 @@ class ContentSeeder extends Seeder
                 $event->update(compact('kicker', 'title', 'meta') + ['body' => null]);
             }
         }
+        $this->attachTimelinePhotos();
 
         // Roles and bios are the client's own words, from the brochure's "Two minds / One spark!".
         $leaders = [
@@ -180,6 +185,16 @@ class ContentSeeder extends Seeder
                 ->first(fn (TeamMember $m) => Str::slug($m->name) === pathinfo($file, PATHINFO_FILENAME));
 
             $member?->update(['photo' => ImageStore::store(new UploadedFile($file, basename($file), 'image/jpeg', null, true), 'team')]);
+        }
+    }
+
+    /** Archive photographs for the story timeline (seeders/media/timeline/{year}.jpg). */
+    private function attachTimelinePhotos(): void
+    {
+        foreach (glob(database_path('seeders/media/timeline/*.jpg')) as $file) {
+            $event = TimelineEvent::where('year', (int) pathinfo($file, PATHINFO_FILENAME))->whereNull('image')->first();
+
+            $event?->update(['image' => ImageStore::store(new UploadedFile($file, basename($file), 'image/jpeg', null, true), 'timeline')]);
         }
     }
 

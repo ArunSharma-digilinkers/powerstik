@@ -132,8 +132,12 @@ Three sets came from the client and are used as-is, beyond a crop and a mild lev
 1. The map carries nine pins — the brochure's nine markets. The site lists eleven, because
    Bangladesh and the USA were confirmed separately. Ask Design India for a map with those two
    added rather than editing their artwork here.
-2. `media-inbox/canon.png` is a **Xerox Color 175** press, while the brochure credits Canon,
-   Japan. The card is labelled "Digital press" with no brand until that is resolved.
+2. ~~`media-inbox/canon.png` is a **Xerox Color 175**~~ — **settled 2026-10-17.** Arun
+   photographed the press: it is a **Canon imagePRESS V900**, M/C no. 17, which is what
+   the brochure said all along. The machine record and the home card both carry the name
+   now. `media-inbox/canon.png` is still a Xerox and is not the press, so the cutout cut
+   from it was deleted rather than relabelled — the home card shows its tinted well until
+   somebody supplies Canon artwork.
 
 The press pictures are manufacturer renders, not photographs of the Sonipat floor. The brochure
 uses them the same way, so they are fine here — but real plant photography would be better, and

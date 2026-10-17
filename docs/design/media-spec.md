@@ -116,12 +116,12 @@ The list is `AboutController::MEDIA`. All 1600px on the long edge.
 by `ContentSeeder` **only where the field is empty**. Same ratios as the admin slots
 they fill: `industries/{slug}.jpg` (4:3), `industries/hero/{slug}.png` (~2:1 cutout,
 PNG so the transparency survives), `team/{name-slug}.jpg` (5:4),
-`clients/{name-slug}.png` (transparent) and `machines/{name-slug}.jpg` (4:3).
+`clients/{name-slug}.png` (transparent) `machines/{name-slug}.jpg` (4:3) and `timeline/{year}.jpg` (4:3).
 
 `machines/` is matched on the slug of the machine's **name**, so a record called
 "Flat-bed die-cutter" takes `flat-bed-die-cutter.jpg`. Rename the machine and the
 photograph stops attaching — the row keeps the image it already has, and a new row gets
-nothing. The SM-74 and CD-102 photographs are **not** here: they were uploaded in the
+nothing. `timeline/` is matched on the year instead, which cannot drift. The SM-74 and CD-102 photographs are **not** here: they were uploaded in the
 admin before this route existed, so they live in `public/uploads` and exist locally
 only.
 
@@ -144,6 +144,8 @@ are in `resources/media-inbox/`, git-ignored.
 | `machines/mark-andy-e5` | `IMG_7277.HEIC` | full frame |
 | `machines/rhyguan-label-converter` | `IMG_7275.HEIC` | full frame |
 | `machines/flat-bed-die-cutter` | `IMG_7283.HEIC` | full frame |
+| `machines/canon-imagepress-v900` | `IMG_6964.HEIC` | full frame |
+| `timeline/2019` | `IMG-20190104-WA0053.JPG` (1280 × 961) | the office the week it opened |
 | `about/careers.webp` | `IMG_5874.HEIC` (4032 × 3024) | — |
 | `about/design-india.webp` | `e49bf162….JPG` (868 × 1280) | — |
 | `home/founders.webp` | `FullSizeRender.HEIC` (1991 × 3370) | — |

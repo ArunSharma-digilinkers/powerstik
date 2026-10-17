@@ -28,7 +28,7 @@
     $machines = [
         ['Offset · Germany', 'Two Heidelberg Speedmasters', 'The five-colour SM-74 for cartons and sheet labels, and the large-format CD-102 for long runs and heavy stock.', 'heidelberg'],
         ['Flexo · USA', 'Mark Andy E5', 'Roll label press — applicator-ready reels, core size and winding direction to spec.', 'mark-andy'],
-        ['Digital', 'Digital press', 'Short runs, samples and variable data, without a plate or a minimum.', 'digital'],
+        ['Digital · Japan', 'Canon imagePRESS V900', 'Short runs, samples and variable data, without a plate or a minimum.', 'digital'],
         ['Corrugation', 'Semi-automatic carton printer', 'Print, slot and die-cut in line: mono cartons through 3, 5, 7 and 9-ply, in-house.', 'corrugation'],
     ];
 @endphp
