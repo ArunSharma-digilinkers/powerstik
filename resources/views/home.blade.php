@@ -350,7 +350,7 @@
             <div class="site-container grid items-center gap-12 py-20 lg:grid-cols-[.9fr_1.1fr] lg:gap-[72px] lg:py-24">
                 <div class="aspect-[4/3] bg-rule">
                     @if ($media['founders'])
-                        <img src="{{ $media['founders'] }}" alt="{{ $founders->pluck('name')->join(' and ') }} on the Powerstik shop floor" loading="lazy" class="size-full object-cover">
+                        <img src="{{ $media['founders'] }}" alt="{{ $founders->pluck('name')->join(' and ') }}, the founders of Design India" loading="lazy" class="size-full object-cover">
                     @endif
                 </div>
                 <div>

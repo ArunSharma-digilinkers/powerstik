@@ -30,7 +30,7 @@
         ['Design studio', 'Packaging and label design, dielines, 3D mockups and artwork prep. Where every job starts.', 'team_design', 'Designers at their screens in the Powerstik studio'],
         ['Sales & coordination', 'One named coordinator per client, from enquiry through dispatch and reorder.', 'team_sales', 'The coordination desk'],
         ['Production', 'Pressmen, flexo operators and the corrugation crew running three shifts.', 'team_production', 'Pressmen at the Heidelberg SM-74'],
-        ['Quality & dispatch', 'Incoming inspection, in-process checks, PDI, packing and export documentation.', 'team_quality', 'The QC bench with retained samples'],
+        ['Quality & dispatch', 'Incoming inspection, in-process checks, PDI, packing and export documentation.', 'team_quality', 'Packing a finished lot for dispatch'],
     ];
 
     $stages = [
@@ -228,7 +228,7 @@
             </div>
             <div class="aspect-square bg-[#161616]">
                 @if ($media['design_india'])
-                    <img src="{{ $media['design_india'] }}" alt="The design studio and the press hall side by side" loading="lazy" class="size-full object-cover">
+                    <img src="{{ $media['design_india'] }}" alt="{{ $leaders->pluck('name')->join(' and ') ?: 'The founders of Design India' }}" loading="lazy" class="size-full object-cover">
                 @endif
             </div>
         </div>
@@ -334,7 +334,7 @@
                 </div>
                 <div class="aspect-[4/3] min-w-0 bg-[#161616]">
                     @if ($media['plant_labels'])
-                        <img src="{{ $media['plant_labels'] }}" alt="Label finishing and rewinding" loading="lazy" class="size-full object-cover">
+                        <img src="{{ $media['plant_labels'] }}" alt="Printed label sheets stacked in the press delivery" loading="lazy" class="size-full object-cover">
                     @endif
                 </div>
             </div>
@@ -411,7 +411,7 @@
                 <div>
                     <div class="aspect-square bg-rule max-lg:aspect-[4/3]">
                         @if ($media['careers'])
-                            <img src="{{ $media['careers'] }}" alt="The Powerstik team at work" loading="lazy" class="size-full object-cover">
+                            <img src="{{ $media['careers'] }}" alt="The Powerstik team outside the plant" loading="lazy" class="size-full object-cover">
                         @endif
                     </div>
                     <a href="{{ $apply('Portfolio') }}" data-track="portfolio"

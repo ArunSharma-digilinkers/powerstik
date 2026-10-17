@@ -76,12 +76,12 @@ release. Export WebP at quality ~82.
 
 | File | Ratio | Size | Notes |
 |---|---|---|---|
-| `hero.mp4` | 16:9 | 1920 × 1080 | The hero. Silent, short loop, well under 5 MB. **Placeholder in place** |
-| `hero.webp` | 16:9 | 1920 × 1080 | Poster for the video, and what shows without it. **Placeholder in place** |
+| `hero.mp4` | 16:9 | 1920 × 1080 | The hero. Silent, 6.5s loop, 2.4 MB. Cut from `IMG_9026.MOV` |
+| `hero.webp` | 16:9 | 1920 × 1080 | Poster for the video, and what shows without it. The same clip at 1.5s |
 | `battery.webp` | 4:5 | 1200 × 1500 | Cutout on white. Trim tight — see below |
 | `acid-test.webp` | 3:2 | 1400 × 933 | The test bench. Shared with `/battery-labels` |
 | `export-map.webp` | 16:9 | 1400 × 787 | Redrawn map. Currently shows 9 of the 11 markets |
-| `founders.webp` | 4:3 | 1600 × 1200 | The founders on the floor |
+| `founders.webp` | 4:3 | 1600 × 1200 | **A studio portrait**, not the floor — a floor shot would still be better |
 
 ### `public/media/machines/`
 
@@ -93,9 +93,9 @@ PNG converted to WebP, wide and short — **1200 × 420, about 2.9:1**. Drawn 92
 
 | File | Ratio | Size | Notes |
 |---|---|---|---|
-| `sheet.webp` | 16:10 | 1200 × 750 | **Placeholder in place** |
-| `roll.webp` | 16:10 | 1200 × 750 | **Placeholder in place** |
-| `packaging.webp` | 4:3 | 1200 × 900 | |
+| `sheet.webp` | 16:10 | 1200 × 750 | Battery labels on the Heidelberg. Shipped at **1080 × 675** — the frame is only 1080 wide |
+| `roll.webp` | 16:10 | 1200 × 750 | A finished reel on the Mark Andy, from the same clip as the hero |
+| `packaging.webp` | 4:3 | 1200 × 900 | **Still missing** |
 
 ### `public/media/about/`
 
@@ -121,34 +121,36 @@ PNG so the transparency survives), `team/{name-slug}.jpg` (5:4),
 There is no `machines/` folder here yet — a machine photographed locally has to be
 re-uploaded in Admin → Machines on the server.
 
-## Placeholders, and what replaces them
+## Where the plant photography comes from
 
-Four files on the list above are **cut from two phone videos** Arun shot on the floor
-on 2026-10-17, kept in `resources/media-inbox/plant-video/` (git-ignored):
+Everything on the floor was cut out of phone video and stills Arun supplied, with
+AVFoundation (there is no ffmpeg or ImageMagick on this machine — `docs/` has no
+toolchain to install, the Swift one-offs live in the session scratchpad). The sources
+are in `resources/media-inbox/`, git-ignored.
 
-| Slot | Source |
-|---|---|
-| `home/hero.mp4` | `flexo-noor-batt-rolls.mp4`, 1.0–7.0s, video track only |
-| `home/hero.webp` | the same clip at 1.0s |
-| `battery-labels/sheet.webp` | `offset-aeromax-sheets.mp4` at 16.0s |
-| `battery-labels/roll.webp` | `flexo-noor-batt-rolls.mp4` at 3.0s |
+| Slot | Source | Taken at |
+|---|---|---|
+| `home/hero.mp4` | `IMG_9026.MOV` (2160 × 3840, 23s) | 2.5–9.0s, 16:9 band from y 1312 |
+| `home/hero.webp` | the same clip | 4.0s |
+| `battery-labels/roll.webp` | the same clip | 12.0s |
+| `battery-labels/sheet.webp` | `2345a5e0….MOV` (1080 × 1920) | 28s |
+| `about/plant-labels.webp` | the same clip | 42s |
+| `about/team-quality.webp` | `2AC0896D….MOV` (1080 × 1920) | 24s |
+| `about/careers.webp` | `IMG_5874.HEIC` (4032 × 3024) | — |
+| `about/design-india.webp` | `e49bf162….JPG` (868 × 1280) | — |
+| `home/founders.webp` | `FullSizeRender.HEIC` (1991 × 3370) | — |
 
-**They are 576px on the long edge, because WhatsApp re-encoded the clips to
-576 × 1024.** That is under every size in the tables above, so treat them as holding
-the slot, not as finished media. Two consequences:
+Two things to know before cutting any more of these:
 
-- The hero is **portrait**, not 16:9. Under `object-cover` that is close to native on
-  a phone (a 390 × 743 hero needs a 0.73× scale) and a 3× upscale on a desktop, where
-  only the middle quarter of the frame shows. The gradient over it hides a good deal
-  of that. The 16:10 stills draw at about 1:1 on a 1× display and half-resolution on
-  a retina one.
-- The hero shows one named client's artwork at size. Noor Batt carries `show_logo`,
-  so that is permitted, but it is a placeholder decision rather than a design one.
-
-To replace them: get the **originals off the phone** — AirDrop or Drive, never
-WhatsApp, which is what cost the resolution — then re-cut to the sizes in the tables.
-Nothing in the code has to change; these are all optional files behind an `is_file()`
-check, so a better file at the same path is the whole job.
+- **The first batch came through WhatsApp and was re-encoded to 576 × 1024**, which is
+  under every size in the tables above. The replacements came off the phone directly.
+  **Never accept plant media over WhatsApp.** Get the original by AirDrop or Drive.
+- **Two of the three video sources carry a baked-in "Powerstik / packaging experts"
+  wordmark** low in the frame, and it is not the wordmark this site uses. Every crop
+  taken from them stops above it. Check for it in any new frame.
+- `about/design-india.webp` is the one file under its slot: 868px into a 566px well, so
+  it is sharp at 1× and about three-quarters resolution on a retina screen. It is the
+  largest version of that photograph that exists.
 
 ## Two traps
 
@@ -162,3 +164,21 @@ row `auto`, so a percentage `max-height` on the image has nothing to resolve aga
 and the image overflows at full size. Every such well carries `grid-rows-1` for this
 reason — don't remove it. Where the image is photography rather than a cutout, use an
 `aspect-[…] overflow-hidden` band with `object-cover` instead, as the cards do.
+
+## Who and what is in these pictures
+
+The site names a client only where `show_logo` is set, so what is legible in a
+photograph matters as much as what it shows.
+
+- **`home/hero.mp4`, `home/hero.webp` and `battery-labels/roll.webp`** run an **Amaron**
+  web and reel. Amaron is a seeded client with `show_logo` on.
+- **`battery-labels/sheet.webp` and `about/plant-labels.webp`** are battery warranty
+  labels printed to generic type codes (N40 MF, NS40Z MF). No client brand is legible.
+- **`about/careers.webp`** is about sixty identifiable staff at a cake-cutting outside
+  the plant, April 2025. It is the client's own photograph of their own people, but it is
+  the only image on the site that shows a crowd of faces — worth their nod.
+- **`home/founders.webp` and `about/design-india.webp`** are Amit and Sumit Sharma.
+  A third man appears beside them in the client's own 2026 social artwork
+  (`media-inbox/8C1DD085….PNG`) — **he is their father.** He is not in `team_members`,
+  the site does not name him, and that artwork is not used anywhere: it carries baked-in
+  type, a tagline the site does not use and a green that is not the brand lime.

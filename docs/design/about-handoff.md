@@ -302,23 +302,29 @@ Not designed. Page-specific guidance on top of the home page README's notes:
 
 ## Assets needed
 
-13 image positions, all empty. **Real factory and team photography — no stock** (brief §8).
+13 image positions, **four of them now filled** (see below). **Real factory and team photography — no stock** (brief §8).
 
 | Slot id | What belongs there | Aspect |
 | --- | --- | --- |
 | `ps-ab-story` | Archive photo per milestone — early studio, each press installation, first export consignment (**7 images needed, one per year**) | 4:3 |
 | `ps-ab-amit` | Portrait — Amit Sharma on the shop floor | 5:4 |
 | `ps-ab-sumit` | Portrait — Sumit Sharma in the design room | 5:4 |
-| `ps-ab-di` | Studio and plant side by side — designers at screens, press behind | 1:1 |
+| `ps-ab-di` | ~~Studio and plant side by side~~ → **filled**: Amit and Sumit on black, which sits on the section's own ink ground | 1:1 |
 | `ps-ab-team1` | Designers at screens | 4:3 |
 | `ps-ab-team2` | Coordination desk | 4:3 |
 | `ps-ab-team3` | Pressmen at the SM-74 | 4:3 |
-| `ps-ab-team4` | QC bench with retained samples | 4:3 |
+| `ps-ab-team4` | ~~QC bench with retained samples~~ → **filled**: packing a finished lot for dispatch | 4:3 |
 | `ps-ab-plant1` | 360° plant walkthrough — main press hall (**video or 360° asset**) | fills 2-row span |
 | `ps-ab-plant2` | Corrugation line | 4:3 |
-| `ps-ab-plant3` | Label finishing and rewinding | 4:3 |
+| `ps-ab-plant3` | ~~Label finishing and rewinding~~ → **filled**: printed label sheets stacked in the press delivery | 4:3 |
 | `ps-ab-sustain` | Baled waste board / recycled substrate stock | 4:5 |
-| `ps-ab-careers` | Team candid — design room or shop floor | 1:1 |
+| `ps-ab-careers` | **filled**: the whole team outside the plant, April 2025 | 1:1 |
+
+**The two founder portraits are the pair of studio shots**, not floor portraits: `ps-ab-amit`
+and `ps-ab-sumit` are still served by the seeded single portraits, while the two-up studio
+shots went to `ps-ab-di` and the home founders' note. The man standing with them in the
+client's 2026 social artwork is **their father**; he is not in `team_members` and the site
+does not name him. See the last section of `media-spec.md`.
 
 **Archive photography is a real risk.** Photos from 2002–2014 may not exist at usable quality. If they don't, the timeline still works with the plant-today photography, or with scans of early artwork, invoices and machine delivery paperwork — which would arguably be more characterful. Ask before the shoot so it can be planned.
 
