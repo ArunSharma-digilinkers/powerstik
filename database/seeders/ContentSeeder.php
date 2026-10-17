@@ -110,24 +110,40 @@ class ContentSeeder extends Seeder
 
         // The story milestones, as the client gave them on 2026-10-17. Matched on the
         // year alone, so a correction lands on the row that is already there instead of
-        // adding a second tab for the same year. The paragraph under each one is still
-        // unwritten: `body` is filled in Admin → Our story timeline, not here.
+        // adding a second tab for the same year.
+        //
+        // The paragraphs are ours, not the client's, and they were written on 2026-10-17
+        // at Arun's request. Every one of them is built only out of facts the site already
+        // states elsewhere — the brochure's founding, the export count, the roll-label
+        // specs, the ply range, the Rai address in the footer. Nothing here invents an
+        // event, a client or a machine. If you add a milestone, hold that line, and let
+        // an editor's own copy win: a paragraph is only ever filled when it is empty.
         $milestones = [
-            [2002, 'The beginning', 'Design India opens in Haryana', 'Design India founded · Haryana'],
-            [2007, 'First press', 'Printing comes in-house', null],
-            [2019, 'New office', 'The team moves into a new office', null],
-            [2021, 'Export', 'The first consignment leaves India', 'Exports begin · now 11 countries'],
-            [2022, 'Roll labels', 'Roll labels join the sheet line', null],
-            [2024, 'New plant', 'A new plant at Rai', 'Rai · Haryana'],
-            [2025, 'Corrugation', 'Corrugation comes in-house', '3, 5, 7 and 9-ply'],
+            [2002, 'The beginning', 'Design India opens in Haryana', 'Design India founded · Haryana',
+                'Amit and Sumit Sharma opened Design India as a design consultancy in Haryana. Logos, labels and packaging artwork were drawn here and printed by somebody else.'],
+            [2007, 'First press', 'Printing comes in-house', null,
+                'The first press arrived and the work stopped going out to be printed. Design and print have been under one roof ever since.'],
+            [2019, 'New office', 'The team moves into a new office', null,
+                'The studio moved into a room of its own — open desks, glass and daylight. The photograph is from the week it opened.'],
+            [2021, 'Export', 'The first consignment leaves India', 'Exports begin · now 11 countries',
+                'The first consignment left India. The work reaches eleven markets today, and the bench that packs a job files its export papers too.'],
+            [2022, 'Roll labels', 'Roll labels join the sheet line', null,
+                'Roll labels joined the sheet line, so a client running an automatic applicator could be supplied without changing vendor. Core size and winding direction to spec, reel after reel.'],
+            [2024, 'New plant', 'A new plant at Rai', 'Rai · Haryana',
+                'The floor moved to Rai Industrial Estate in Sonipat. Design, print, finishing and dispatch sit on one site.'],
+            [2025, 'Corrugation', 'Corrugation comes in-house', '3, 5, 7 and 9-ply',
+                'Corrugation came in-house and the box stopped being bought in. Mono cartons through 3, 5, 7 and 9-ply, printed, slotted and die-cut on the same floor as the label that goes on them.'],
         ];
-        foreach ($milestones as [$year, $kicker, $title, $meta]) {
-            $event = TimelineEvent::firstOrCreate(['year' => $year], compact('kicker', 'title', 'meta'));
+        foreach ($milestones as [$year, $kicker, $title, $meta, $body]) {
+            $event = TimelineEvent::firstOrCreate(['year' => $year], compact('kicker', 'title', 'meta', 'body'));
 
-            // Rows seeded before the client confirmed the dates carry the brief's one-line
-            // stub. Replace that, but never a paragraph an editor has since written.
+            // The brief shipped a one-line stub for 2002 before any of this was confirmed;
+            // replace that outright. Otherwise only fill a paragraph that is still empty —
+            // an editor's own words are never overwritten.
             if ($event->body === 'Powerstik began as a small design studio.') {
-                $event->update(compact('kicker', 'title', 'meta') + ['body' => null]);
+                $event->update(compact('kicker', 'title', 'meta', 'body'));
+            } elseif (blank($event->body)) {
+                $event->update(compact('body'));
             }
         }
         $this->attachTimelinePhotos();

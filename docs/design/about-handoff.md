@@ -87,10 +87,15 @@ The page's one piece of real interactivity, and the brief's explicit ask ("inter
 
 > **These seven are the client's own, given on 2026-10-17**, and they replaced the
 > reconstruction this handoff shipped with — the old years (2006 / 2010 / 2014 / 2017)
-> were invented and are gone. **The `body` paragraph under each one is still unwritten.**
-> The panel prints the kicker, the title and the meta line and simply leaves the paragraph
-> out while it is empty, so the section is honest rather than padded. Write them in
-> Admin → About us → Our story timeline; don't put invented copy back in a seeder.
+> were invented and are gone.
+>
+> **The paragraph under each one is ours, written on 2026-10-17 at Arun's request**, and
+> every sentence in it is built out of a fact the site already states somewhere else: the
+> brochure's founding, the export count, the roll-label specs, the ply range, the Rai
+> address in the footer. None of it invents an event, a client or a machine — that is what
+> went wrong with the first version of this timeline. Hold that line if you add a year, and
+> leave an editor's own copy alone: `ContentSeeder` only ever fills a paragraph that is empty.
+> Five of the seven now carry an archive photograph as well; 2021 and 2024 do not.
 
 **Production notes**
 - Each milestone should have **its own archive image**; the prototype reuses a single slot (`ps-ab-story`) because there is no photography yet. Add an `image` field to the milestone model and swap on selection with a short cross-fade (~200ms).
