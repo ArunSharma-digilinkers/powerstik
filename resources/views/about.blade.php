@@ -63,7 +63,7 @@
         : url('/contact');
 @endphp
 
-<x-layouts.site title="About us" description="Powerstik is the print and packaging arm that grew out of a design studio. Since {{ $since }}: one plant in Haryana, ~{{ $people }} people and the same two founders.">
+<x-layouts.site title="About us" description="Powerstik is the print and packaging arm that grew out of a design studio founded in {{ $since }}. One plant in Haryana, ~{{ $people }} people and the same two founders.">
     {{-- 1. Page hero --}}
     <section class="on-dark bg-ink text-white" aria-labelledby="about-title">
         <div class="site-container pt-14 pb-16 lg:pt-[88px] lg:pb-[84px]">
@@ -72,7 +72,7 @@
                 <div>
                     <p class="mb-[26px] flex items-center gap-3.5 font-mono text-[12px] tracking-[.14em] text-brand-500 uppercase">
                         <span class="h-0.5 w-[46px] shrink-0 bg-brand-500" aria-hidden="true"></span>
-                        Since {{ $since }} · Haryana, India
+                        Est. {{ $since }} · Haryana, India
                     </p>
                     <h1 id="about-title" class="text-[clamp(2.25rem,1rem+4.6vw,4.875rem)] leading-[.96] font-extrabold tracking-[-.04em]">
                         It started at a<br> design table.

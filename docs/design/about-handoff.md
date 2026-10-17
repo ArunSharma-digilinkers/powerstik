@@ -77,7 +77,7 @@ The page's one piece of real interactivity, and the brief's explicit ask ("inter
 
 | Year | Kicker | Title | Meta |
 | --- | --- | --- | --- |
-| 2002 | The beginning | Design India opens in Haryana | Design India founded · Haryana |
+| 2002 | The beginning | Design India opens in Delhi | Design India founded · Delhi |
 | 2007 | First press | Printing comes in-house | — |
 | 2019 | New office | The team moves into a new office | — |
 | 2021 | Export | The first consignment leaves India | Exports begin · now 11 countries |
@@ -96,6 +96,12 @@ The page's one piece of real interactivity, and the brief's explicit ask ("inter
 > went wrong with the first version of this timeline. Hold that line if you add a year, and
 > leave an editor's own copy alone: `ContentSeeder` only ever fills a paragraph that is empty.
 > Five of the seven now carry an archive photograph as well; 2021 and 2024 do not.
+>
+> **Design India started in Delhi, not Haryana** (Arun, 2026-10-17). The company was in
+> Delhi for twenty-two years and only moved to Rai Industrial Estate, Sonipat with the 2024
+> plant. Everywhere else on the site that says Haryana is present tense and still correct —
+> the plant *is* in Haryana — but don't write "since 2002" and "Haryana" as one phrase. The
+> About hero says `Est. 2002 · Haryana, India` for exactly that reason.
 
 **Production notes**
 - Each milestone should have **its own archive image**; the prototype reuses a single slot (`ps-ab-story`) because there is no photography yet. Add an `image` field to the milestone model and swap on selection with a short cross-fade (~200ms).

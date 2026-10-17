@@ -119,18 +119,18 @@ class ContentSeeder extends Seeder
         // event, a client or a machine. If you add a milestone, hold that line, and let
         // an editor's own copy win: a paragraph is only ever filled when it is empty.
         $milestones = [
-            [2002, 'The beginning', 'Design India opens in Haryana', 'Design India founded · Haryana',
-                'Amit and Sumit Sharma opened Design India as a design consultancy in Haryana. Logos, labels and packaging artwork were drawn here and printed by somebody else.'],
+            [2002, 'The beginning', 'Design India opens in Delhi', 'Design India founded · Delhi',
+                'Amit and Sumit Sharma opened Design India as a design consultancy in Delhi. Logos, labels and packaging artwork were drawn here and printed by somebody else.'],
             [2007, 'First press', 'Printing comes in-house', null,
                 'The first press arrived and the work stopped going out to be printed. Design and print have been under one roof ever since.'],
             [2019, 'New office', 'The team moves into a new office', null,
-                'The studio moved into a room of its own — open desks, glass and daylight. The photograph is from the week it opened.'],
+                'The studio moved into a room of its own in Delhi — open desks, glass and daylight. The photograph is from the week it opened.'],
             [2021, 'Export', 'The first consignment leaves India', 'Exports begin · now 11 countries',
                 'The first consignment left India. The work reaches eleven markets today, and the bench that packs a job files its export papers too.'],
             [2022, 'Roll labels', 'Roll labels join the sheet line', null,
                 'Roll labels joined the sheet line, so a client running an automatic applicator could be supplied without changing vendor. Core size and winding direction to spec, reel after reel.'],
             [2024, 'New plant', 'A new plant at Rai', 'Rai · Haryana',
-                'The floor moved to Rai Industrial Estate in Sonipat. Design, print, finishing and dispatch sit on one site.'],
+                'After twenty-two years in Delhi, the floor moved to Rai Industrial Estate in Sonipat. Design, print, finishing and dispatch now sit on one site.'],
             [2025, 'Corrugation', 'Corrugation comes in-house', '3, 5, 7 and 9-ply',
                 'Corrugation came in-house and the box stopped being bought in. Mono cartons through 3, 5, 7 and 9-ply, printed, slotted and die-cut on the same floor as the label that goes on them.'],
         ];
@@ -146,6 +146,24 @@ class ContentSeeder extends Seeder
                 $event->update(compact('body'));
             }
         }
+        // Arun corrected the founding on 2026-10-17: Design India started in **Delhi** and
+        // the company stayed there until the move to Rai in 2024. Rows seeded before that
+        // say Haryana, and the loop above will not touch them because their paragraph is no
+        // longer empty. Rewrite the superseded wording, and only that wording, so an
+        // editor's own copy is still safe. Drop this block once the server has run it.
+        $bodies = collect($milestones)->keyBy(0)->map(fn (array $m) => $m[4]);
+
+        TimelineEvent::where('year', 2002)->where('title', 'Design India opens in Haryana')
+            ->update(['title' => 'Design India opens in Delhi', 'meta' => 'Design India founded · Delhi']);
+
+        foreach ([
+            2002 => 'Amit and Sumit Sharma opened Design India as a design consultancy in Haryana. Logos, labels and packaging artwork were drawn here and printed by somebody else.',
+            2019 => 'The studio moved into a room of its own — open desks, glass and daylight. The photograph is from the week it opened.',
+            2024 => 'The floor moved to Rai Industrial Estate in Sonipat. Design, print, finishing and dispatch sit on one site.',
+        ] as $year => $superseded) {
+            TimelineEvent::where('year', $year)->where('body', $superseded)->update(['body' => $bodies[$year]]);
+        }
+
         $this->attachTimelinePhotos();
 
         // Roles and bios are the client's own words, from the brochure's "Two minds / One spark!".
