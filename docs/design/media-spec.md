@@ -148,7 +148,12 @@ are in `resources/media-inbox/`, git-ignored.
 | `machines/hpm-92-guillotine` | `IMG_7285.HEIC` | full frame |
 | `about/plant-corrugation.webp` | `IMG_6521.HEIC` | **rotated 90° CW first** |
 | `about/team-production.webp` | `IMG_6523.MOV` (1080 × 1920) | 2.0s |
+| `timeline/2002` | `62543DB5….MOV` (1080 × 1920) | 8.5s — **1080px, under the slot** |
+| `timeline/2007` | the SM-74 photo already in `public/uploads` | 1280 × 960, at the minimum |
 | `timeline/2019` | `IMG-20190104-WA0053.JPG` (1280 × 961) | the office the week it opened |
+| `timeline/2022` | `IMG_7277.HEIC` | full frame |
+| `timeline/2025` | `IMG_6521.HEIC` | rotated, then the top band |
+| `about/team-design.webp` | `62543DB5….MOV` | 2.5s |
 | `about/careers.webp` | `IMG_5874.HEIC` (4032 × 3024) | — |
 | `about/design-india.webp` | `e49bf162….JPG` (868 × 1280) | — |
 | `home/founders.webp` | `FullSizeRender.HEIC` (1991 × 3370) | — |
@@ -208,6 +213,17 @@ photograph matters as much as what it shows.
   is a seeded client with `show_logo` on.
 - **`about/plant-corrugation.webp` and `about/team-production.webp`** are the corrugated
   board cutter and the three men working it. Nothing branded is legible.
+- **The design-room clip shows a third party's artwork.** `about/team-design.webp` and the
+  2002 milestone are both frames of a monitor running **Fruit Rush** bottle visuals, and Fruit
+  Rush is not in the clients table. Arun allowed it on 2026-10-17 as a stopgap — "for time
+  being" — so it is a known exception to the `show_logo` rule, not an oversight. Both crops
+  sit back far enough to take in the desk and the room rather than filling the frame with the
+  screen, but the brand is still legible at the timeline's size. Replace it the moment there
+  is a photograph of designers at work.
+- **The timeline carries today's machines, not archive photographs.** 2007 shows the SM-74 as
+  it stands now, 2022 the Mark Andy, 2025 the corrugated cutter. None of them is a picture of
+  the machine as installed in that year, and no caption claims otherwise — the handoff always
+  named plant-today photography as the fallback if the archive turned out not to exist.
 - **`media-inbox/IMG_6570.HEIC` is the sample shelf and is not used.** It is a wall of other
   companies' cartons — Pedigree, Park Avenue, PrintWeek, Peri Bakers among them — and only
   Amaron on that shelf is a client with `show_logo` set. Showing the rest would name clients

@@ -27,7 +27,7 @@
     // Fixed copy from the About design. Milestones, leaders, roles and the
     // certification / sustainability lists come from the database.
     $teams = [
-        ['Design studio', 'Packaging and label design, dielines, 3D mockups and artwork prep. Where every job starts.', 'team_design', 'Designers at their screens in the Powerstik studio'],
+        ['Design studio', 'Packaging and label design, dielines, 3D mockups and artwork prep. Where every job starts.', 'team_design', 'A workstation in the Powerstik design studio'],
         ['Sales & coordination', 'One named coordinator per client, from enquiry through dispatch and reorder.', 'team_sales', 'The coordination desk'],
         ['Production', 'Pressmen, flexo operators and the corrugation crew running three shifts.', 'team_production', 'The corrugation crew feeding board through the cutter'],
         ['Quality & dispatch', 'Incoming inspection, in-process checks, PDI, packing and export documentation.', 'team_quality', 'Packing a finished lot for dispatch'],
