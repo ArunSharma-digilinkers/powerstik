@@ -26,7 +26,7 @@
         class="sticky top-0 z-40 border-b border-rule bg-paper/94 backdrop-blur-[8px]">
     <div class="site-container-wide flex h-[72px] items-center justify-between gap-10 min-[1100px]:h-[84px]">
         <a href="{{ url('/') }}" class="shrink-0" aria-label="Powerstik home">
-            <img src="{{ asset('images/brand/logo.png') }}" alt="Powerstik" width="960" height="217" class="h-7 w-auto min-[1100px]:h-9">
+            <img src="{{ asset('images/brand/logo.png') }}" alt="Powerstick" width="960" height="184" class="h-7 w-auto min-[1100px]:h-9">
         </a>
 
         <nav aria-label="Main" class="hidden min-[1100px]:block">

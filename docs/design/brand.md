@@ -1,8 +1,15 @@
 # Powerstik brand — lime and ink
 
 Source of truth: the client brochure (`docs/design/brand/brochure-1..4.jpg`, full PDF in
-`resources/media-inbox/brochure.pdf`) and the supplied wordmark
-(`docs/design/brand/powerstik-logo-master.png`, 1288 × 267, transparent).
+`resources/media-inbox/brochure.pdf`) and the supplied wordmark —
+**`docs/design/brand/powerstick-logo-master.png`, 2729 × 522, transparent**, which arrived
+on 2026-10-17 and replaced `powerstik-logo-master.png`.
+
+> ⚠️ **The brand is being renamed: Powerstik → Powerstick.** The new wordmark is on the
+> site; **the copy has not been changed yet** — around 115 occurrences across views, seeders,
+> config, mail and docs still read "Powerstik", so the footer currently sets the new name in
+> the logo and the old one in the sentence beneath it. Don't fix that piecemeal: it is one
+> pass, and it needs decisions about the domain, the ® and the registered name first.
 
 This replaces the red scheme (`#E31E24`) that the home page design handoff used. Nothing of the
 red brand survives; if you find a red that is not a validation error, it is a leftover.
@@ -11,13 +18,19 @@ red brand survives; if you find a red that is not a validation error, it is a le
 
 | Role | Value | Where |
 |---|---|---|
-| Brand lime | `#C7FF00` | the "stik" in the wordmark; every fill, block, chip and rule |
-| Ink | `#221F20` | the "power" in the wordmark; body type, dark grounds, primary buttons |
+| Brand lime | `#C7FF00` | the block behind "Power"; every fill, block, chip and rule |
+| Ink | `#221F20` | the type in the wordmark; body type, dark grounds, primary buttons |
 | Ink deep | `#141213` | the second dark ground, for stacked dark sections |
 | Paper | `#FFFFFF` | the brochure ground. Pure white, not the old cream |
 
 The brochure prints the lime as `#D4FD00`; that is the CMYK conversion of the same colour, so
-screen work uses the wordmark's `#C7FF00`.
+screen work uses `#C7FF00`.
+
+> ⚠️ **The new wordmark was supplied in `#DBE836`, not `#C7FF00`** — a duller, yellower green.
+> Beside a `#C7FF00` button it reads as a mistake, so the installed artwork is **recoloured to
+> `#C7FF00`** and the original sits untouched at `docs/design/brand/powerstick-logo-master.png`.
+> If `#DBE836` is the new brand lime then the token changes and the whole site follows, which is
+> a different job. Ask before assuming either way.
 
 ### The one rule that matters
 
@@ -66,17 +79,26 @@ marker-pen highlight (`group-hover:bg-brand-500`), links swap a lime underline f
 
 Generated from the master by `docs/design/brand/README-assets.md`:
 
-- `public/images/brand/logo.png` — 960 × 217, ink "power" + lime "stik", for light grounds
-- `public/images/brand/logo-white.png` — the knockout: white "power" + lime "stik", for ink grounds
-- `public/images/brand/mark.png` — the "p" in ink on a lime tile, 512px
+- `public/images/brand/logo.png` — 960 × 184, ink "Power" on a lime block + ink "stick"
+- `public/images/brand/logo-white.png` — the knockout for ink grounds. **Only the type outside
+  the lime block turns white.** "Power" sits on lime and stays ink; white on lime measures about
+  1.2:1 and would vanish
+- `public/images/brand/mark.png` — the "P" in ink on a lime tile, 512px
 - `public/favicon.ico`, `favicon-32.png`, `apple-touch-icon.png` — the same tile
 
-The new wordmark carries **no tagline**. "better ideas" was part of the old artwork and is gone;
-`<meta name="theme-color">` is the ink.
+The wordmark carries **no tagline**. "better ideas" belonged to the old artwork; the client's
+2026 social posts use "where trust meets perfection", which is not on this logo and is not on the
+site. `<meta name="theme-color">` is the ink.
+
+**The lime block has rounded ends**, which is the one place the brand's square-corner rule does
+not apply. A logo is allowed its own geometry; nothing else on the site may borrow the radius.
 
 ## Still to ask the client
 
-- Vector artwork (SVG/AI/EPS) for the wordmark. Everything here is rebuilt from a 1288px PNG.
+- Vector artwork (SVG/AI/EPS) for the wordmark. Everything here is rebuilt from a 2729px PNG.
+- **Which lime is canonical**, `#C7FF00` or the `#DBE836` the new artwork shipped in.
+- **Whether the registered mark covers "Powerstick"** — the artwork carries ®, and the site
+  prints it in the footer.
 - Whether "better ideas" survives as a tagline anywhere off the logo.
 - Whether the floating WhatsApp button should keep the ink treatment or go back to WhatsApp's
   own green (`--color-whatsapp` is still defined; it is one class in
