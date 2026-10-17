@@ -72,8 +72,8 @@ release. Export WebP at quality ~82.
 
 | File | Ratio | Size | Notes |
 |---|---|---|---|
-| `hero.mp4` | 16:9 | 1920 × 1080 | The hero. Silent, short loop, well under 5 MB |
-| `hero.webp` | 16:9 | 1920 × 1080 | Poster for the video, and what shows without it |
+| `hero.mp4` | 16:9 | 1920 × 1080 | The hero. Silent, short loop, well under 5 MB. **Placeholder in place** |
+| `hero.webp` | 16:9 | 1920 × 1080 | Poster for the video, and what shows without it. **Placeholder in place** |
 | `battery.webp` | 4:5 | 1200 × 1500 | Cutout on white. Trim tight — see below |
 | `acid-test.webp` | 3:2 | 1400 × 933 | The test bench. Shared with `/battery-labels` |
 | `export-map.webp` | 16:9 | 1400 × 787 | Redrawn map. Currently shows 9 of the 11 markets |
@@ -87,11 +87,11 @@ PNG converted to WebP, wide and short — **1200 × 420, about 2.9:1**. Drawn 92
 
 ### `public/media/battery-labels/`
 
-| File | Ratio | Size |
-|---|---|---|
-| `sheet.webp` | 16:10 | 1200 × 750 |
-| `roll.webp` | 16:10 | 1200 × 750 |
-| `packaging.webp` | 4:3 | 1200 × 900 |
+| File | Ratio | Size | Notes |
+|---|---|---|---|
+| `sheet.webp` | 16:10 | 1200 × 750 | **Placeholder in place** |
+| `roll.webp` | 16:10 | 1200 × 750 | **Placeholder in place** |
+| `packaging.webp` | 4:3 | 1200 × 900 | |
 
 ### `public/media/about/`
 
@@ -115,6 +115,35 @@ they fill: `industries/{slug}.jpg` (4:3), `industries/hero/{slug}.jpg` (16:7),
 
 There is no `machines/` folder here yet — a machine photographed locally has to be
 re-uploaded in Admin → Machines on the server.
+
+## Placeholders, and what replaces them
+
+Four files on the list above are **cut from two phone videos** Arun shot on the floor
+on 2026-10-17, kept in `resources/media-inbox/plant-video/` (git-ignored):
+
+| Slot | Source |
+|---|---|
+| `home/hero.mp4` | `flexo-noor-batt-rolls.mp4`, 1.0–7.0s, video track only |
+| `home/hero.webp` | the same clip at 1.0s |
+| `battery-labels/sheet.webp` | `offset-aeromax-sheets.mp4` at 16.0s |
+| `battery-labels/roll.webp` | `flexo-noor-batt-rolls.mp4` at 3.0s |
+
+**They are 576px on the long edge, because WhatsApp re-encoded the clips to
+576 × 1024.** That is under every size in the tables above, so treat them as holding
+the slot, not as finished media. Two consequences:
+
+- The hero is **portrait**, not 16:9. Under `object-cover` that is close to native on
+  a phone (a 390 × 743 hero needs a 0.73× scale) and a 3× upscale on a desktop, where
+  only the middle quarter of the frame shows. The gradient over it hides a good deal
+  of that. The 16:10 stills draw at about 1:1 on a 1× display and half-resolution on
+  a retina one.
+- The hero shows one named client's artwork at size. Noor Batt carries `show_logo`,
+  so that is permitted, but it is a placeholder decision rather than a design one.
+
+To replace them: get the **originals off the phone** — AirDrop or Drive, never
+WhatsApp, which is what cost the resolution — then re-cut to the sizes in the tables.
+Nothing in the code has to change; these are all optional files behind an `is_file()`
+check, so a better file at the same path is the whole job.
 
 ## Two traps
 
