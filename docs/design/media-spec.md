@@ -161,6 +161,7 @@ are in `resources/media-inbox/`, git-ignored.
 | `timeline/2019` | `IMG-20190104-WA0053.JPG` (1280 × 961) | the office the week it opened |
 | `timeline/2022` | `IMG_7277.HEIC` | full frame |
 | `timeline/2025` | `IMG_6521.HEIC` | rotated, then the top band |
+| `timeline/2024` | `f9b9e26e….JPG` (3120 × 4160) | the bottom 2340 rows, full width |
 | `about/team-design.webp` | `62543DB5….MOV` | 2.5s |
 | `about/careers.webp` | `IMG_5874.HEIC` (4032 × 3024) | — |
 | `about/design-india.webp` | `e49bf162….JPG` (868 × 1280) | — |
@@ -239,10 +240,18 @@ photograph matters as much as what it shows.
   sit back far enough to take in the desk and the room rather than filling the frame with the
   screen, but the brand is still legible at the timeline's size. Replace it the moment there
   is a photograph of designers at work.
-- **The timeline carries today's machines, not archive photographs.** 2007 shows the SM-74 as
-  it stands now, 2022 the Mark Andy, 2025 the corrugated cutter. None of them is a picture of
-  the machine as installed in that year, and no caption claims otherwise — the handoff always
-  named plant-today photography as the fallback if the archive turned out not to exist.
+- **The timeline carries today's machines, not archive photographs — with one exception.**
+  2007 shows the SM-74 as it stands now, 2022 the Mark Andy, 2025 the corrugated cutter. None
+  of them is a picture of the machine as installed in that year, and no caption claims
+  otherwise — the handoff always named plant-today photography as the fallback if the archive
+  turned out not to exist. **2024 is the first slot filled from the year it describes**: the
+  Rai building was photographed on 2024-08-29, in the year of the milestone it illustrates.
+- **A four-storey building does not fit a 4:3 landscape.** Shot from the kerb, the Rai plant
+  fills a 3120 × 4160 portrait frame top to bottom, and the tallest 4:3 window that frame
+  allows is 3120 × 2340 — 56% of it. Anchor that window on the **forecourt**, not the roof:
+  the gate, the Design India board and the ground read as a plant, while the upper floors
+  alone read as an anonymous red-and-white wall. Four other crops were tried and all of them
+  lost the building.
 - **`media-inbox/IMG_6570.HEIC` is the sample shelf and is not used.** It is a wall of other
   companies' cartons — Pedigree, Park Avenue, PrintWeek, Peri Bakers among them — and only
   Amaron on that shelf is a client with `show_logo` set. Showing the rest would name clients
