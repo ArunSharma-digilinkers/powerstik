@@ -29,7 +29,7 @@
         <aside class="fixed inset-y-0 left-0 z-40 w-64 -translate-x-full border-r border-zinc-200 bg-white transition lg:translate-x-0"
                :class="nav && 'translate-x-0'">
             <div class="flex h-16 items-center border-b border-zinc-200 px-5">
-                <a href="{{ route('admin.dashboard') }}"><img src="/images/brand/logo.png" alt="Powerstick" class="h-8 w-auto"></a>
+                <a href="{{ route('admin.dashboard') }}"><img src="/images/brand/logo.png" alt="Powerstik" class="h-8 w-auto"></a>
             </div>
             <nav class="h-[calc(100%-4rem)] space-y-5 overflow-y-auto p-3">
                 @foreach ($nav as $group => $items)

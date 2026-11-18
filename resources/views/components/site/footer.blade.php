@@ -10,7 +10,7 @@
 <footer class="on-dark bg-ink text-[14.5px] text-muted">
     <div class="site-container-wide grid gap-12 pt-16 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-14 lg:pt-[76px]">
         <div class="sm:col-span-2 lg:col-span-1">
-            <img src="{{ asset('images/brand/logo-white.png') }}" alt="Powerstick" width="960" height="184" loading="lazy" class="h-[30px] w-auto">
+            <img src="{{ asset('images/brand/logo-white.png') }}" alt="Powerstik" width="960" height="217" loading="lazy" class="h-[30px] w-auto">
             <p class="mt-6 max-w-[34ch] leading-[1.6] text-faint">Powerstik is a brand of Design India. Labels, cartons and corrugated packaging, designed and printed in-house.</p>
             <address class="mt-5 leading-[1.6] not-italic text-mono">
                 @if ($address)
